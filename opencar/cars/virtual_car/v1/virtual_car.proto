@@ -2,31 +2,47 @@ syntax = "proto3";
 
 package opencar.cars.virtual_car.v1;
 
-// State represents a snapshot of the virtual car's current condition.
-message State {
-  // The total distance the car has traveled, in meters.
-  optional int32 odometer = 1;
-  // Whether the car is currently in motion.
+// Basic state that can be broadcasted on any communication protocol.
+message BasicState {
+  // The odometer value of the car, in kilometers.
+  optional uint32 odometer = 1;
+
+  // Simple state indicating if the car is driving or not.
   optional bool is_driving = 2;
-  // The current speed of the car, in kilometers per hour (km/h).
-  optional int32 speed = 3;
-  // Whether the car doors are locked.
-  optional bool are_doors_locked = 4;
+
+  // Simple state indicating if the car's doors are locked or not.
+  optional bool are_doors_locked = 3;
 }
 
-// Command represents an action to be performed by the virtual car.
-message Command {
-  // Action defines the specific commands that can be sent to the virtual car.
-  enum Action {
-    // The action is not specified. This is the default value and should be
-    // ignored.
-    ACTION_UNSPECIFIED = 0;
-    // A command to lock the car doors.
-    ACTION_LOCK_DOORS = 1;
-    // A command to unlock the car doors.
-    ACTION_UNLOCK_DOORS = 2;
+// Advanced state that can only be shared over BLE.
+message AdvancedState {
+  enum Gear {
+    GEAR_UNSPECIFIED = 0;
+    PARK = 1;
+    REVERSE = 2;
+    NEUTRAL = 3;
+    DRIVE = 4;
   }
 
-  // The specific action to be executed.
-  Action action = 1;
+  // The current car speed, in kph.
+  optional int32 speed = 1;
+
+  // The current gear selected in the car.
+  optional Gear gear = 2;
+}
+
+// This contains a single basic command.
+message BasicCommand {
+  oneof action {
+    DoorLockCommand door_lock = 1;
+  }
+}
+
+// This contains a single advanced command.
+message AdvancedCommand {
+}
+
+// Command to lock or unlock the car's doors.
+message DoorLockCommand {
+  bool lock = 1;
 }

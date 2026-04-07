@@ -1,56 +1,74 @@
 syntax = "proto3";
-
 package opencar.core.v1;
 
-// MessageEnvelope is the core data structure for all communication between the
-// vehicle and the client (e.g., mobile app). It follows an "envelope pattern,"
-// where this message provides routing and metadata, while the actual
-// vehicle-specific data is carried in the opaque `payload` field.
-message MessageEnvelope {
-  // A unique identifier for the car's make and model (e.g., "hmg_ioniq5",
-  // "virtual_car"). This tells the client how to decode the `payload`.
-  string car_id = 1;
+import "system.proto";
 
+// AppToDevice is used for communication from the app to the device in the
+// vehicle. This is mostly for sending commands to the device.
+message AppToDevice {
   // A unique identifier for this specific message, which can be used for
-  // request/response matching or message deduplication.
-  uint32 message_id = 2;
+  // request/response matching.
+  uint64 message_id = 1;
+  // CRC32 hash of the vehicle platform name. This tells the code how to encode
+  // and decode vehicle specific data.
+  uint32 platform_id = 2;
 
+  oneof payload {
+    SystemCommand system_command = 3;
+    bytes basic_command_bytes = 4;
+    bytes advanced_command_bytes = 5;
+  }
+}
+
+// DeviceToApp is used for communication from the device to the app. This is
+// both for broadcasting the vehicle state and sending response to command sent
+// from the app.
+message DeviceToApp {
   // The timestamp when the message was created, as a Unix timestamp in
   // milliseconds.
-  uint64 timestamp_ms = 3;
+  uint64 timestamp_ms = 1;
+  // CRC32 hash of the vehicle platform name. This tells the code how to encode
+  // and decode vehicle specific data.
+  uint32 platform_id = 2;
 
-  // MessageType defines the purpose of the message contained within the envelope.
-  enum MessageType {
-    // The message type is not specified. This is the default value and should
-    // be treated as an error.
-    MESSAGE_TYPE_UNSPECIFIED = 0;
-    // A broadcast of the vehicle's current state. The payload will contain a
-    // serialized `State` message for the given `car_id`.
-    MESSAGE_TYPE_STATE_BROADCAST = 1;
-    // A request from the client to the vehicle to perform an action. The payload
-    // will contain a serialized `Command` message.
-    MESSAGE_TYPE_COMMAND_REQUEST = 2;
-    // A response from the vehicle to the client after a `COMMAND_REQUEST`.
-    MESSAGE_TYPE_COMMAND_RESPONSE = 3;
-    // A message containing system health information (e.g., battery, connectivity).
-    MESSAGE_TYPE_SYSTEM_HEALTH = 4;
+  oneof payload {
+    StateUpdate state_update = 3;
+    CommandResponse command_response = 4;
   }
+}
 
-  // The type of this message, which determines how the payload should be
-  // interpreted.
-  MessageType type = 4;
+// This holds the state update data of the device, containing both the system
+// state and the vehicle specific state.
+message StateUpdate {
+  // System state, only transmitted over BLE.
+  SystemState system_state = 1;
 
-  // For `COMMAND_RESPONSE` messages, this indicates whether the requested
-  // command was executed successfully.
-  bool success = 5;
+  // Vehicle specific state.
+  VehicleState vehicle_state = 2;
+}
 
-  // For `COMMAND_RESPONSE` messages where `success` is false, this field
-  // contains a human-readable error message.
-  string error_message = 6;
+// This holds the different vehicle specific states.
+message VehicleState {
+  // The basic vehicle specific state bytes, sent to all connections.
+  bytes basic_state_bytes = 1;
 
-  // The opaque, serialized payload. The `type` and `car_id` fields determine
-  // how to decode these bytes. For example, if `car_id` is "virtual_car" and
-  // `type` is `STATE_BROADCAST`, this payload will be a serialized
-  // `opencar.cars.virtual_car.v1.State` message.
-  bytes payload = 7;
+  // The advanced vehicle specific state bytes, sent only over BLE.
+  bytes advanced_state_bytes = 2;
+}
+
+// This holds a command response metadata and data.
+message CommandResponse {
+  // A unique identifier, matching the original request.
+  uint64 message_id = 1;
+
+  // This indicates whether the command succeeded or not.
+  bool success = 2;
+
+  // This field contains a human-readable error message when the command failed.
+  string error_message = 3;
+
+  oneof response_data {
+    bytes basic_response_data = 5;
+    bytes advanced_response_bytes = 6;
+  }
 }
