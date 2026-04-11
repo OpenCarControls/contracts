@@ -23,8 +23,62 @@ message SystemCommand {
   oneof action {
     // A restart command.
     RestartCommand restart_command = 1;
+
+    // Enables or disables the on-demand CAN debug streaming mode. BLE only.
+    SetCanDebugEnabled set_can_debug_enabled = 2;
+
+    // Replaces the active CAN debug blocklist. BLE only.
+    UpdateCanDebugFilters update_can_debug_filters = 3;
   }
 }
 
 // This command tells the system to restart.
 message RestartCommand {}
+
+// Enables or disables on-demand CAN debug streaming over BLE.
+//
+// When enabled, raw CAN frames (before vehicle-specific filtering) are batched
+// and sent to the app as CanDebugUpdate messages on the existing DeviceToApp
+// BLE characteristic. No new characteristic or subscription is required.
+//
+// This command is sent via the existing AppToDevice BLE characteristic.
+message SetCanDebugEnabled {
+  // Whether to enable (true) or disable (false) CAN debug streaming.
+  bool enabled = 1;
+
+  // The CAN bus IDs to stream. Each value is a 0-based bus index matching the
+  // order of [[can_buses]] entries in the device config. An empty list means
+  // all buses are observed.
+  repeated uint32 bus_ids = 2;
+}
+
+// Replaces the full CAN debug blocklist. Silently ignored if CAN debug is
+// not currently active.
+//
+// The app owns the filter state; this message always sends the complete desired
+// list. The firmware replaces its stored list atomically on receipt. To clear
+// all filters (pass everything), send an empty list.
+message UpdateCanDebugFilters {
+  // The new blocklist. Any frame matching any entry is excluded from the
+  // CanDebugUpdate stream. An empty list means all frames are forwarded.
+  repeated CanDebugFilter filters = 1;
+}
+
+// A single CAN debug blocklist entry. A frame is excluded from the debug stream
+// if: (frame_can_id & mask) == (can_id & mask) AND is_extended_id matches.
+//
+// The blocklist applies across all buses being observed; there is no per-bus
+// filter scoping.
+message CanDebugFilter {
+  // The CAN identifier to match against.
+  uint32 can_id = 1;
+
+  // True if this filter targets extended (29-bit) frame IDs; false for
+  // standard (11-bit) frame IDs.
+  bool is_extended_id = 2;
+
+  // Acceptance mask. Bits set to 1 must match between the frame ID and
+  // can_id. Use 0x7FF for exact standard-ID match, 0x1FFFFFFF for exact
+  // extended-ID match, or 0 to block every frame regardless of ID.
+  uint32 mask = 3;
+}

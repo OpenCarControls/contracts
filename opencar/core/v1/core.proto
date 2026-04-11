@@ -47,6 +47,11 @@ message DeviceToApp {
     // A command response. It contains information about the command execution
     // and potentially response data.
     CommandResponse command_response = 4;
+
+    // A batch of raw CAN frames for developer debugging. Sent over BLE only,
+    // on the same characteristic as state_update and command_response.
+    // Only produced while CAN debug streaming is active (SetCanDebugEnabled).
+    CanDebugUpdate can_debug_update = 5;
   }
 }
 
@@ -88,4 +93,39 @@ message CommandResponse {
     // Advanced response data that can only be sent over BLE.
     bytes advanced_response_bytes = 6;
   }
+}
+
+// A batch of raw CAN frames produced by the debug streaming feature.
+// Sent over BLE only, on the same DeviceToApp characteristic as state updates
+// and command responses. Only produced while CAN debug is active.
+message CanDebugUpdate {
+  // The captured CAN frames in this batch. May be empty if dropped_frames > 0.
+  repeated CanDebugFrame frames = 1;
+
+  // Number of frames dropped since the previous batch because the internal
+  // debug channel was full (i.e. BLE could not keep up with the CAN bus rate).
+  // This counts channel-full failures only — frames excluded by the blocklist
+  // are NOT counted here. Resets to zero after each batch is sent.
+  uint32 dropped_frames = 2;
+}
+
+// A single raw CAN frame captured for developer debugging.
+message CanDebugFrame {
+  // Device uptime in milliseconds at the moment this frame was received from
+  // the CAN bus hardware — set by the board driver, not the batch sender.
+  uint64 timestamp_ms = 1;
+
+  // 0-based index of the CAN bus this frame arrived on, matching the order of
+  // [[can_buses]] entries in the device config.
+  uint32 bus_id = 2;
+
+  // The CAN frame identifier (standard 11-bit or extended 29-bit raw value).
+  uint32 can_id = 3;
+
+  // True if this is an extended (29-bit) frame ID; false for standard (11-bit).
+  bool is_extended_id = 4;
+
+  // Raw frame payload. Contains exactly dlc bytes — NOT zero-padded to 8.
+  // dlc is implicit from the length of this field.
+  bytes data = 5;
 }
