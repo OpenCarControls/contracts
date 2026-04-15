@@ -105,9 +105,13 @@ message CommandResponse {
 
 // High-level status for a command execution attempt.
 enum CommandStatusCode {
+  // Unspecified command status.
   COMMAND_STATUS_CODE_UNSPECIFIED = 0;
+  // OK indicates the command was accepted and executed successfully.
   COMMAND_STATUS_CODE_OK = 1;
+  // FAILED indicates the command execution failed.
   COMMAND_STATUS_CODE_FAILED = 2;
+  // REJECTED_NOT_CONTROLLER indicates the command was rejected because the sender is not the controller.
   COMMAND_STATUS_CODE_REJECTED_NOT_CONTROLLER = 3;
 }
 
