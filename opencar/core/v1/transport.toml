@@ -1,0 +1,23 @@
+[mqtt]
+command_topic_template = "opencar/{client_id}/cmd"
+data_topic_template = "opencar/{client_id}/data"
+
+[ble.service]
+name = "Open Car Control"
+uuid = "1acff001-229b-4d38-a5d2-9af1d9b11f00"
+
+[ble.characteristics.app_to_device]
+uuid = "1acff002-229b-4d38-a5d2-9af1d9b11f00"
+payload = "opencar.core.v1.AppToDevice"
+properties = ["write", "write_without_response"]
+direction = "app -> device"
+
+[ble.characteristics.device_to_app]
+uuid = "1acff003-229b-4d38-a5d2-9af1d9b11f00"
+payload = "opencar.core.v1.DeviceToApp"
+properties = ["notify"]
+direction = "device -> app"
+
+[ble.notes]
+pairing = "Recommended before enabling control commands."
+mtu = "Use the largest negotiated MTU available; protobuf payloads may span multiple ATT packets."

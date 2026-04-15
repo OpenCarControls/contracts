@@ -29,6 +29,18 @@ message SystemCommand {
 
     // Replaces the active CAN debug blocklist. BLE only.
     UpdateCanDebugFilters update_can_debug_filters = 3;
+
+    // Returns the currently bonded BLE phones.
+    ListPairedPhonesCommand list_paired_phones = 4;
+
+    // Removes one bonded BLE phone by its stable device ID.
+    RemovePairedPhoneCommand remove_paired_phone = 5;
+
+    // Removes all bonded BLE phones.
+    ClearPairedPhonesCommand clear_paired_phones = 6;
+
+    // Records a newly paired BLE phone in the bonded registry.
+    UpsertPairedPhoneCommand upsert_paired_phone = 7;
   }
 }
 
@@ -81,4 +93,22 @@ message CanDebugFilter {
   // can_id. Use 0x7FF for exact standard-ID match, 0x1FFFFFFF for exact
   // extended-ID match, or 0 to block every frame regardless of ID.
   uint32 mask = 3;
+}
+
+// Requests the list of currently bonded BLE phones.
+message ListPairedPhonesCommand {}
+
+// Requests removal of a single bonded BLE phone.
+message RemovePairedPhoneCommand {
+  // Stable firmware-owned identifier for the bonded phone.
+  bytes device_id = 1;
+}
+
+// Requests removal of all bonded BLE phones.
+message ClearPairedPhonesCommand {}
+
+// Adds a bonded BLE phone if it is not already present.
+message UpsertPairedPhoneCommand {
+  // Stable firmware-owned identifier for the bonded phone.
+  bytes device_id = 1;
 }

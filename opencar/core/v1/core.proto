@@ -13,6 +13,10 @@ message AppToDevice {
   // and decode vehicle specific data.
   uint32 platform_id = 2;
 
+  // Stable BLE-device identifier for controller arbitration and lifecycle
+  // operations. Required for BLE commands; ignored for MQTT.
+  bytes source_device_id = 6;
+
   // The AppToDevice payload, mostly a type of command.
   oneof payload {
     // A system command. This can only be sent from BLE.
@@ -93,6 +97,18 @@ message CommandResponse {
     // Advanced response data that can only be sent over BLE.
     bytes advanced_response_bytes = 6;
   }
+
+  // Structured command result code so apps can distinguish policy rejections
+  // (for example, non-controller lease denial) from generic failures.
+  CommandStatusCode status_code = 7;
+}
+
+// High-level status for a command execution attempt.
+enum CommandStatusCode {
+  COMMAND_STATUS_CODE_UNSPECIFIED = 0;
+  COMMAND_STATUS_CODE_OK = 1;
+  COMMAND_STATUS_CODE_FAILED = 2;
+  COMMAND_STATUS_CODE_REJECTED_NOT_CONTROLLER = 3;
 }
 
 // A batch of raw CAN frames produced by the debug streaming feature.
