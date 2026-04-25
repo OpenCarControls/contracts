@@ -18,6 +18,14 @@ payload = "opencar.core.v1.DeviceToApp"
 properties = ["notify"]
 direction = "device -> app"
 
+[ble.pairing]
+# How long (seconds) the device keeps its pairing window open after the
+# pairing button is pressed. The app wizard uses this as its bond timeout.
+pairing_window_seconds = 30
+# How long (seconds) the wizard scans for an advertising device before
+# declaring a timeout and asking the user to try again.
+scan_timeout_seconds = 30
+
 [ble.notes]
 pairing = "Recommended before enabling control commands."
 mtu = "Use the largest negotiated MTU available; protobuf payloads may span multiple ATT packets."
