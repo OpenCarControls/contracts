@@ -41,17 +41,8 @@ message SystemCommand {
 
     // Records a newly paired BLE phone in the bonded registry.
     UpsertPairedPhoneCommand upsert_paired_phone = 7;
-
-    // Acknowledges receipt of a BondSavedEvent and signals that the app is
-    // ready for the firmware to disconnect and persist the bond to flash.
-    // BLE only. Ignored if no bond-save is pending.
-    ReadyToDisconnectCommand ready_to_disconnect = 8;
   }
 }
-
-// Sent by the app in response to a BondSavedEvent to trigger an immediate
-// (rather than timeout-driven) disconnect-and-persist cycle.
-message ReadyToDisconnectCommand {}
 
 // This command tells the system to restart.
 message RestartCommand {}
@@ -124,17 +115,4 @@ message UpsertPairedPhoneCommand {
 
 // A firmware-initiated event pushed to the app with no associated inbound
 // command. Delivered over the DeviceToApp BLE characteristic.
-message SystemEvent {
-  oneof event {
-    // The firmware accepted a new bond and will disconnect briefly to persist
-    // it to flash. The phone should treat this as a successful pairing outcome
-    // and wait for the device to auto-reconnect; no user action is required.
-    BondSavedEvent bond_saved = 1;
-  }
-}
-
-// Sent once, immediately before the firmware forces a disconnect to persist a
-// new BLE bond to flash. The app should respond with ReadyToDisconnectCommand
-// to trigger the disconnect immediately; a 1-second fallback fires regardless
-// in case the app crashes or does not implement the handshake.
-message BondSavedEvent {}
+message SystemEvent {}
