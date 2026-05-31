@@ -29,6 +29,11 @@ message AppToDevice {
     // An advanced command bytes, encoded/decoded using the platform_id. This
     // can only be sent from BLE.
     bytes advanced_command_bytes = 5;
+
+    // A heartbeat with no payload. Sent periodically over MQTT to signal that
+    // a client is active, allowing the vehicle to throttle state updates when
+    // no clients are connected.
+    bool heartbeat = 7;
   }
 }
 
