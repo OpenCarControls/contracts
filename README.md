@@ -44,6 +44,20 @@ We use [`buf`](https://buf.build/) to manage our Protobuf files. It enforces sty
 
 If you prefer to work locally without the devcontainer, you will need to install the `buf` CLI manually.
 
+### Native Windows Setup (Optional)
+While the dev container is the primary supported environment, you can set up a local Windows environment by installing the necessary tools directly on your host machine.
+
+1. **Install `buf` CLI:** We recommend using the Windows Package Manager (`winget`):
+   ```powershell
+   winget install bufbuild.buf
+   ```
+2. **Install `protoc` (Protocol Buffers Compiler):** 
+   ```powershell
+   winget install Google.Protobuf
+   ```
+
+*(Alternatively, you can download the binaries manually from their respective GitHub release pages and add them to your system `PATH`.)*
+
 Before submitting a PR, ensure your changes pass these checks by running:
 
 *   **Format your files:** `buf format -w`
