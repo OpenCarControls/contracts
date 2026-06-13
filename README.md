@@ -49,11 +49,11 @@ While the dev container is the primary supported environment, you can set up a l
 
 1. **Install `buf` CLI:** We recommend using the Windows Package Manager (`winget`):
    ```powershell
-   winget install Buf.Buf
+   winget install bufbuild.buf
    ```
 2. **Install `protoc` (Protocol Buffers Compiler):** 
    ```powershell
-   winget install -e --id Google.Protobuf
+   winget install Google.Protobuf
    ```
 
 *(Alternatively, you can download the binaries manually from their respective GitHub release pages and add them to your system `PATH`.)*
