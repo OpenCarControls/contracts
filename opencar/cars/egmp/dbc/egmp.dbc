@@ -1,0 +1,10 @@
+VERSION ""
+
+NS_ :
+
+BS_:
+
+BU_:
+
+BO_ 291 DummyMessage: 8 Vector__XXX
+ SG_ DummySpeed : 0|16@1+ (1,0) [0|65535] "kph" Vector__XXX
