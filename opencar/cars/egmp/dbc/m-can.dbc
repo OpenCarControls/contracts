@@ -1,0 +1,2007 @@
+VERSION ""
+
+
+NS_ :
+    NS_DESC_
+    CM_
+    BA_DEF_
+    BA_
+    VAL_
+    CAT_DEF_
+    CAT_
+    FILTER
+    BA_DEF_DEF_
+    EV_DATA_
+    ENVVAR_DATA_
+    SGTYPE_
+    SGTYPE_VAL_
+    BA_DEF_SGTYPE_
+    BA_SGTYPE_
+    SIG_TYPE_REF_
+    VAL_TABLE_
+    SIG_GROUP_
+    SIG_VALTYPE_
+    SIGTYPE_VALTYPE_
+    BO_TX_BU_
+    BA_DEF_REL_
+    BA_REL_
+    BA_DEF_DEF_REL_
+    BU_SG_REL_
+    BU_EV_REL_
+    BU_BO_REL_
+    SG_MUL_VAL_
+
+BS_: 
+BU_: 
+BO_ 1041 BODY_STATUS: 8 Vector__XXX
+   SG_ Crc_Val : 0|7@1+ (1,0) [0|127] "" Vector__XXX
+   SG_ AlvCnt_Val : 12|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Doors_Unlocked : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Driver_Door_Open : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Passenger_Seatbelt_Fastened : 36|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Passenger_Door_Open : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Driver_Seatbelt_Fastened : 42|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Hood_Open : 44|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Rear_Left_Door_Open : 52|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Rear_Right_Door_Open : 56|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 162 WHEEL_SPEEDS: 8 Vector__XXX
+   SG_ Wheel_Speed_FL : 0|16@1+ (0.03125,0) [0|2047.97] "kph" Vector__XXX
+   SG_ Wheel_Speed_FR : 16|16@1+ (0.03125,0) [0|2047.97] "kph" Vector__XXX
+   SG_ Wheel_Speed_RL : 32|16@1+ (0.03125,0) [0|2047.97] "kph" Vector__XXX
+   SG_ Wheel_Speed_RR : 48|16@1+ (0.03125,0) [0|2047.97] "kph" Vector__XXX
+
+BO_ 428 CLUSTER_INFO_428: 8 Vector__XXX
+   SG_ Speed_kph : 0|8@1+ (1,0) [0|255] "kph" Vector__XXX
+
+BO_ 938 CHARGE_PORT_DOOR: 8 Vector__XXX
+   SG_ Crc_Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ AlvCnt_Val : 12|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Port_Open : 33|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1044 TRUNK_STATUS: 8 Vector__XXX
+   SG_ Crc_Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ AlvCnt_Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Trunk_Open : 24|6@1+ (1,0) [0|63] "" Vector__XXX
+
+BO_ 763 BATTERY_INFO_763: 8 Vector__XXX
+   SG_ Raw_BMS_State_Of_Charge : 32|8@1+ (0.25,0) [0|100] "%" Vector__XXX
+   SG_ Cand_Volt_2FB_46 : 46|10@1+ (1,0) [0|1023] "V" Vector__XXX
+   SG_ Cand_Volt_2FB_54 : 54|10@1+ (1,0) [0|1023] "V" Vector__XXX
+
+BO_ 411 CHARGING_INFO: 8 Vector__XXX
+   SG_ Charging_Current : 32|10@1+ (1,0) [0|1023] "A" Vector__XXX
+
+BO_ 685 BMS_PRECOND_STATUS: 8 Vector__XXX
+   SG_ Battery_Precond_State : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1261 NAV_PRECOND_STATUS: 8 Vector__XXX
+   SG_ Precond_Request : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1042 BRAKE_PEDAL_STATUS: 8 Vector__XXX
+   SG_ Brake_Pedal : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1077 POWER_CAN_STATUS: 8 Vector__XXX
+   SG_ Crc_Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ AlvCnt_Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Power_State : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 550 AMBIENT_TEMPERATURE: 8 Vector__XXX
+   SG_ Outdoor_Temperature : 24|8@1+ (1,-40) [-40|215] "C" Vector__XXX
+
+BO_ 551 ODOMETER: 8 Vector__XXX
+   SG_ Odometer : 8|24@1+ (0.1,0) [0|1.67772e+06] "km" Vector__XXX
+
+BO_ 593 CLUSTER_WARNINGS: 8 Vector__XXX
+   SG_ Crc_Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ AlvCnt_Val : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Rear_Defrost_State : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 764 BATTERY_INFO_764: 8 Vector__XXX
+   SG_ State_Of_Charge : 56|8@1+ (0.5,0) [0|100] "%" Vector__XXX
+
+BO_ 1230 BMS_INFO: 8 Vector__XXX
+   SG_ BMS_State_Of_Charge : 0|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+
+BO_ 843 LIGHT_STALK_STATUS: 8 Vector__XXX
+   SG_ Headlight_Switch : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1096 STEERING_WHEEL_BUTTONS: 8 Vector__XXX
+   SG_ Crc_Val : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AlvCnt_Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Steering_Wheel_Mode_Button : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Steering_Wheel_Speak_Button : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Steering_Wheel_Call_Button : 18|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Steering_Wheel_Vol_Up_Button : 32|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ Steering_Wheel_Vol_Down_Button : 30|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Steering_Wheel_Mute_Button : 24|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ Steering_Wheel_Skip_Up_Button : 28|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Steering_Wheel_Skip_Down_Button : 26|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Steering_Wheel_Star_Button : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Steering_Wheel_Menu_Down_Button : 48|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Steering_Wheel_Menu_Up_Button : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Steering_Wheel_Menu_Press_Button : 52|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1141 PASSENGER_SEAT_HEATING: 8 Vector__XXX
+   SG_ Passenger_Seat_Heating_Opt : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Passenger_Seat_Heating_Oper : 3|9@1+ (1,0) [0|511] "" Vector__XXX
+
+BO_ 1174 DRIVER_SEAT_HEATING: 8 Vector__XXX
+   SG_ Driver_Seat_Heating_Opt : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Driver_Seat_Heating_Oper : 3|11@1+ (1,0) [0|2047] "" Vector__XXX
+
+BO_ 706 MOTOR_TORQUE: 8 Vector__XXX
+   SG_ Motor_Torque_Percent : 24|8@1- (1,0) [-128|127] "%" Vector__XXX
+
+BO_ 795 CLIMATE_STATUS: 8 Vector__XXX
+   SG_ Steering_Wheel_Heating_State : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Climate_Fan_Speed : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Climate_Airflow_Direction : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Climate_AC_State : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Climate_Recirculation_State : 34|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 896 CLIMATE_TEMPERATURE: 8 Vector__XXX
+   SG_ Crc_Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ AlvCnt_Val : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Driver_Temp_C : 24|8@1+ (0.5,14) [14|32] "C" Vector__XXX
+   SG_ Driver_Temp_F : 32|8@1+ (1,0) [0|255] "F" Vector__XXX
+   SG_ Passenger_Temp_C : 40|8@1+ (0.5,14) [14|32] "C" Vector__XXX
+   SG_ Passenger_Temp_F : 48|8@1+ (1,0) [0|255] "F" Vector__XXX
+
+BO_ 782 CHARGING_POWER: 8 Vector__XXX
+   SG_ Charging_Power_kW : 48|8@1+ (1,0) [0|255] "kW" Vector__XXX
+
+BO_ 268 THERMAL_METRICS: 8 Vector__XXX
+   SG_ Thermal_Metric_1 : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Thermal_Metric_2 : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 603 CANDIDATE_25B: 8 Vector__XXX
+   SG_ Cand_Curr_25B_50 : 50|10@1+ (1,0) [0|1023] "" Vector__XXX
+
+BO_ 796 CANDIDATE_31C: 8 Vector__XXX
+   SG_ Cand_Volt_31C_1 : 1|13@1+ (0.1,0) [0|819] "V" Vector__XXX
+
+BO_ 199 HU_EV_E: 8 Vector__XXX
+   SG_ HU_V2LModeSet : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ HU_V2GModeSet : 3|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ HU_V2XInstantRunSet : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HU_V2XDischrgLimSocValSet : 8|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ HU_EcoClmtLimSet : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HU_UtilModeSetReq : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HU_ChgInCurrSet : 24|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ HU_EV_BatteryConditioning : 27|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ NAVI_precond_EVStationFlag : 29|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ NAVI_precond_EVStationType : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HU_QckChrgCustomSet : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 255 BCM_20_200ms: 8 Vector__XXX
+   SG_ BCM_Crc20Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt20Val : 12|37@1+ (1,0) [0|1.37439e+11] "" Vector__XXX
+   SG_ BCM_SafetyWdwOptTyp2 : 49|7@1+ (1,0) [0|127] "" Vector__XXX
+
+BO_ 353 CCNC_0x161: 32 Vector__XXX
+   SG_ CHECKSUM : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ COUNTER : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ FCA_ICON : 24|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FCA_ALT_ICON : 27|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ LKA_ICON : 30|3@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HBA_ICON : 33|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ZEROS_1 : 36|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ ZEROS_2 : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ FCA_IMAGE : 42|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ZEROS_3 : 45|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ZEROS_4 : 48|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ BCA_LEFT : 51|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ BCA_RIGHT : 54|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ LCA_LEFT_ARROW : 57|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ LCA_RIGHT_ARROW : 60|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ZEROS_5 : 63|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ CENTERLINE : 64|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ TARGET : 66|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ TARGET_DISTANCE : 69|11@1+ (0.1,0) [0|204.7] "m" Vector__XXX
+   SG_ LANELINE_LEFT : 80|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ LANELINE_LEFT_POSITION : 84|6@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ LANELINE_RIGHT : 90|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ LANELINE_RIGHT_POSITION : 94|6@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ LANELINE_CURVATURE : 100|5@1- (1,15) [0|31] "" Vector__XXX
+   SG_ LANE_HIGHLIGHT : 105|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ LANE_HIGHLIGHT_DISTANCE : 109|11@1+ (0.1,0) [0|204.7] "m" Vector__XXX
+   SG_ LANE_LEFT : 120|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ LANE_RIGHT : 123|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ LANE_ZOOM : 126|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ALERTS_1 : 128|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ ALERTS_2 : 134|5@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ALERTS_3 : 139|5@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ ALERTS_4 : 144|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ ALERTS_5 : 152|5@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ MUTE : 157|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ SOUNDS_1 : 160|4@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SOUNDS_2 : 164|4@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SOUNDS_3 : 168|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ SOUNDS_4 : 172|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ZEROS_6 : 175|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ ZEROS_7 : 176|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ SETSPEED_HUD : 181|3@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DISTANCE_LEAD : 184|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ DISTANCE_CAR : 189|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ DISTANCE_SPACING : 192|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DISTANCE : 196|4@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ SETSPEED_SPEED : 200|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ SETSPEED : 208|4@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HDA_ICON : 212|4@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SLA_ICON : 216|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ NAV_ICON : 220|4@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ LFA_ICON : 224|4@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ LCA_LEFT_ICON : 228|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ LCA_RIGHT_ICON : 232|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ BACKGROUND : 236|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DAW_ICON : 240|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ CAR_CIRCLE : 243|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ZEROS_8 : 246|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ZEROS_9 : 248|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 354 CCNC_0x162: 32 Vector__XXX
+   SG_ CHECKSUM : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ COUNTER : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ COUNTRY : 24|4@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ SPEEDLIMIT_FLASH : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ SPEEDLIMIT : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ SIGNS : 40|8@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ SPEEDLIMIT_WEATHER : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ VIBRATE : 52|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ZEROS_1 : 55|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ ZEROS_2 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ LEAD : 64|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ LEAD_DISTANCE : 69|11@1+ (0.1,0) [0|204.7] "m" Vector__XXX
+   SG_ LEAD_LATERAL : 80|7@1+ (0.1,0) [0|127] "m" Vector__XXX
+   SG_ ZEROS_3 : 87|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ LEAD_ALT : 88|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ LEAD_ALT_DISTANCE : 93|11@1+ (0.1,0) [0|204.7] "m" Vector__XXX
+   SG_ LEAD_ALT_LATERAL : 104|7@1+ (0.1,0) [0|127] "m" Vector__XXX
+   SG_ ZEROS_4 : 111|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ LEAD_LEFT : 112|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ LEAD_LEFT_DISTANCE : 117|11@1+ (0.1,0) [0|204.7] "m" Vector__XXX
+   SG_ LEAD_LEFT_LATERAL : 128|7@1+ (0.1,0) [0|127] "m" Vector__XXX
+   SG_ ZEROS_5 : 135|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ LEAD_RIGHT : 136|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ LEAD_RIGHT_DISTANCE : 141|11@1+ (0.1,0) [0|204.7] "m" Vector__XXX
+   SG_ LEAD_RIGHT_LATERAL : 152|7@1+ (0.1,0) [0|127] "m" Vector__XXX
+   SG_ ZEROS_6 : 159|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ ZEROS_7 : 162|3@0+ (1,0) [0|7] "" Vector__XXX
+   SG_ LEAD_LEFT_REAR_STATUS : 167|5@0+ (1,0) [0|31] "" Vector__XXX
+   SG_ LEAD_LEFT_REAR_DISTANCE : 175|8@0+ (0.1,0) [0|255] "m" Vector__XXX
+   SG_ LEAD_LEFT_REAR_LATERAL : 182|7@0+ (0.1,0) [0|127] "m" Vector__XXX
+   SG_ ZEROS_8 : 183|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ ZEROS_9 : 191|8@0+ (1,0) [0|255] "" Vector__XXX
+   SG_ LEAD_RIGHT_REAR_STATUS : 196|5@0+ (1,0) [0|31] "" Vector__XXX
+   SG_ LEAD_RIGHT_REAR_DISTANCE : 197|8@1+ (0.1,0) [0|255] "m" Vector__XXX
+   SG_ LEAD_RIGHT_REAR_LATERAL : 205|7@1+ (0.1,0) [0|127] "m" Vector__XXX
+   SG_ ZEROS_10 : 212|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ FAULT_FSS : 213|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_FCA : 216|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_LSS : 219|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_SLA : 222|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_DAW : 225|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_HBA : 228|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_SCC : 231|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_LFA : 234|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_HDA : 237|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_LCA : 240|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_HDP : 243|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_DAS : 246|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ FAULT_ESS : 249|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ZEROS_11 : 252|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 438 CAM_0x1b6: 32 Vector__XXX
+   SG_ CHECKSUM : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ COUNTER : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 439 CAM_0x1b7: 32 Vector__XXX
+   SG_ CHECKSUM : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ COUNTER : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 440 CAM_0x1b8: 32 Vector__XXX
+   SG_ CHECKSUM : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ COUNTER : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 441 CAM_0x1b9: 32 Vector__XXX
+   SG_ CHECKSUM : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ COUNTER : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 507 CAM_0x1fb: 32 Vector__XXX
+   SG_ CHECKSUM : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ COUNTER : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 599 RRPSM_02_00ms: 8 Vector__XXX
+   SG_ RR_SHVU_SeatOptSta : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ C_RH_Folding_SW : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ RR_SHVU_SeatHtOperSta : 3|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ C_LH_Unfolding_SW : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ C_LH_Folding_SW : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ RRPSM_RearModeWngDis : 8|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ RRIMS_AMPBzrReq : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 689 ADAS_CMD_34_100ms: 10 Vector__XXX
+   SG_ ADAS_CMD_Crc34Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ ADAS_CMD_AlvCnt34Val : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HDP_RDD_WarnSta : 24|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ HDP_RDD_LongAsstCtrlSta : 27|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HDP_RDD_HzrdLmpReqSta : 29|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ HDP_RDD_ACIActvDispSta : 32|40@1+ (1,0) [0|1099511627775] "" Vector__XXX
+   SG_ HDP_RDD_EMStbltActvReqSta : 72|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 827 TP_HU_IAU: 8 Vector__XXX
+   SG_ TP_HU_IAU_Byte0 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_HU_IAU_Byte1 : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_HU_IAU_Byte2 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_HU_IAU_Byte3 : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_HU_IAU_Byte4 : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_HU_IAU_Byte5 : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_HU_IAU_Byte6 : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_HU_IAU_Byte7 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 828 TP_IAU_HU: 8 Vector__XXX
+   SG_ TP_IAU_HU_Byte0 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_IAU_HU_Byte1 : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_IAU_HU_Byte2 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_IAU_HU_Byte3 : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_IAU_HU_Byte4 : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_IAU_HU_Byte5 : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_IAU_HU_Byte6 : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ TP_IAU_HU_Byte7 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 895 GATEWAY_STS_100ms: 8 Vector__XXX
+   SG_ GATEWAY_HS_D_STS : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 898 DATC_05_200ms: 8 Vector__XXX
+   SG_ DATC_Crc5Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_AlvCnt5Val : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_FrDrvModDis : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_FrPassModDis : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_ClmtTxtPopupOSD : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_TempDispUnitSta : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_DrvAutoDis : 42|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_FrClmtScrnDis : 46|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_AcDis : 48|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_IntakeSta : 50|6@1+ (1,0) [0|63] "" Vector__XXX
+
+BO_ 899 DATC_06_200ms: 8 Vector__XXX
+   SG_ DATC_Crc6Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_AlvCnt6Val : 16|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ DATC_SyncDis : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_OpSta : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ DATC_FrDfgSta : 35|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_SmrtVntDis : 37|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ DATC_AutoDfgBlnkDis : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_AutoDfgSysOffDis : 42|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ DATC_ArClnIND : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_RrDfgInd : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 900 DATC_07_200ms: 8 Vector__XXX
+   SG_ DATC_Crc7Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_AlvCnt7Val : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_FrDrvBlwDis : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_FrPsBlwDis : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_HeatDis : 32|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_DrvOnlyDis : 36|20@1+ (1,0) [0|1.04858e+06] "" Vector__XXX
+   SG_ DATC_AUTOStep : 56|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_IntakeDis : 60|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 902 PSM_02_200ms: 8 Vector__XXX
+   SG_ PSM_DrvStSldFwdDis : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStSldBckwdDis : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStReclneFwdDis : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStReclneBckwdDis : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_IMSOptTyp : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ PSM_DrvStTiltDnDis : 10|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStHghtUpDis : 12|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStHghtDnDis : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStCushExtBckwdDis : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStCushExtFwdDis : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStHdRstUpDis : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStHdRstDnDis : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SmrtIMS_StatureRspVal : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PSM_DrvStHdRstBckwdDis : 26|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ SmrtIMS_SeatedHghtRspVal : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ SmrtIMS_WghtRspVal : 32|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PSM_DrvStLmbrLoDis : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SmartIMS_DisReq : 36|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PSM_DrvStLmbrUpDis : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SmrtIMS_ExitSta : 40|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PSM_DrvStBlstrInfDis : 42|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ PSM_DrvStRlxTiltUpDis : 43|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStRlxTiltDnDis : 45|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStLegUpDis : 47|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_DrvStLegDnDis : 49|7@1+ (1,0) [0|127] "" Vector__XXX
+
+BO_ 903 APSU_03_200ms_APSU: 8 Vector__XXX
+   SG_ PSM_LmbrSigSrcTyp : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 904 PSM_04_200ms: 8 Vector__XXX
+   SG_ PSM_DrvReclinePosition : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ PSM_EsyAcsGetOnSta : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_EsyAcsGetOffSta : 10|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PSM_EsyAcsStpSta : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ RRPSS_L_StSldFwdMvBtn : 16|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StSldBwdMvBtn : 18|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StRclFwdMvBtn : 20|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StRclBwdMvBtn : 22|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ PSM_SWVerMinor1 : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ RRPSS_L_StTltUpMvBtn : 28|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StTltDnMvBtn : 30|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StHRestUpMvBtn : 32|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StHRestDnMvBtn : 34|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StHRestFwdMvBtn : 36|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StHRestBwdMvBtn : 38|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StLegRestUpBtn : 40|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ RRPSS_L_StLegRestDnBtn : 42|0@1+ (1,0) [0|0] "" Vector__XXX
+   SG_ PSM_DrvHeightPosition : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ PSM_DrvSlidePosition : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 916 BCM_19_200ms: 8 Vector__XXX
+   SG_ BCM_Crc19Val : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ USM_1stRrStRmndSta : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ BCM_AlvCnt19Val : 12|7@1+ (1,0) [0|127] "" Vector__XXX
+   SG_ USM_IBU_AutoDrUnLkReq : 19|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ USM_IBU_TwoTrnUnLkCurrentSta : 24|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ USM_IBU_RemoteWDWCurrentSta : 29|11@1+ (1,0) [0|2047] "" Vector__XXX
+   SG_ USM_IBU_AutoDrLkReq2 : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 942 HU_AMP_E_942: 8 Vector__XXX
+   SG_ AMP_Beep1VolumeStep_DATC : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_SPDIF_OutputCh_Select : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ AMP_Analog_OutputCh_Select : 24|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ AMP_Beep1_OutputCh_Select : 40|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ AMP_Beep1KBDVolumeStep : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 945 DATC_09_200ms: 8 Vector__XXX
+   SG_ DATC_Crc9Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_AlvCnt9Val : 16|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_RrBlwDis : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_ArClnSysOSD : 40|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_ArClnStepClr : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_ArClnSmblTyp : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_AfterBlowUSMSta : 52|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_SchdldVntUSMSta : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_SchdldVntHrSta : 56|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ DATC_SchdldVntMinSta : 61|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 946 DATC_10_200ms: 8 Vector__XXX
+   SG_ DATC_Crc10Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_AlvCnt10Val : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_Typ : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_Opt1Typ : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_Opt3Typ : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_Opt2Typ : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_Opt4Typ : 52|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ DATC_StrWhlUSMSta : 58|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_StrWhlHtngReq : 60|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 963 BCM_16_200ms: 8 Vector__XXX
+   SG_ BCM_Crc16Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt16Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ IBU_SWVerMajor1 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ IBU_SWVerMinor1 : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ IBU_SWVerMinor2 : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ ECW_Fault : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ECW_FaultActv : 42|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ECW_HiVolt : 44|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ECW_HiVoltActv : 46|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ECW_LoVolt : 48|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ECW_LoVoltActv : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ECW_Overload : 52|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ECW_OverloadActv : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ECW_CommErr : 56|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SunRoof_RearBlindOprSta : 58|6@1+ (1,0) [0|63] "" Vector__XXX
+
+BO_ 992 BCM_02_200ms: 8 Vector__XXX
+   SG_ BCM_Crc2Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt2Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ BAlarm_BglrAlrmCurrentSta : 16|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ BAlarm_BglrAlrmSta : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ BAlarm_PncAlrmSta : 22|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ BAlarm_BrglrHrnRlySta : 26|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ BCM_KeyInSta : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ BCM_AccInSta : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ BCM_Ign1InSta : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ BCM_Ign2InSta : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 997 BCM_05_200ms: 8 Vector__XXX
+   SG_ BCM_Crc5Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt5Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PDW_OptTyp : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PDW_SysChkSndSta : 19|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PDW_SwIndOnReq : 22|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ PDW_FrCtWrngLvlDis : 27|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PDW_SysFlrSta : 30|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PDW_FrCtWrngSndSta : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PDW_FrLtWrngLvlDis : 35|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ PDW_FrRtWrngLvlDis : 43|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ PDW_FrSnsrWrngLvlSta : 51|5@1+ (1,0) [0|31] "" Vector__XXX
+
+BO_ 998 BCM_06_200ms: 8 Vector__XXX
+   SG_ BCM_Crc6Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt6Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PDW_RrCtWrngLvlDis : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ PDW_RrLtWrngLvlDis : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ PDW_RrRtWrngLvlDis : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1029 ICU_12_200ms: 8 Vector__XXX
+   SG_ ICU_Crc12Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ ICU_AlvCnt12Val : 12|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DoorLock_CtrlDrLkSwSta_ICU : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DoorLock_CtrlDrUnLkSwSta_ICU : 22|18@1+ (1,0) [0|262143] "" Vector__XXX
+   SG_ ICU_IGN3On_ReqState_New : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ ICU_BattMngAlert : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1040 ICU_10_200ms: 8 Vector__XXX
+   SG_ ICU_Crc10Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ ICU_AlvCnt10Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ ICU_BS2SoC : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ ICU_BS2NCap : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ ICU_BS2OpnCirVol : 32|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ ICU_BS2_FSOC : 44|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ ICU_BS2_FSOH : 45|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ ICU_BS2_FSOF : 46|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ ICU_BS2_FQSTAT : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ ICU_BS2SoH : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ ICU_BS2SoF : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1043 BLINKERS: 8 Vector__XXX
+   SG_ LEFT_STALK : 8|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ RIGHT_STALK : 10|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ COUNTER_ALT : 15|4@0+ (1,0) [0|15] "" Vector__XXX
+   SG_ LEFT_LAMP : 20|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ RIGHT_LAMP : 22|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ LEFT_LAMP_ALT : 59|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ RIGHT_LAMP_ALT : 61|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ USE_ALT_LAMP : 62|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1046 ICU_06_200ms: 8 Vector__XXX
+   SG_ ICU_Crc6Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ ICU_AlvCnt6Val : 12|38@1+ (1,0) [0|2.74878e+11] "" Vector__XXX
+   SG_ Lamp_RrTrnSigLmpLftOpnSta : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_RrTrnSigLmpRtOpnSta : 52|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_FrTrnSigLmpLftOpnSta : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_FrTrnSigLmpRtOpnSta : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1047 ICU_07_200ms: 8 Vector__XXX
+   SG_ ICU_Crc7Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ ICU_AlvCnt7Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1048 ICU_08_200ms: 8 Vector__XXX
+   SG_ ICU_Crc8Val : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HSWS_SysWrngSta_ICU : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ ICU_AlvCnt8Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DriveTypeOption : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Warn_RrLftSBRMATSwSta : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Warn_RrRhtSBRMATSwSta : 20|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ Lamp_FootLampOnReq : 30|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_MoodLampOnReq : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ICU_PowerAutoCutModSta : 35|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ICU_SoCBattStaMsgReq : 37|9@1+ (1,0) [0|511] "" Vector__XXX
+   SG_ Brake_SwSta_ICU : 46|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1050 BCM_07_200ms: 8 Vector__XXX
+   SG_ BCM_Crc7Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt7Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Lamp_HiPrioHzrdReq : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Lamp_LoPrioHzrdReq : 19|17@1+ (1,0) [0|131071] "" Vector__XXX
+   SG_ Lamp_IntTailLmpOnReq : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_ExtrnlTailLmpOnReq : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_HdLmpLoOnReq : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_HdLmpHiOnReq : 42|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Lamp_AvTailLmpSta : 46|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1051 BCM_08_200ms: 8 Vector__XXX
+   SG_ BCM_Crc8Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt8Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Lamp_HbaCtrlModTyp : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_IFSCtrlModTyp : 18|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Lamp_RrFogLmpOnReq : 22|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ Lamp_HdLmpWlcmCmd : 34|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ Lamp_PuddleLmpOnReq : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1052 BCM_09_200ms: 8 Vector__XXX
+   SG_ BCM_Crc9Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt9Val : 12|7@1+ (1,0) [0|127] "" Vector__XXX
+   SG_ Lamp_AutoLtSnsrNightSta : 19|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_VendorInfo : 21|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Lamp_AutoLtSnsrHorVal : 24|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ IBU_HDPSpprtSWVer : 34|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ IBU_HDPSpprtRdy : 50|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ Wiper_RainAmount : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1055 HU_AVM_PE: 8 Vector__XXX
+   SG_ HU_SVM_tch_mpt_valid__ccp_pan : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HU_SVM_ccp_pan_valid : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ SVM_CaptureModeCMD : 10|46@1+ (1,0) [0|7.03687e+13] "" Vector__XXX
+   SG_ HU_SVM_ccp_pan : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1058 BCM_10_200ms: 8 Vector__XXX
+   SG_ BCM_Crc10Val : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Wiper_RainSnsrPartNum : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ BCM_AlvCnt10Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Wiper_PrkngPosSta : 16|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Wiper_RainSnsrOptionTyp : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Wiper_RainSnsrSta : 22|28@1+ (1,0) [0|2.68435e+08] "" Vector__XXX
+   SG_ BCM_GearPosPSta : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ BCM_SunRoofOpnSta : 52|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ SunRoof_RrBlindErrSta : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1063 DATC_11_200ms: 8 Vector__XXX
+   SG_ DATC_Crc11Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_AlvCnt11Val : 16|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ DATC_TunnelFuncOff4AutoDfgReq : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_RrCtlLckSta : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_DrvrStHtrUSMSta : 34|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_WshFldUSMSta : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_DfgLgcUSMSta : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_AutoFrshUSMSta : 42|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_HptIntnstySta : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1066 DATC_13_200ms: 8 Vector__XXX
+   SG_ DATC_Crc13Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_AlvCnt13Val : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_MltAutoBlrTxt : 24|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ DATC_MltAutoBlrTxt_Ps : 27|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ DATC_MltAutoBlrTxt_Rr : 30|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_RLStTmblrSwReq : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_RRStTmblrSwReq : 40|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_Opt5Typ : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1074 BCM_11_200ms: 8 Vector__XXX
+   SG_ BCM_Crc11Val : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ USM_UipSta : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ BCM_AlvCnt11Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ USM_EscrtHdLmpSta : 16|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ USM_BtnIllumiAlwaysOnSta : 22|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ USM_WlcmMirLtSystTitleOpt : 27|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ USM_UnlockWlcmSta : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ USM_SmrtWlcmSta : 35|13@1+ (1,0) [0|8191] "" Vector__XXX
+   SG_ USM_RrStRmndSta : 48|11@1+ (1,0) [0|2047] "" Vector__XXX
+   SG_ USM_PDWAutoOnSta : 59|5@1+ (1,0) [0|31] "" Vector__XXX
+
+BO_ 1090 BCM_12_200ms: 8 Vector__XXX
+   SG_ BCM_Crc12Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt12Val : 12|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_SmkOptTyp : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ BCM_SunRoofOptTyp : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Window_DrvrSdWdwSta_BCM : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Window_AsstSdWdwSta_BCM : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Window_RrLftWdwSta_BCM : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Window_RrRtWdwSta_BCM : 38|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ SunRoof_GlassPosSta : 44|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ SunRoof_BlindPosSta : 52|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ SunRoof_GlassErrSta : 58|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ SunRoof_BlindErrSta : 61|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1092 SMK_02_200ms: 8 Vector__XXX
+   SG_ SMK_Crc2Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ SMK_AlvCnt2Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ SSB_StrtStpBtnSw1Sta : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SSB_StrtStpBtnSw2Sta : 18|11@1+ (1,0) [0|2047] "" Vector__XXX
+   SG_ ENG_PwrAutoOffInfo : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ SMK_AuthSta : 29|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ SMK_Ign1InSta : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_Ign1RlySta : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_Ign2InSta : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_Ign2RlySta : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_StrtFdbckSta : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_StrtrRlyOutSta : 42|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_AccInSta : 44|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_AccRlySta : 46|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_CLUAccIndOnReq : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ SMK_TlEngRunSta : 56|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_TlCrnkModSta : 58|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_RmtKeyEngRunSta : 60|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SMK_RmtKeyCrnkModSta : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1093 SMK_06_200ms: 8 Vector__XXX
+   SG_ SMK_Crc6Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ SMK_AlvCnt6Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Lamp_HzrdBlnkngSta : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ RSPA_LearntSta : 19|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Lamp_SmrtWlcmLtOnReq : 21|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Fob_BattStaInfo : 24|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Fob_FoundDrvWlcmArea : 26|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Fob_FoundAsstWlcmArea : 28|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Fob_FoundExtrnlArea : 30|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Fob_FoundIntArea : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Fob_LearntSta : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ RSPA_RFSigErrSta : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ RSPA_CanErrSta : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ LFAnt_FltSta : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ LFAnt_SrchSta : 42|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ RSPA_ModSta_SMK : 48|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ RSPA_FobBattSta : 51|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Fob_BtnReleasedSta : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ USM_SmrtTrnkTlgtModSta : 56|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ USM_WALModSta : 59|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Fob_FoundWlcmArea : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1099 WPC_01_200ms: 8 Vector__XXX
+   SG_ USM_CmdWPCSta : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ WPC_PhnLftWrngSta : 2|14@1+ (1,0) [0|16383] "" Vector__XXX
+   SG_ WPC_SWVerMajor1 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ WPC_SWVerMinor1 : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ WPC_SWVerMinor2 : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1124 BCM_15_200ms: 8 Vector__XXX
+   SG_ BCM_Crc15Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ BCM_AlvCnt15Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Window_DrvrSdWdwActSta : 16|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Window_AsstSdWdwActSta : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Window_RrLftWdwActSta : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Window_RrRtWdwActSta : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Window_DrvrSdWdwDetailOpnSta : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Window_AsstSdWdwDetailOpnSta : 35|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Window_DrvrSdWdwErrAntPinch : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Window_RrLftWdwDetailOpnSta : 40|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Window_RrRtWdwDetailOpnSta : 43|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Window_AsstSdWdwErrAntPinch : 46|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Window_RrLftWdwErrAntPinch : 48|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Window_RrRtWdwErrAntPinch : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SunRoof_RrBlindPosSta : 52|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1125 DATC_14_00ms: 8 Vector__XXX
+   SG_ DATC_Crc14Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_AlvCnt14Val : 16|34@1+ (1,0) [0|1.71799e+10] "" Vector__XXX
+   SG_ DATC_Beep1Sound : 50|6@1+ (1,0) [0|63] "" Vector__XXX
+
+BO_ 1144 DRIVE_MODE: 8 Vector__XXX
+   SG_ DRIVE_MODE : 0|16@1+ (1,-61611) [0|61611] "" Vector__XXX
+   SG_ DRIVE_MODE2 : 28|3@1+ (1,0) [1|3] "" Vector__XXX
+
+BO_ 1151 HVAC_TOUCH_BUTTONS: 8 Vector__XXX
+   SG_ AUTO_BUTTON : 8|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ SYNC_BUTTON : 12|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ FR_DEFROST_BUTTON : 20|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ RR_DEFROST_BUTTON : 22|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ FAN_SPEED_UP_BUTTON : 24|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ FAN_SPEED_DOWN_BUTTON : 26|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ AIR_DIRECTION_BUTTON : 28|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ AC_BUTTON : 40|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ DRIVER_ONLY_BUTTON : 44|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ RECIRC_BUTTON : 48|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ HEAT_BUTTON : 52|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1157 VESS_PE: 8 Vector__XXX
+   SG_ VESS_CLU_Warning : 6|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ VESS_LogSnapshotState : 11|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ VESS_ChgGuideMdLvlSt : 13|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ VESS_SWVerMajor : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ VESS_SWVerMinor : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1167 ICU_11_1000ms: 8 Vector__XXX
+   SG_ ICU_Crc11Val : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ IGN_AutoOff_WarnSta : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Bat_dischrg : 10|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ICU_AlvCnt11Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Batt_SoCWarningValue : 16|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ C_StrgWhlHeatingOpt : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ C_StrgWhlHeatingSWInf : 34|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ ICU_BattAutoCutPreWrng : 36|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ IGN_AutoOff_WarnSta_CLU : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1187 HU_Navi_ISLW_PE: 8 Vector__XXX
+   SG_ Navi_ISLW_LinkClass : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Navi_ISLW_Frwinfo : 3|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Navi_ISLW_SpdUnit : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Navi_ISLW_SpdLimit : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Navi_ISLW_CountryCode : 16|11@1+ (1,0) [0|2047] "" Vector__XXX
+   SG_ Navi_ISLW_MapSource : 27|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ Navi_ISLW_TollExist : 30|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Navi_ISLW_TunnelExist : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Navi_ISLW_TimeSpd : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1201 HU_EV_P_02_CF_HU_DepartSet2: 8 Vector__XXX
+   SG_ ICU_Popup_Enable : 26|6@1+ (1,0) [0|63] "" Vector__XXX
+
+BO_ 1204 HU_NAVI_V2_3_POS_PE: 8 Vector__XXX
+   SG_ POS_V2_3_Offset : 0|13@1+ (1,0) [0|8191] "" Vector__XXX
+   SG_ POS_V2_3_PathIndex : 13|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ POS_V2_3_CyclicCounter : 18|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ POS_V2_3_RangeAvgSpeed : 21|9@1+ (1,0) [0|511] "" Vector__XXX
+   SG_ POS_V2_3_CurrAltitude100m : 30|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ POS_V2_3_CurrAltitude1m : 36|7@1+ (1,0) [0|127] "" Vector__XXX
+   SG_ POS_V2_3_CurrFuncRoadClass : 43|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ POS_V2_3_CurrFormOfWay : 46|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ POS_V2_3_CurrDirectionLanes : 50|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ POS_V2_3_CurrSpeedLimit : 54|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ POS_V2_3_CurrTrafficSpeed : 59|5@1+ (1,0) [0|31] "" Vector__XXX
+
+BO_ 1205 HU_NAVI_V2_3_PATH_PE_1205: 8 Vector__XXX
+   SG_ PATH_V2_3_CalculatedRoute : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PATH_V2_3_PathType : 4|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PATH_V2_3_Value0 : 7|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PATH_V2_3_Value1 : 11|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ PATH_V2_3_FuncRoadClass : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PATH_V2_3_TurnAngle : 19|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ PATH_V2_3_DirectionLanes : 27|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PATH_V2_3_RemainingDistance : 31|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ PATH_V2_3_MeanEffectiveSlope : 43|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ PATH_V2_3_CyclicCounter : 53|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1207 HU_NAVI_V2_3_PATH_PE_1207: 8 Vector__XXX
+   SG_ PATH_V2_3_CalculatedRoute_01 : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ PATH_V2_3_PathType_01 : 4|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PATH_V2_3_Value0_01 : 7|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PATH_V2_3_Value1_01 : 11|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ PATH_V2_3_FuncRoadClass_01 : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PATH_V2_3_TurnAngle_01 : 19|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ PATH_V2_3_DirectionLanes_01 : 27|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ PATH_V2_3_RemainingDistance_01 : 31|12@1+ (1,0) [0|4095] "" Vector__XXX
+   SG_ PATH_V2_3_MeanEffectiveSlope_01 : 43|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ PATH_V2_3_CyclicCounter_01 : 53|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1208 HU_NAVI_V2_3_META_E: 8 Vector__XXX
+   SG_ META_V2_3_MapProvider : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ META_V2_3_CountryCode : 3|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ META_V2_3_RegionCode : 13|17@1+ (1,0) [0|131071] "" Vector__XXX
+   SG_ META_V2_3_MajorProtocolVersion : 30|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ META_V2_3_MinorProtocolVersion : 32|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ META_V2_3_DrivingSide : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ META_V2_3_SpeedUnit : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ META_V2_3_Country_OptADAS : 40|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ META_V2_3_CyclicCounter : 45|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1209 HU_NAVI_V2_3_SEG_E: 8 Vector__XXX
+   SG_ SEG_V2_3_Offset : 0|13@1+ (1,0) [0|8191] "" Vector__XXX
+   SG_ SEG_V2_3_PathIndex : 13|9@1+ (1,0) [0|511] "" Vector__XXX
+   SG_ SEG_V2_3_CalculatedRoute : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SEG_V2_3_FuncRoadClass : 24|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ SEG_V2_3_SpeedLimit : 27|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ SEG_V2_3_FormOfWay : 32|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ SEG_V2_3_DirectionLanes : 36|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ SEG_V2_3_SpeedLimitUnder5 : 40|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ SEG_V2_3_DividedRoad : 43|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ SEG_V2_3_CyclicCounter : 45|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ SEG_V2_3_Retransmission : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1210 HU_NAVI_V2_3_PROSHORT_E: 8 Vector__XXX
+   SG_ PROSHORT_V2_3_Offset : 0|13@1+ (1,0) [0|8191] "" Vector__XXX
+   SG_ PROSHORT_V2_3_PathIndex : 13|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ PROSHORT_V2_3_Distance : 23|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ PROSHORT_V2_3_Value0 : 33|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ PROSHORT_V2_3_Value1 : 43|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ PROSHORT_V2_3_ProfileType : 53|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ PROSHORT_V2_3_CyclicCounter : 58|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PROSHORT_V2_3_Accuracy : 61|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1214 HU_NAVI_V2_3_PROLONG_E: 8 Vector__XXX
+   SG_ PROLONG_V2_3_Value : 0|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+   SG_ PROLONG_V2_3_Offset : 32|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ PROLONG_V2_3_PathIndex : 48|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ PROLONG_V2_3_ProfileType : 54|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ PROLONG_V2_3_CyclicCounter : 59|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ PROLONG_V2_3_Update : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1215 HU_NAVI_V2_3_STUB_E: 8 Vector__XXX
+   SG_ STUB_V2_3_Offset : 0|13@1+ (1,0) [0|8191] "" Vector__XXX
+   SG_ STUB_V2_3_PathIndex : 13|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ STUB_V2_3_SubPathIndex : 21|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ STUB_V2_3_RelativeProb : 27|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ STUB_V2_3_FuncRoadClass : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ STUB_V2_3_CalculatedRoute : 35|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ STUB_V2_3_RightOfWay : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ STUB_V2_3_TurnAngle : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ STUB_V2_3_FormOfWay : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ STUB_V2_3_DirectionLanes : 52|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ STUB_V2_3_CyclicCounter : 56|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ STUB_V2_3_LastStubAtOffset : 59|5@1+ (1,0) [0|31] "" Vector__XXX
+
+BO_ 1224 HU_TMU_E: 8 Vector__XXX
+   SG_ HU_eCallStatus : 19|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ C_SHVU_DTC_Mode : 26|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ HU_TempUnit : 36|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1239 HU_Car_PE: 8 Vector__XXX
+   SG_ HU_VehiclePwr : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ HU_BtnShowReq : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1240 CLUSTER_INFO_1240: 8 Vector__XXX
+   SG_ DISTANCE_UNIT : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1245 AMP_HU_E_08_AMP_CLUinfo_OutputCh: 8 Vector__XXX
+   SG_ HU_EV_GpsSched_State : 26|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ HU_LatchHoldReq_EV_PE : 34|6@1+ (1,0) [0|63] "" Vector__XXX
+
+BO_ 1247 HU_NAVI_PE: 8 Vector__XXX
+   SG_ Navi_AirConditionWarning : 18|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ Navi_AirConditionType : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1253 IEB_01_10ms_2_IEB_InhbtTrnstnTo4wd: 8 Vector__XXX
+   SG_ Auth_Req : 35|23@1+ (1,0) [0|8.38861e+06] "" Vector__XXX
+   SG_ SecureCom_Req : 58|6@1+ (1,0) [0|63] "" Vector__XXX
+
+BO_ 1257 HU_GW_P_1257: 8 Vector__XXX
+   SG_ CF_Tmu_RoadType2 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ CF_Tmu_RoadType1 : 4|20@1+ (1,0) [0|1.04858e+06] "" Vector__XXX
+   SG_ CF_Tmu_RoadType4 : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ CF_Tmu_RoadType3 : 28|24@1+ (1,0) [0|1.67772e+07] "" Vector__XXX
+   SG_ CF_Tmu_RoadType5 : 52|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1258 HU_GW_P_1258: 8 Vector__XXX
+   SG_ CF_Tmu_RoadType7 : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ CF_Tmu_RoadType6 : 4|20@1+ (1,0) [0|1.04858e+06] "" Vector__XXX
+   SG_ CF_Tmu_RoadType9 : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ CF_Tmu_RoadType8 : 28|24@1+ (1,0) [0|1.67772e+07] "" Vector__XXX
+   SG_ CF_Tmu_RoadType10 : 52|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1259 LOCAL_TIME2: 8 Vector__XXX
+   SG_ HOURS : 15|5@0+ (1,0) [0|31] "" Vector__XXX
+   SG_ MINUTES : 21|6@0+ (1,0) [0|63] "" Vector__XXX
+   SG_ SECONDS : 24|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ NEW_SIGNAL_3 : 39|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1260 HU_GW_P_1260: 8 Vector__XXX
+   SG_ CR_Tmu_DrvDistance1 : 0|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ CR_Tmu_DrvDistance2 : 10|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ CR_Tmu_DrvDistance3 : 20|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ CR_Tmu_DrvDistance4 : 30|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ CR_Tmu_DrvDistance5 : 40|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ CR_Tmu_DrvDistance6 : 50|6@1+ (1,0) [0|63] "" Vector__XXX
+
+BO_ 1262 HU_EV_P_1262: 8 Vector__XXX
+   SG_ CR_HU_EconStMin_WeedDay : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ CR_HU_EconStHr_WeekDay : 3|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ CR_HU_EconEndMin_WeekDay : 8|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ CR_HU_EconEndHr_WeekDay : 11|27@1+ (1,0) [0|1.34218e+08] "" Vector__XXX
+   SG_ CR_HU_ChgCtrMode : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1263 HU_EV_P_1263: 8 Vector__XXX
+   SG_ CR_HU_DepartSet1_Min : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ CR_HU_DepartSet1_Hour : 3|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_Enable : 8|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_Sun : 9|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_Sat : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_Fri : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_Thu : 12|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_Wed : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_Tue : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_Mon : 15|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CR_HU_DepartSet2_Min : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ CR_HU_DepartSet2_Hour : 19|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ CF_HU_DepartSet2_Enable : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet2_Sun : 25|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet2_Sat : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet2_Fri : 27|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet2_Thu : 28|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet2_Wed : 29|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet2_Tue : 30|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet2_Mon : 31|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_TempUnit : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ CR_HU_DepartSet1_TempSet : 33|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_PreCondSet : 39|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ CF_HU_DepartSet1_DefrostCtr : 47|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1264 LOCAL_TIME: 8 Vector__XXX
+   SG_ HOURS : 12|5@0+ (1,0) [0|31] "" Vector__XXX
+   SG_ MINUTES : 21|6@0+ (1,0) [0|63] "" Vector__XXX
+   SG_ SECONDS : 31|8@0+ (1,0) [0|59] "" Vector__XXX
+
+BO_ 1265 HU_GW_PE: 8 Vector__XXX
+   SG_ AMP_UpdateIGNIhn : 0|11@1+ (1,0) [0|2047] "" Vector__XXX
+   SG_ HU_Background_Time_Info : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ C_FRU_Option_Info : 10|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ HU_RrStRemindOffSetReq : 11|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ HU_IG3_Request : 12|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ HU_Background : 18|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ ccIC_HUD_PbackSta : 21|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ HU_BackgroundFadeInOut : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1266 HU_CLU_PE: 8 Vector__XXX
+   SG_ HU_LanguageInfo : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HU_VolumeStatus : 8|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ HU_MuteStatus : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HU_WelcomeReady : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HU_UsmSupport : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HU_NaviStatus : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ HU_BVM_Display_Message : 24|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ HU_SVM_View_Display : 27|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ HU_NaviCamSettingStatus : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HU_EVSupport : 40|14@1+ (1,0) [0|16383] "" Vector__XXX
+   SG_ HU_AutoBrightState_New : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1267 DATC_08_200ms: 8 Vector__XXX
+   SG_ RSELockOnOff_PE : 0|36@1+ (1,0) [0|6.87195e+10] "" Vector__XXX
+   SG_ HU_DATC_DisplayThemes : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_AlvCnt8Val : 16|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ DATC_SmrtVntOnOffSta : 26|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_PsAutoDis : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ DATC_RrAutoDis : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HU_PhoneActivity_PE : 36|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HU_VRActivity_PE : 38|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ DATC_RrDrvModDis : 40|10@1+ (1,0) [0|1023] "" Vector__XXX
+   SG_ DATC_DisplayThemes : 50|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ DATC_AUTOStepPS : 56|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ DATC_AUTOStepRR : 59|5@1+ (1,0) [0|31] "" Vector__XXX
+
+BO_ 1278 HU_MON_PE: 8 Vector__XXX
+   SG_ HU_Type : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HU_Navi_RspADASMapMsg : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ HU_DistributeInfo : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ HU_OptionInfo : 32|22@1+ (1,0) [0|4.1943e+06] "" Vector__XXX
+   SG_ HU_NaviHandshakingSupport : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ HU_AMP_EQVariant : 56|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ HU_AdasSupport : 61|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1584 HU_AMP_E_1584: 8 Vector__XXX
+   SG_ AMP_RrTTSSound : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_NaviSound : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_TTSSound : 6|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ AMP_SDVCStep : 9|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ AMP_Beep1Mode : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_MasterBeepVolumeStep : 16|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ AMP_SignalDoctor : 19|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_ASDMode : 21|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ AMP_ANCMode : 25|7@1+ (1,0) [0|127] "" Vector__XXX
+   SG_ AMP_VirtualVenueMode : 32|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ AMP_QLIMode : 35|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ AMP_DriverMode : 38|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ AMP_VoiceGuideTTS : 44|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_Beep1KBDMode : 46|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1585 HU_AMP_E_1585: 8 Vector__XXX
+   SG_ AMP_Mute : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_AudioMode : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_WrnPromptMode : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_SPDIFMute : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_Reset : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_QuietMode : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_DSCMode : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ AMP_RANCMode : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ AMP_CenterpointMode : 32|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_QLSMode : 34|14@1+ (1,0) [0|16383] "" Vector__XXX
+   SG_ AMP_SiriMode : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1586 HU_AMP_E_1586: 8 Vector__XXX
+   SG_ AMP_LogSnapshot : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ VESS_LogSnapshot : 2|20@1+ (1,0) [0|1.04858e+06] "" Vector__XXX
+   SG_ AMP_VersionReq : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1587 HU_AMP_E_1587: 8 Vector__XXX
+   SG_ AMP_EngASDMasterGain : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_Beep1Frequency : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1588 HU_AMP_E_1588: 8 Vector__XXX
+   SG_ AMP_NaviVolumeStep : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ ATS_Beep_OutputCh_Select : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ ATS_BeepVolumeStep : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ ATS_BeepFrequency : 32|17@1+ (1,0) [0|131071] "" Vector__XXX
+   SG_ AMP_ESEVMasterGain : 49|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ AMP_NaviVoice_Priority : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ AMP_ESEVMode : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1589 HU_AMP_E_1589: 8 Vector__XXX
+   SG_ AMP_MTSVolumeStep : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_eASDMode : 8|3@1+ (1,0) [0|7] "" Vector__XXX
+   SG_ AMP_eASDCstVolumeSet : 11|15@1+ (1,0) [0|32767] "" Vector__XXX
+   SG_ AMP_eASDAPSSet : 26|6@1+ (1,0) [0|63] "" Vector__XXX
+   SG_ AMP_eASDCstMode : 32|5@1+ (1,0) [0|31] "" Vector__XXX
+   SG_ AMP_eASDCstReset : 37|3@1+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 1590 HU_AMP_E_1590: 8 Vector__XXX
+   SG_ AMP_HFVolumeStep : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DVRS_Beep_OutputCh_Select : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DVRS_BeepVolumeStep : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DVRS_BeepFrequency : 32|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ AMP_SiriVolumeStep : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1591 HU_AMP_E_1591: 8 Vector__XXX
+   SG_ AMP_MainVolumeSet : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_BalanceSet : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_FadeSet : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_BassSet : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_MidSet : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ AMP_TrebleSet : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1593 HU_AMP_E_1593: 8 Vector__XXX
+   SG_ DATC_Beep1_OutputCh_Select : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ DATC_Beep1VolumeStep : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DATC_Beep1Frequency : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1597 HU_AMP_P: 8 Vector__XXX
+   SG_ AMP_SetMaxMainVolStep : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+
+
+
+CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
+CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
+CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
+CM_ SG_ 1041 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 938 Crc_Val "Unverified opendbc signal";
+CM_ SG_ 938 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 1044 Crc_Val "Unverified opendbc signal";
+CM_ SG_ 1044 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 1077 Crc_Val "Unverified opendbc signal";
+CM_ SG_ 1077 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 593 Crc_Val "Unverified opendbc signal";
+CM_ SG_ 593 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 1096 Crc_Val "Unverified opendbc signal";
+CM_ SG_ 1096 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 1141 Passenger_Seat_Heating_Opt "Unverified opendbc signal";
+CM_ SG_ 1141 Passenger_Seat_Heating_Oper "Unverified opendbc signal";
+CM_ SG_ 1174 Driver_Seat_Heating_Opt "Unverified opendbc signal";
+CM_ SG_ 1174 Driver_Seat_Heating_Oper "Unverified opendbc signal";
+CM_ SG_ 896 Crc_Val "Unverified opendbc signal";
+CM_ SG_ 896 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 896 Driver_Temp_C "Unverified opendbc signal";
+CM_ SG_ 896 Driver_Temp_F "Unverified opendbc signal";
+CM_ SG_ 896 Passenger_Temp_C "Unverified opendbc signal";
+CM_ SG_ 896 Passenger_Temp_F "Unverified opendbc signal";
+CM_ BO_ 199 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 199 HU_V2LModeSet "Unverified opendbc signal";
+CM_ SG_ 199 HU_V2GModeSet "Unverified opendbc signal";
+CM_ SG_ 199 HU_V2XInstantRunSet "Unverified opendbc signal";
+CM_ SG_ 199 HU_V2XDischrgLimSocValSet "Unverified opendbc signal";
+CM_ SG_ 199 HU_EcoClmtLimSet "Unverified opendbc signal";
+CM_ SG_ 199 HU_UtilModeSetReq "Unverified opendbc signal";
+CM_ SG_ 199 HU_ChgInCurrSet "Unverified opendbc signal";
+CM_ SG_ 199 HU_EV_BatteryConditioning "Unverified opendbc signal";
+CM_ SG_ 199 NAVI_precond_EVStationFlag "Unverified opendbc signal";
+CM_ SG_ 199 NAVI_precond_EVStationType "Unverified opendbc signal";
+CM_ SG_ 199 HU_QckChrgCustomSet "Unverified opendbc signal";
+CM_ BO_ 255 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 255 BCM_Crc20Val "Unverified opendbc signal";
+CM_ SG_ 255 BCM_AlvCnt20Val "Unverified opendbc signal";
+CM_ SG_ 255 BCM_SafetyWdwOptTyp2 "Unverified opendbc signal";
+CM_ BO_ 353 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 353 CHECKSUM "Unverified opendbc signal";
+CM_ SG_ 353 COUNTER "Unverified opendbc signal";
+CM_ SG_ 353 FCA_ICON "Unverified opendbc signal";
+CM_ SG_ 353 FCA_ALT_ICON "Unverified opendbc signal";
+CM_ SG_ 353 LKA_ICON "Unverified opendbc signal";
+CM_ SG_ 353 HBA_ICON "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_1 "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_2 "Unverified opendbc signal";
+CM_ SG_ 353 FCA_IMAGE "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_3 "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_4 "Unverified opendbc signal";
+CM_ SG_ 353 BCA_LEFT "Unverified opendbc signal";
+CM_ SG_ 353 BCA_RIGHT "Unverified opendbc signal";
+CM_ SG_ 353 LCA_LEFT_ARROW "Unverified opendbc signal";
+CM_ SG_ 353 LCA_RIGHT_ARROW "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_5 "Unverified opendbc signal";
+CM_ SG_ 353 CENTERLINE "Unverified opendbc signal";
+CM_ SG_ 353 TARGET "Unverified opendbc signal";
+CM_ SG_ 353 TARGET_DISTANCE "Unverified opendbc signal";
+CM_ SG_ 353 LANELINE_LEFT "Unverified opendbc signal";
+CM_ SG_ 353 LANELINE_LEFT_POSITION "Unverified opendbc signal";
+CM_ SG_ 353 LANELINE_RIGHT "Unverified opendbc signal";
+CM_ SG_ 353 LANELINE_RIGHT_POSITION "Unverified opendbc signal";
+CM_ SG_ 353 LANELINE_CURVATURE "Unverified opendbc signal";
+CM_ SG_ 353 LANE_HIGHLIGHT "Unverified opendbc signal";
+CM_ SG_ 353 LANE_HIGHLIGHT_DISTANCE "Unverified opendbc signal";
+CM_ SG_ 353 LANE_LEFT "Unverified opendbc signal";
+CM_ SG_ 353 LANE_RIGHT "Unverified opendbc signal";
+CM_ SG_ 353 LANE_ZOOM "Unverified opendbc signal";
+CM_ SG_ 353 ALERTS_1 "Unverified opendbc signal";
+CM_ SG_ 353 ALERTS_2 "Unverified opendbc signal";
+CM_ SG_ 353 ALERTS_3 "Unverified opendbc signal";
+CM_ SG_ 353 ALERTS_4 "Unverified opendbc signal";
+CM_ SG_ 353 ALERTS_5 "Unverified opendbc signal";
+CM_ SG_ 353 MUTE "Unverified opendbc signal";
+CM_ SG_ 353 SOUNDS_1 "Unverified opendbc signal";
+CM_ SG_ 353 SOUNDS_2 "Unverified opendbc signal";
+CM_ SG_ 353 SOUNDS_3 "Unverified opendbc signal";
+CM_ SG_ 353 SOUNDS_4 "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_6 "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_7 "Unverified opendbc signal";
+CM_ SG_ 353 SETSPEED_HUD "Unverified opendbc signal";
+CM_ SG_ 353 DISTANCE_LEAD "Unverified opendbc signal";
+CM_ SG_ 353 DISTANCE_CAR "Unverified opendbc signal";
+CM_ SG_ 353 DISTANCE_SPACING "Unverified opendbc signal";
+CM_ SG_ 353 DISTANCE "Unverified opendbc signal";
+CM_ SG_ 353 SETSPEED_SPEED "Unverified opendbc signal";
+CM_ SG_ 353 SETSPEED "Unverified opendbc signal";
+CM_ SG_ 353 HDA_ICON "Unverified opendbc signal";
+CM_ SG_ 353 SLA_ICON "Unverified opendbc signal";
+CM_ SG_ 353 NAV_ICON "Unverified opendbc signal";
+CM_ SG_ 353 LFA_ICON "Unverified opendbc signal";
+CM_ SG_ 353 LCA_LEFT_ICON "Unverified opendbc signal";
+CM_ SG_ 353 LCA_RIGHT_ICON "Unverified opendbc signal";
+CM_ SG_ 353 BACKGROUND "Unverified opendbc signal";
+CM_ SG_ 353 DAW_ICON "Unverified opendbc signal";
+CM_ SG_ 353 CAR_CIRCLE "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_8 "Unverified opendbc signal";
+CM_ SG_ 353 ZEROS_9 "Unverified opendbc signal";
+CM_ BO_ 354 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 354 CHECKSUM "Unverified opendbc signal";
+CM_ SG_ 354 COUNTER "Unverified opendbc signal";
+CM_ SG_ 354 COUNTRY "Unverified opendbc signal";
+CM_ SG_ 354 SPEEDLIMIT_FLASH "Unverified opendbc signal";
+CM_ SG_ 354 SPEEDLIMIT "Unverified opendbc signal";
+CM_ SG_ 354 SIGNS "Unverified opendbc signal";
+CM_ SG_ 354 SPEEDLIMIT_WEATHER "Unverified opendbc signal";
+CM_ SG_ 354 VIBRATE "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_1 "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_2 "Unverified opendbc signal";
+CM_ SG_ 354 LEAD "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_DISTANCE "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_LATERAL "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_3 "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_ALT "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_ALT_DISTANCE "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_ALT_LATERAL "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_4 "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_LEFT "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_LEFT_DISTANCE "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_LEFT_LATERAL "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_5 "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_RIGHT "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_RIGHT_DISTANCE "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_RIGHT_LATERAL "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_6 "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_7 "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_LEFT_REAR_STATUS "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_LEFT_REAR_DISTANCE "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_LEFT_REAR_LATERAL "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_8 "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_9 "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_RIGHT_REAR_STATUS "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_RIGHT_REAR_DISTANCE "Unverified opendbc signal";
+CM_ SG_ 354 LEAD_RIGHT_REAR_LATERAL "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_10 "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_FSS "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_FCA "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_LSS "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_SLA "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_DAW "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_HBA "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_SCC "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_LFA "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_HDA "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_LCA "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_HDP "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_DAS "Unverified opendbc signal";
+CM_ SG_ 354 FAULT_ESS "Unverified opendbc signal";
+CM_ SG_ 354 ZEROS_11 "Unverified opendbc signal";
+CM_ BO_ 438 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 438 CHECKSUM "Unverified opendbc signal";
+CM_ SG_ 438 COUNTER "Unverified opendbc signal";
+CM_ BO_ 439 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 439 CHECKSUM "Unverified opendbc signal";
+CM_ SG_ 439 COUNTER "Unverified opendbc signal";
+CM_ BO_ 440 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 440 CHECKSUM "Unverified opendbc signal";
+CM_ SG_ 440 COUNTER "Unverified opendbc signal";
+CM_ BO_ 441 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 441 CHECKSUM "Unverified opendbc signal";
+CM_ SG_ 441 COUNTER "Unverified opendbc signal";
+CM_ BO_ 507 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 507 CHECKSUM "Unverified opendbc signal";
+CM_ SG_ 507 COUNTER "Unverified opendbc signal";
+CM_ BO_ 599 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 599 RR_SHVU_SeatOptSta "Unverified opendbc signal";
+CM_ SG_ 599 C_RH_Folding_SW "Unverified opendbc signal";
+CM_ SG_ 599 RR_SHVU_SeatHtOperSta "Unverified opendbc signal";
+CM_ SG_ 599 C_LH_Unfolding_SW "Unverified opendbc signal";
+CM_ SG_ 599 C_LH_Folding_SW "Unverified opendbc signal";
+CM_ SG_ 599 RRPSM_RearModeWngDis "Unverified opendbc signal";
+CM_ SG_ 599 RRIMS_AMPBzrReq "Unverified opendbc signal";
+CM_ BO_ 689 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 689 ADAS_CMD_Crc34Val "Unverified opendbc signal";
+CM_ SG_ 689 ADAS_CMD_AlvCnt34Val "Unverified opendbc signal";
+CM_ SG_ 689 HDP_RDD_WarnSta "Unverified opendbc signal";
+CM_ SG_ 689 HDP_RDD_LongAsstCtrlSta "Unverified opendbc signal";
+CM_ SG_ 689 HDP_RDD_HzrdLmpReqSta "Unverified opendbc signal";
+CM_ SG_ 689 HDP_RDD_ACIActvDispSta "Unverified opendbc signal";
+CM_ SG_ 689 HDP_RDD_EMStbltActvReqSta "Unverified opendbc signal";
+CM_ BO_ 827 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 827 TP_HU_IAU_Byte0 "Unverified opendbc signal";
+CM_ SG_ 827 TP_HU_IAU_Byte1 "Unverified opendbc signal";
+CM_ SG_ 827 TP_HU_IAU_Byte2 "Unverified opendbc signal";
+CM_ SG_ 827 TP_HU_IAU_Byte3 "Unverified opendbc signal";
+CM_ SG_ 827 TP_HU_IAU_Byte4 "Unverified opendbc signal";
+CM_ SG_ 827 TP_HU_IAU_Byte5 "Unverified opendbc signal";
+CM_ SG_ 827 TP_HU_IAU_Byte6 "Unverified opendbc signal";
+CM_ SG_ 827 TP_HU_IAU_Byte7 "Unverified opendbc signal";
+CM_ BO_ 828 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 828 TP_IAU_HU_Byte0 "Unverified opendbc signal";
+CM_ SG_ 828 TP_IAU_HU_Byte1 "Unverified opendbc signal";
+CM_ SG_ 828 TP_IAU_HU_Byte2 "Unverified opendbc signal";
+CM_ SG_ 828 TP_IAU_HU_Byte3 "Unverified opendbc signal";
+CM_ SG_ 828 TP_IAU_HU_Byte4 "Unverified opendbc signal";
+CM_ SG_ 828 TP_IAU_HU_Byte5 "Unverified opendbc signal";
+CM_ SG_ 828 TP_IAU_HU_Byte6 "Unverified opendbc signal";
+CM_ SG_ 828 TP_IAU_HU_Byte7 "Unverified opendbc signal";
+CM_ BO_ 895 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 895 GATEWAY_HS_D_STS "Unverified opendbc signal";
+CM_ BO_ 898 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 898 DATC_Crc5Val "Unverified opendbc signal";
+CM_ SG_ 898 DATC_AlvCnt5Val "Unverified opendbc signal";
+CM_ SG_ 898 DATC_FrDrvModDis "Unverified opendbc signal";
+CM_ SG_ 898 DATC_FrPassModDis "Unverified opendbc signal";
+CM_ SG_ 898 DATC_ClmtTxtPopupOSD "Unverified opendbc signal";
+CM_ SG_ 898 DATC_TempDispUnitSta "Unverified opendbc signal";
+CM_ SG_ 898 DATC_DrvAutoDis "Unverified opendbc signal";
+CM_ SG_ 898 DATC_FrClmtScrnDis "Unverified opendbc signal";
+CM_ SG_ 898 DATC_AcDis "Unverified opendbc signal";
+CM_ SG_ 898 DATC_IntakeSta "Unverified opendbc signal";
+CM_ BO_ 899 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 899 DATC_Crc6Val "Unverified opendbc signal";
+CM_ SG_ 899 DATC_AlvCnt6Val "Unverified opendbc signal";
+CM_ SG_ 899 DATC_SyncDis "Unverified opendbc signal";
+CM_ SG_ 899 DATC_OpSta "Unverified opendbc signal";
+CM_ SG_ 899 DATC_FrDfgSta "Unverified opendbc signal";
+CM_ SG_ 899 DATC_SmrtVntDis "Unverified opendbc signal";
+CM_ SG_ 899 DATC_AutoDfgBlnkDis "Unverified opendbc signal";
+CM_ SG_ 899 DATC_AutoDfgSysOffDis "Unverified opendbc signal";
+CM_ SG_ 899 DATC_ArClnIND "Unverified opendbc signal";
+CM_ SG_ 899 DATC_RrDfgInd "Unverified opendbc signal";
+CM_ BO_ 900 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 900 DATC_Crc7Val "Unverified opendbc signal";
+CM_ SG_ 900 DATC_AlvCnt7Val "Unverified opendbc signal";
+CM_ SG_ 900 DATC_FrDrvBlwDis "Unverified opendbc signal";
+CM_ SG_ 900 DATC_FrPsBlwDis "Unverified opendbc signal";
+CM_ SG_ 900 DATC_HeatDis "Unverified opendbc signal";
+CM_ SG_ 900 DATC_DrvOnlyDis "Unverified opendbc signal";
+CM_ SG_ 900 DATC_AUTOStep "Unverified opendbc signal";
+CM_ SG_ 900 DATC_IntakeDis "Unverified opendbc signal";
+CM_ BO_ 902 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 902 PSM_DrvStSldFwdDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStSldBckwdDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStReclneFwdDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStReclneBckwdDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_IMSOptTyp "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStTiltDnDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStHghtUpDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStHghtDnDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStCushExtBckwdDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStCushExtFwdDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStHdRstUpDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStHdRstDnDis "Unverified opendbc signal";
+CM_ SG_ 902 SmrtIMS_StatureRspVal "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStHdRstBckwdDis "Unverified opendbc signal";
+CM_ SG_ 902 SmrtIMS_SeatedHghtRspVal "Unverified opendbc signal";
+CM_ SG_ 902 SmrtIMS_WghtRspVal "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStLmbrLoDis "Unverified opendbc signal";
+CM_ SG_ 902 SmartIMS_DisReq "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStLmbrUpDis "Unverified opendbc signal";
+CM_ SG_ 902 SmrtIMS_ExitSta "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStBlstrInfDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStRlxTiltUpDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStRlxTiltDnDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStLegUpDis "Unverified opendbc signal";
+CM_ SG_ 902 PSM_DrvStLegDnDis "Unverified opendbc signal";
+CM_ BO_ 903 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 903 PSM_LmbrSigSrcTyp "Unverified opendbc signal";
+CM_ BO_ 904 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 904 PSM_DrvReclinePosition "Unverified opendbc signal";
+CM_ SG_ 904 PSM_EsyAcsGetOnSta "Unverified opendbc signal";
+CM_ SG_ 904 PSM_EsyAcsGetOffSta "Unverified opendbc signal";
+CM_ SG_ 904 PSM_EsyAcsStpSta "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StSldFwdMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StSldBwdMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StRclFwdMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StRclBwdMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 PSM_SWVerMinor1 "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StTltUpMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StTltDnMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StHRestUpMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StHRestDnMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StHRestFwdMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StHRestBwdMvBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StLegRestUpBtn "Unverified opendbc signal";
+CM_ SG_ 904 RRPSS_L_StLegRestDnBtn "Unverified opendbc signal";
+CM_ SG_ 904 PSM_DrvHeightPosition "Unverified opendbc signal";
+CM_ SG_ 904 PSM_DrvSlidePosition "Unverified opendbc signal";
+CM_ BO_ 916 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 916 BCM_Crc19Val "Unverified opendbc signal";
+CM_ SG_ 916 USM_1stRrStRmndSta "Unverified opendbc signal";
+CM_ SG_ 916 BCM_AlvCnt19Val "Unverified opendbc signal";
+CM_ SG_ 916 USM_IBU_AutoDrUnLkReq "Unverified opendbc signal";
+CM_ SG_ 916 USM_IBU_TwoTrnUnLkCurrentSta "Unverified opendbc signal";
+CM_ SG_ 916 USM_IBU_RemoteWDWCurrentSta "Unverified opendbc signal";
+CM_ SG_ 916 USM_IBU_AutoDrLkReq2 "Unverified opendbc signal";
+CM_ BO_ 942 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 942 AMP_Beep1VolumeStep_DATC "Unverified opendbc signal";
+CM_ SG_ 942 AMP_SPDIF_OutputCh_Select "Unverified opendbc signal";
+CM_ SG_ 942 AMP_Analog_OutputCh_Select "Unverified opendbc signal";
+CM_ SG_ 942 AMP_Beep1_OutputCh_Select "Unverified opendbc signal";
+CM_ SG_ 942 AMP_Beep1KBDVolumeStep "Unverified opendbc signal";
+CM_ BO_ 945 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 945 DATC_Crc9Val "Unverified opendbc signal";
+CM_ SG_ 945 DATC_AlvCnt9Val "Unverified opendbc signal";
+CM_ SG_ 945 DATC_RrBlwDis "Unverified opendbc signal";
+CM_ SG_ 945 DATC_ArClnSysOSD "Unverified opendbc signal";
+CM_ SG_ 945 DATC_ArClnStepClr "Unverified opendbc signal";
+CM_ SG_ 945 DATC_ArClnSmblTyp "Unverified opendbc signal";
+CM_ SG_ 945 DATC_AfterBlowUSMSta "Unverified opendbc signal";
+CM_ SG_ 945 DATC_SchdldVntUSMSta "Unverified opendbc signal";
+CM_ SG_ 945 DATC_SchdldVntHrSta "Unverified opendbc signal";
+CM_ SG_ 945 DATC_SchdldVntMinSta "Unverified opendbc signal";
+CM_ BO_ 946 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 946 DATC_Crc10Val "Unverified opendbc signal";
+CM_ SG_ 946 DATC_AlvCnt10Val "Unverified opendbc signal";
+CM_ SG_ 946 DATC_Typ "Unverified opendbc signal";
+CM_ SG_ 946 DATC_Opt1Typ "Unverified opendbc signal";
+CM_ SG_ 946 DATC_Opt3Typ "Unverified opendbc signal";
+CM_ SG_ 946 DATC_Opt2Typ "Unverified opendbc signal";
+CM_ SG_ 946 DATC_Opt4Typ "Unverified opendbc signal";
+CM_ SG_ 946 DATC_StrWhlUSMSta "Unverified opendbc signal";
+CM_ SG_ 946 DATC_StrWhlHtngReq "Unverified opendbc signal";
+CM_ BO_ 963 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 963 BCM_Crc16Val "Unverified opendbc signal";
+CM_ SG_ 963 BCM_AlvCnt16Val "Unverified opendbc signal";
+CM_ SG_ 963 IBU_SWVerMajor1 "Unverified opendbc signal";
+CM_ SG_ 963 IBU_SWVerMinor1 "Unverified opendbc signal";
+CM_ SG_ 963 IBU_SWVerMinor2 "Unverified opendbc signal";
+CM_ SG_ 963 ECW_Fault "Unverified opendbc signal";
+CM_ SG_ 963 ECW_FaultActv "Unverified opendbc signal";
+CM_ SG_ 963 ECW_HiVolt "Unverified opendbc signal";
+CM_ SG_ 963 ECW_HiVoltActv "Unverified opendbc signal";
+CM_ SG_ 963 ECW_LoVolt "Unverified opendbc signal";
+CM_ SG_ 963 ECW_LoVoltActv "Unverified opendbc signal";
+CM_ SG_ 963 ECW_Overload "Unverified opendbc signal";
+CM_ SG_ 963 ECW_OverloadActv "Unverified opendbc signal";
+CM_ SG_ 963 ECW_CommErr "Unverified opendbc signal";
+CM_ SG_ 963 SunRoof_RearBlindOprSta "Unverified opendbc signal";
+CM_ BO_ 992 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 992 BCM_Crc2Val "Unverified opendbc signal";
+CM_ SG_ 992 BCM_AlvCnt2Val "Unverified opendbc signal";
+CM_ SG_ 992 BAlarm_BglrAlrmCurrentSta "Unverified opendbc signal";
+CM_ SG_ 992 BAlarm_BglrAlrmSta "Unverified opendbc signal";
+CM_ SG_ 992 BAlarm_PncAlrmSta "Unverified opendbc signal";
+CM_ SG_ 992 BAlarm_BrglrHrnRlySta "Unverified opendbc signal";
+CM_ SG_ 992 BCM_KeyInSta "Unverified opendbc signal";
+CM_ SG_ 992 BCM_AccInSta "Unverified opendbc signal";
+CM_ SG_ 992 BCM_Ign1InSta "Unverified opendbc signal";
+CM_ SG_ 992 BCM_Ign2InSta "Unverified opendbc signal";
+CM_ BO_ 997 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 997 BCM_Crc5Val "Unverified opendbc signal";
+CM_ SG_ 997 BCM_AlvCnt5Val "Unverified opendbc signal";
+CM_ SG_ 997 PDW_OptTyp "Unverified opendbc signal";
+CM_ SG_ 997 PDW_SysChkSndSta "Unverified opendbc signal";
+CM_ SG_ 997 PDW_SwIndOnReq "Unverified opendbc signal";
+CM_ SG_ 997 PDW_FrCtWrngLvlDis "Unverified opendbc signal";
+CM_ SG_ 997 PDW_SysFlrSta "Unverified opendbc signal";
+CM_ SG_ 997 PDW_FrCtWrngSndSta "Unverified opendbc signal";
+CM_ SG_ 997 PDW_FrLtWrngLvlDis "Unverified opendbc signal";
+CM_ SG_ 997 PDW_FrRtWrngLvlDis "Unverified opendbc signal";
+CM_ SG_ 997 PDW_FrSnsrWrngLvlSta "Unverified opendbc signal";
+CM_ BO_ 998 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 998 BCM_Crc6Val "Unverified opendbc signal";
+CM_ SG_ 998 BCM_AlvCnt6Val "Unverified opendbc signal";
+CM_ SG_ 998 PDW_RrCtWrngLvlDis "Unverified opendbc signal";
+CM_ SG_ 998 PDW_RrLtWrngLvlDis "Unverified opendbc signal";
+CM_ SG_ 998 PDW_RrRtWrngLvlDis "Unverified opendbc signal";
+CM_ BO_ 1029 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1029 ICU_Crc12Val "Unverified opendbc signal";
+CM_ SG_ 1029 ICU_AlvCnt12Val "Unverified opendbc signal";
+CM_ SG_ 1029 DoorLock_CtrlDrLkSwSta_ICU "Unverified opendbc signal";
+CM_ SG_ 1029 DoorLock_CtrlDrUnLkSwSta_ICU "Unverified opendbc signal";
+CM_ SG_ 1029 ICU_IGN3On_ReqState_New "Unverified opendbc signal";
+CM_ SG_ 1029 ICU_BattMngAlert "Unverified opendbc signal";
+CM_ BO_ 1040 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1040 ICU_Crc10Val "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_AlvCnt10Val "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2SoC "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2NCap "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2OpnCirVol "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2_FSOC "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2_FSOH "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2_FSOF "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2_FQSTAT "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2SoH "Unverified opendbc signal";
+CM_ SG_ 1040 ICU_BS2SoF "Unverified opendbc signal";
+CM_ BO_ 1043 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1043 LEFT_STALK "Unverified opendbc signal";
+CM_ SG_ 1043 RIGHT_STALK "Unverified opendbc signal";
+CM_ SG_ 1043 COUNTER_ALT "Unverified opendbc signal";
+CM_ SG_ 1043 LEFT_LAMP "Unverified opendbc signal";
+CM_ SG_ 1043 RIGHT_LAMP "Unverified opendbc signal";
+CM_ SG_ 1043 LEFT_LAMP_ALT "Unverified opendbc signal";
+CM_ SG_ 1043 RIGHT_LAMP_ALT "Unverified opendbc signal";
+CM_ SG_ 1043 USE_ALT_LAMP "Unverified opendbc signal";
+CM_ BO_ 1046 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1046 ICU_Crc6Val "Unverified opendbc signal";
+CM_ SG_ 1046 ICU_AlvCnt6Val "Unverified opendbc signal";
+CM_ SG_ 1046 Lamp_RrTrnSigLmpLftOpnSta "Unverified opendbc signal";
+CM_ SG_ 1046 Lamp_RrTrnSigLmpRtOpnSta "Unverified opendbc signal";
+CM_ SG_ 1046 Lamp_FrTrnSigLmpLftOpnSta "Unverified opendbc signal";
+CM_ SG_ 1046 Lamp_FrTrnSigLmpRtOpnSta "Unverified opendbc signal";
+CM_ BO_ 1047 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1047 ICU_Crc7Val "Unverified opendbc signal";
+CM_ SG_ 1047 ICU_AlvCnt7Val "Unverified opendbc signal";
+CM_ BO_ 1048 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1048 ICU_Crc8Val "Unverified opendbc signal";
+CM_ SG_ 1048 HSWS_SysWrngSta_ICU "Unverified opendbc signal";
+CM_ SG_ 1048 ICU_AlvCnt8Val "Unverified opendbc signal";
+CM_ SG_ 1048 DriveTypeOption "Unverified opendbc signal";
+CM_ SG_ 1048 Warn_RrLftSBRMATSwSta "Unverified opendbc signal";
+CM_ SG_ 1048 Warn_RrRhtSBRMATSwSta "Unverified opendbc signal";
+CM_ SG_ 1048 Lamp_FootLampOnReq "Unverified opendbc signal";
+CM_ SG_ 1048 Lamp_MoodLampOnReq "Unverified opendbc signal";
+CM_ SG_ 1048 ICU_PowerAutoCutModSta "Unverified opendbc signal";
+CM_ SG_ 1048 ICU_SoCBattStaMsgReq "Unverified opendbc signal";
+CM_ SG_ 1048 Brake_SwSta_ICU "Unverified opendbc signal";
+CM_ BO_ 1050 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1050 BCM_Crc7Val "Unverified opendbc signal";
+CM_ SG_ 1050 BCM_AlvCnt7Val "Unverified opendbc signal";
+CM_ SG_ 1050 Lamp_HiPrioHzrdReq "Unverified opendbc signal";
+CM_ SG_ 1050 Lamp_LoPrioHzrdReq "Unverified opendbc signal";
+CM_ SG_ 1050 Lamp_IntTailLmpOnReq "Unverified opendbc signal";
+CM_ SG_ 1050 Lamp_ExtrnlTailLmpOnReq "Unverified opendbc signal";
+CM_ SG_ 1050 Lamp_HdLmpLoOnReq "Unverified opendbc signal";
+CM_ SG_ 1050 Lamp_HdLmpHiOnReq "Unverified opendbc signal";
+CM_ SG_ 1050 Lamp_AvTailLmpSta "Unverified opendbc signal";
+CM_ BO_ 1051 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1051 BCM_Crc8Val "Unverified opendbc signal";
+CM_ SG_ 1051 BCM_AlvCnt8Val "Unverified opendbc signal";
+CM_ SG_ 1051 Lamp_HbaCtrlModTyp "Unverified opendbc signal";
+CM_ SG_ 1051 Lamp_IFSCtrlModTyp "Unverified opendbc signal";
+CM_ SG_ 1051 Lamp_RrFogLmpOnReq "Unverified opendbc signal";
+CM_ SG_ 1051 Lamp_HdLmpWlcmCmd "Unverified opendbc signal";
+CM_ SG_ 1051 Lamp_PuddleLmpOnReq "Unverified opendbc signal";
+CM_ BO_ 1052 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1052 BCM_Crc9Val "Unverified opendbc signal";
+CM_ SG_ 1052 BCM_AlvCnt9Val "Unverified opendbc signal";
+CM_ SG_ 1052 Lamp_AutoLtSnsrNightSta "Unverified opendbc signal";
+CM_ SG_ 1052 Lamp_VendorInfo "Unverified opendbc signal";
+CM_ SG_ 1052 Lamp_AutoLtSnsrHorVal "Unverified opendbc signal";
+CM_ SG_ 1052 IBU_HDPSpprtSWVer "Unverified opendbc signal";
+CM_ SG_ 1052 IBU_HDPSpprtRdy "Unverified opendbc signal";
+CM_ SG_ 1052 Wiper_RainAmount "Unverified opendbc signal";
+CM_ BO_ 1055 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1055 HU_SVM_tch_mpt_valid__ccp_pan "Unverified opendbc signal";
+CM_ SG_ 1055 HU_SVM_ccp_pan_valid "Unverified opendbc signal";
+CM_ SG_ 1055 SVM_CaptureModeCMD "Unverified opendbc signal";
+CM_ SG_ 1055 HU_SVM_ccp_pan "Unverified opendbc signal";
+CM_ BO_ 1058 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1058 BCM_Crc10Val "Unverified opendbc signal";
+CM_ SG_ 1058 Wiper_RainSnsrPartNum "Unverified opendbc signal";
+CM_ SG_ 1058 BCM_AlvCnt10Val "Unverified opendbc signal";
+CM_ SG_ 1058 Wiper_PrkngPosSta "Unverified opendbc signal";
+CM_ SG_ 1058 Wiper_RainSnsrOptionTyp "Unverified opendbc signal";
+CM_ SG_ 1058 Wiper_RainSnsrSta "Unverified opendbc signal";
+CM_ SG_ 1058 BCM_GearPosPSta "Unverified opendbc signal";
+CM_ SG_ 1058 BCM_SunRoofOpnSta "Unverified opendbc signal";
+CM_ SG_ 1058 SunRoof_RrBlindErrSta "Unverified opendbc signal";
+CM_ BO_ 1063 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1063 DATC_Crc11Val "Unverified opendbc signal";
+CM_ SG_ 1063 DATC_AlvCnt11Val "Unverified opendbc signal";
+CM_ SG_ 1063 DATC_TunnelFuncOff4AutoDfgReq "Unverified opendbc signal";
+CM_ SG_ 1063 DATC_RrCtlLckSta "Unverified opendbc signal";
+CM_ SG_ 1063 DATC_DrvrStHtrUSMSta "Unverified opendbc signal";
+CM_ SG_ 1063 DATC_WshFldUSMSta "Unverified opendbc signal";
+CM_ SG_ 1063 DATC_DfgLgcUSMSta "Unverified opendbc signal";
+CM_ SG_ 1063 DATC_AutoFrshUSMSta "Unverified opendbc signal";
+CM_ SG_ 1063 DATC_HptIntnstySta "Unverified opendbc signal";
+CM_ BO_ 1066 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1066 DATC_Crc13Val "Unverified opendbc signal";
+CM_ SG_ 1066 DATC_AlvCnt13Val "Unverified opendbc signal";
+CM_ SG_ 1066 DATC_MltAutoBlrTxt "Unverified opendbc signal";
+CM_ SG_ 1066 DATC_MltAutoBlrTxt_Ps "Unverified opendbc signal";
+CM_ SG_ 1066 DATC_MltAutoBlrTxt_Rr "Unverified opendbc signal";
+CM_ SG_ 1066 DATC_RLStTmblrSwReq "Unverified opendbc signal";
+CM_ SG_ 1066 DATC_RRStTmblrSwReq "Unverified opendbc signal";
+CM_ SG_ 1066 DATC_Opt5Typ "Unverified opendbc signal";
+CM_ BO_ 1074 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1074 BCM_Crc11Val "Unverified opendbc signal";
+CM_ SG_ 1074 USM_UipSta "Unverified opendbc signal";
+CM_ SG_ 1074 BCM_AlvCnt11Val "Unverified opendbc signal";
+CM_ SG_ 1074 USM_EscrtHdLmpSta "Unverified opendbc signal";
+CM_ SG_ 1074 USM_BtnIllumiAlwaysOnSta "Unverified opendbc signal";
+CM_ SG_ 1074 USM_WlcmMirLtSystTitleOpt "Unverified opendbc signal";
+CM_ SG_ 1074 USM_UnlockWlcmSta "Unverified opendbc signal";
+CM_ SG_ 1074 USM_SmrtWlcmSta "Unverified opendbc signal";
+CM_ SG_ 1074 USM_RrStRmndSta "Unverified opendbc signal";
+CM_ SG_ 1074 USM_PDWAutoOnSta "Unverified opendbc signal";
+CM_ BO_ 1090 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1090 BCM_Crc12Val "Unverified opendbc signal";
+CM_ SG_ 1090 BCM_AlvCnt12Val "Unverified opendbc signal";
+CM_ SG_ 1090 BCM_SmkOptTyp "Unverified opendbc signal";
+CM_ SG_ 1090 BCM_SunRoofOptTyp "Unverified opendbc signal";
+CM_ SG_ 1090 Window_DrvrSdWdwSta_BCM "Unverified opendbc signal";
+CM_ SG_ 1090 Window_AsstSdWdwSta_BCM "Unverified opendbc signal";
+CM_ SG_ 1090 Window_RrLftWdwSta_BCM "Unverified opendbc signal";
+CM_ SG_ 1090 Window_RrRtWdwSta_BCM "Unverified opendbc signal";
+CM_ SG_ 1090 SunRoof_GlassPosSta "Unverified opendbc signal";
+CM_ SG_ 1090 SunRoof_BlindPosSta "Unverified opendbc signal";
+CM_ SG_ 1090 SunRoof_GlassErrSta "Unverified opendbc signal";
+CM_ SG_ 1090 SunRoof_BlindErrSta "Unverified opendbc signal";
+CM_ BO_ 1092 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1092 SMK_Crc2Val "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_AlvCnt2Val "Unverified opendbc signal";
+CM_ SG_ 1092 SSB_StrtStpBtnSw1Sta "Unverified opendbc signal";
+CM_ SG_ 1092 SSB_StrtStpBtnSw2Sta "Unverified opendbc signal";
+CM_ SG_ 1092 ENG_PwrAutoOffInfo "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_AuthSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_Ign1InSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_Ign1RlySta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_Ign2InSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_Ign2RlySta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_StrtFdbckSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_StrtrRlyOutSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_AccInSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_AccRlySta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_CLUAccIndOnReq "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_TlEngRunSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_TlCrnkModSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_RmtKeyEngRunSta "Unverified opendbc signal";
+CM_ SG_ 1092 SMK_RmtKeyCrnkModSta "Unverified opendbc signal";
+CM_ BO_ 1093 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1093 SMK_Crc6Val "Unverified opendbc signal";
+CM_ SG_ 1093 SMK_AlvCnt6Val "Unverified opendbc signal";
+CM_ SG_ 1093 Lamp_HzrdBlnkngSta "Unverified opendbc signal";
+CM_ SG_ 1093 RSPA_LearntSta "Unverified opendbc signal";
+CM_ SG_ 1093 Lamp_SmrtWlcmLtOnReq "Unverified opendbc signal";
+CM_ SG_ 1093 Fob_BattStaInfo "Unverified opendbc signal";
+CM_ SG_ 1093 Fob_FoundDrvWlcmArea "Unverified opendbc signal";
+CM_ SG_ 1093 Fob_FoundAsstWlcmArea "Unverified opendbc signal";
+CM_ SG_ 1093 Fob_FoundExtrnlArea "Unverified opendbc signal";
+CM_ SG_ 1093 Fob_FoundIntArea "Unverified opendbc signal";
+CM_ SG_ 1093 Fob_LearntSta "Unverified opendbc signal";
+CM_ SG_ 1093 RSPA_RFSigErrSta "Unverified opendbc signal";
+CM_ SG_ 1093 RSPA_CanErrSta "Unverified opendbc signal";
+CM_ SG_ 1093 LFAnt_FltSta "Unverified opendbc signal";
+CM_ SG_ 1093 LFAnt_SrchSta "Unverified opendbc signal";
+CM_ SG_ 1093 RSPA_ModSta_SMK "Unverified opendbc signal";
+CM_ SG_ 1093 RSPA_FobBattSta "Unverified opendbc signal";
+CM_ SG_ 1093 Fob_BtnReleasedSta "Unverified opendbc signal";
+CM_ SG_ 1093 USM_SmrtTrnkTlgtModSta "Unverified opendbc signal";
+CM_ SG_ 1093 USM_WALModSta "Unverified opendbc signal";
+CM_ SG_ 1093 Fob_FoundWlcmArea "Unverified opendbc signal";
+CM_ BO_ 1099 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1099 USM_CmdWPCSta "Unverified opendbc signal";
+CM_ SG_ 1099 WPC_PhnLftWrngSta "Unverified opendbc signal";
+CM_ SG_ 1099 WPC_SWVerMajor1 "Unverified opendbc signal";
+CM_ SG_ 1099 WPC_SWVerMinor1 "Unverified opendbc signal";
+CM_ SG_ 1099 WPC_SWVerMinor2 "Unverified opendbc signal";
+CM_ BO_ 1124 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1124 BCM_Crc15Val "Unverified opendbc signal";
+CM_ SG_ 1124 BCM_AlvCnt15Val "Unverified opendbc signal";
+CM_ SG_ 1124 Window_DrvrSdWdwActSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_AsstSdWdwActSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_RrLftWdwActSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_RrRtWdwActSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_DrvrSdWdwDetailOpnSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_AsstSdWdwDetailOpnSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_DrvrSdWdwErrAntPinch "Unverified opendbc signal";
+CM_ SG_ 1124 Window_RrLftWdwDetailOpnSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_RrRtWdwDetailOpnSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_AsstSdWdwErrAntPinch "Unverified opendbc signal";
+CM_ SG_ 1124 Window_RrLftWdwErrAntPinch "Unverified opendbc signal";
+CM_ SG_ 1124 Window_RrRtWdwErrAntPinch "Unverified opendbc signal";
+CM_ SG_ 1124 SunRoof_RrBlindPosSta "Unverified opendbc signal";
+CM_ BO_ 1125 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1125 DATC_Crc14Val "Unverified opendbc signal";
+CM_ SG_ 1125 DATC_AlvCnt14Val "Unverified opendbc signal";
+CM_ SG_ 1125 DATC_Beep1Sound "Unverified opendbc signal";
+CM_ BO_ 1144 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1144 DRIVE_MODE "Unverified opendbc signal";
+CM_ SG_ 1144 DRIVE_MODE2 "Unverified opendbc signal";
+CM_ BO_ 1151 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1151 AUTO_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 SYNC_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 FR_DEFROST_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 RR_DEFROST_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 FAN_SPEED_UP_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 FAN_SPEED_DOWN_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 AIR_DIRECTION_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 AC_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 DRIVER_ONLY_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 RECIRC_BUTTON "Unverified opendbc signal";
+CM_ SG_ 1151 HEAT_BUTTON "Unverified opendbc signal";
+CM_ BO_ 1157 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1157 VESS_CLU_Warning "Unverified opendbc signal";
+CM_ SG_ 1157 VESS_LogSnapshotState "Unverified opendbc signal";
+CM_ SG_ 1157 VESS_ChgGuideMdLvlSt "Unverified opendbc signal";
+CM_ SG_ 1157 VESS_SWVerMajor "Unverified opendbc signal";
+CM_ SG_ 1157 VESS_SWVerMinor "Unverified opendbc signal";
+CM_ BO_ 1167 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1167 ICU_Crc11Val "Unverified opendbc signal";
+CM_ SG_ 1167 IGN_AutoOff_WarnSta "Unverified opendbc signal";
+CM_ SG_ 1167 Bat_dischrg "Unverified opendbc signal";
+CM_ SG_ 1167 ICU_AlvCnt11Val "Unverified opendbc signal";
+CM_ SG_ 1167 Batt_SoCWarningValue "Unverified opendbc signal";
+CM_ SG_ 1167 C_StrgWhlHeatingOpt "Unverified opendbc signal";
+CM_ SG_ 1167 C_StrgWhlHeatingSWInf "Unverified opendbc signal";
+CM_ SG_ 1167 ICU_BattAutoCutPreWrng "Unverified opendbc signal";
+CM_ SG_ 1167 IGN_AutoOff_WarnSta_CLU "Unverified opendbc signal";
+CM_ BO_ 1187 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1187 Navi_ISLW_LinkClass "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_Frwinfo "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_SpdUnit "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_SpdLimit "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_CountryCode "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_MapSource "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_TollExist "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_TunnelExist "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_TimeSpd "Unverified opendbc signal";
+CM_ BO_ 1201 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1201 ICU_Popup_Enable "Unverified opendbc signal";
+CM_ BO_ 1204 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1204 POS_V2_3_Offset "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_PathIndex "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_CyclicCounter "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_RangeAvgSpeed "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_CurrAltitude100m "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_CurrAltitude1m "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_CurrFuncRoadClass "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_CurrFormOfWay "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_CurrDirectionLanes "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_CurrSpeedLimit "Unverified opendbc signal";
+CM_ SG_ 1204 POS_V2_3_CurrTrafficSpeed "Unverified opendbc signal";
+CM_ BO_ 1205 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1205 PATH_V2_3_CalculatedRoute "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_PathType "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_Value0 "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_Value1 "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_FuncRoadClass "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_TurnAngle "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_DirectionLanes "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_RemainingDistance "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_MeanEffectiveSlope "Unverified opendbc signal";
+CM_ SG_ 1205 PATH_V2_3_CyclicCounter "Unverified opendbc signal";
+CM_ BO_ 1207 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1207 PATH_V2_3_CalculatedRoute_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_PathType_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_Value0_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_Value1_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_FuncRoadClass_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_TurnAngle_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_DirectionLanes_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_RemainingDistance_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_MeanEffectiveSlope_01 "Unverified opendbc signal";
+CM_ SG_ 1207 PATH_V2_3_CyclicCounter_01 "Unverified opendbc signal";
+CM_ BO_ 1208 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1208 META_V2_3_MapProvider "Unverified opendbc signal";
+CM_ SG_ 1208 META_V2_3_CountryCode "Unverified opendbc signal";
+CM_ SG_ 1208 META_V2_3_RegionCode "Unverified opendbc signal";
+CM_ SG_ 1208 META_V2_3_MajorProtocolVersion "Unverified opendbc signal";
+CM_ SG_ 1208 META_V2_3_MinorProtocolVersion "Unverified opendbc signal";
+CM_ SG_ 1208 META_V2_3_DrivingSide "Unverified opendbc signal";
+CM_ SG_ 1208 META_V2_3_SpeedUnit "Unverified opendbc signal";
+CM_ SG_ 1208 META_V2_3_Country_OptADAS "Unverified opendbc signal";
+CM_ SG_ 1208 META_V2_3_CyclicCounter "Unverified opendbc signal";
+CM_ BO_ 1209 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1209 SEG_V2_3_Offset "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_PathIndex "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_CalculatedRoute "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_FuncRoadClass "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_SpeedLimit "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_FormOfWay "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_DirectionLanes "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_SpeedLimitUnder5 "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_DividedRoad "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_CyclicCounter "Unverified opendbc signal";
+CM_ SG_ 1209 SEG_V2_3_Retransmission "Unverified opendbc signal";
+CM_ BO_ 1210 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1210 PROSHORT_V2_3_Offset "Unverified opendbc signal";
+CM_ SG_ 1210 PROSHORT_V2_3_PathIndex "Unverified opendbc signal";
+CM_ SG_ 1210 PROSHORT_V2_3_Distance "Unverified opendbc signal";
+CM_ SG_ 1210 PROSHORT_V2_3_Value0 "Unverified opendbc signal";
+CM_ SG_ 1210 PROSHORT_V2_3_Value1 "Unverified opendbc signal";
+CM_ SG_ 1210 PROSHORT_V2_3_ProfileType "Unverified opendbc signal";
+CM_ SG_ 1210 PROSHORT_V2_3_CyclicCounter "Unverified opendbc signal";
+CM_ SG_ 1210 PROSHORT_V2_3_Accuracy "Unverified opendbc signal";
+CM_ BO_ 1214 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1214 PROLONG_V2_3_Value "Unverified opendbc signal";
+CM_ SG_ 1214 PROLONG_V2_3_Offset "Unverified opendbc signal";
+CM_ SG_ 1214 PROLONG_V2_3_PathIndex "Unverified opendbc signal";
+CM_ SG_ 1214 PROLONG_V2_3_ProfileType "Unverified opendbc signal";
+CM_ SG_ 1214 PROLONG_V2_3_CyclicCounter "Unverified opendbc signal";
+CM_ SG_ 1214 PROLONG_V2_3_Update "Unverified opendbc signal";
+CM_ BO_ 1215 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1215 STUB_V2_3_Offset "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_PathIndex "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_SubPathIndex "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_RelativeProb "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_FuncRoadClass "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_CalculatedRoute "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_RightOfWay "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_TurnAngle "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_FormOfWay "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_DirectionLanes "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_CyclicCounter "Unverified opendbc signal";
+CM_ SG_ 1215 STUB_V2_3_LastStubAtOffset "Unverified opendbc signal";
+CM_ BO_ 1224 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1224 HU_eCallStatus "Unverified opendbc signal";
+CM_ SG_ 1224 C_SHVU_DTC_Mode "Unverified opendbc signal";
+CM_ SG_ 1224 HU_TempUnit "Unverified opendbc signal";
+CM_ BO_ 1239 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1239 HU_VehiclePwr "Unverified opendbc signal";
+CM_ SG_ 1239 HU_BtnShowReq "Unverified opendbc signal";
+CM_ BO_ 1240 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1240 DISTANCE_UNIT "Unverified opendbc signal";
+CM_ BO_ 1245 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1245 HU_EV_GpsSched_State "Unverified opendbc signal";
+CM_ SG_ 1245 HU_LatchHoldReq_EV_PE "Unverified opendbc signal";
+CM_ BO_ 1247 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1247 Navi_AirConditionWarning "Unverified opendbc signal";
+CM_ SG_ 1247 Navi_AirConditionType "Unverified opendbc signal";
+CM_ BO_ 1253 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1253 Auth_Req "Unverified opendbc signal";
+CM_ SG_ 1253 SecureCom_Req "Unverified opendbc signal";
+CM_ BO_ 1257 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1257 CF_Tmu_RoadType2 "Unverified opendbc signal";
+CM_ SG_ 1257 CF_Tmu_RoadType1 "Unverified opendbc signal";
+CM_ SG_ 1257 CF_Tmu_RoadType4 "Unverified opendbc signal";
+CM_ SG_ 1257 CF_Tmu_RoadType3 "Unverified opendbc signal";
+CM_ SG_ 1257 CF_Tmu_RoadType5 "Unverified opendbc signal";
+CM_ BO_ 1258 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1258 CF_Tmu_RoadType7 "Unverified opendbc signal";
+CM_ SG_ 1258 CF_Tmu_RoadType6 "Unverified opendbc signal";
+CM_ SG_ 1258 CF_Tmu_RoadType9 "Unverified opendbc signal";
+CM_ SG_ 1258 CF_Tmu_RoadType8 "Unverified opendbc signal";
+CM_ SG_ 1258 CF_Tmu_RoadType10 "Unverified opendbc signal";
+CM_ BO_ 1259 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1259 HOURS "Unverified opendbc signal";
+CM_ SG_ 1259 MINUTES "Unverified opendbc signal";
+CM_ SG_ 1259 SECONDS "Unverified opendbc signal";
+CM_ SG_ 1259 NEW_SIGNAL_3 "Unverified opendbc signal";
+CM_ BO_ 1260 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1260 CR_Tmu_DrvDistance1 "Unverified opendbc signal";
+CM_ SG_ 1260 CR_Tmu_DrvDistance2 "Unverified opendbc signal";
+CM_ SG_ 1260 CR_Tmu_DrvDistance3 "Unverified opendbc signal";
+CM_ SG_ 1260 CR_Tmu_DrvDistance4 "Unverified opendbc signal";
+CM_ SG_ 1260 CR_Tmu_DrvDistance5 "Unverified opendbc signal";
+CM_ SG_ 1260 CR_Tmu_DrvDistance6 "Unverified opendbc signal";
+CM_ BO_ 1262 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1262 CR_HU_EconStMin_WeedDay "Unverified opendbc signal";
+CM_ SG_ 1262 CR_HU_EconStHr_WeekDay "Unverified opendbc signal";
+CM_ SG_ 1262 CR_HU_EconEndMin_WeekDay "Unverified opendbc signal";
+CM_ SG_ 1262 CR_HU_EconEndHr_WeekDay "Unverified opendbc signal";
+CM_ SG_ 1262 CR_HU_ChgCtrMode "Unverified opendbc signal";
+CM_ BO_ 1263 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1263 CR_HU_DepartSet1_Min "Unverified opendbc signal";
+CM_ SG_ 1263 CR_HU_DepartSet1_Hour "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_Enable "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_Sun "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_Sat "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_Fri "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_Thu "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_Wed "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_Tue "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_Mon "Unverified opendbc signal";
+CM_ SG_ 1263 CR_HU_DepartSet2_Min "Unverified opendbc signal";
+CM_ SG_ 1263 CR_HU_DepartSet2_Hour "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet2_Enable "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet2_Sun "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet2_Sat "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet2_Fri "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet2_Thu "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet2_Wed "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet2_Tue "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet2_Mon "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_TempUnit "Unverified opendbc signal";
+CM_ SG_ 1263 CR_HU_DepartSet1_TempSet "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_PreCondSet "Unverified opendbc signal";
+CM_ SG_ 1263 CF_HU_DepartSet1_DefrostCtr "Unverified opendbc signal";
+CM_ BO_ 1264 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1264 HOURS "Unverified opendbc signal";
+CM_ SG_ 1264 MINUTES "Unverified opendbc signal";
+CM_ SG_ 1264 SECONDS "Unverified opendbc signal";
+CM_ BO_ 1265 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1265 AMP_UpdateIGNIhn "Unverified opendbc signal";
+CM_ SG_ 1265 HU_Background_Time_Info "Unverified opendbc signal";
+CM_ SG_ 1265 C_FRU_Option_Info "Unverified opendbc signal";
+CM_ SG_ 1265 HU_RrStRemindOffSetReq "Unverified opendbc signal";
+CM_ SG_ 1265 HU_IG3_Request "Unverified opendbc signal";
+CM_ SG_ 1265 HU_Background "Unverified opendbc signal";
+CM_ SG_ 1265 ccIC_HUD_PbackSta "Unverified opendbc signal";
+CM_ SG_ 1265 HU_BackgroundFadeInOut "Unverified opendbc signal";
+CM_ BO_ 1266 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1266 HU_LanguageInfo "Unverified opendbc signal";
+CM_ SG_ 1266 HU_VolumeStatus "Unverified opendbc signal";
+CM_ SG_ 1266 HU_MuteStatus "Unverified opendbc signal";
+CM_ SG_ 1266 HU_WelcomeReady "Unverified opendbc signal";
+CM_ SG_ 1266 HU_UsmSupport "Unverified opendbc signal";
+CM_ SG_ 1266 HU_NaviStatus "Unverified opendbc signal";
+CM_ SG_ 1266 HU_BVM_Display_Message "Unverified opendbc signal";
+CM_ SG_ 1266 HU_SVM_View_Display "Unverified opendbc signal";
+CM_ SG_ 1266 HU_NaviCamSettingStatus "Unverified opendbc signal";
+CM_ SG_ 1266 HU_EVSupport "Unverified opendbc signal";
+CM_ SG_ 1266 HU_AutoBrightState_New "Unverified opendbc signal";
+CM_ BO_ 1267 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1267 RSELockOnOff_PE "Unverified opendbc signal";
+CM_ SG_ 1267 HU_DATC_DisplayThemes "Unverified opendbc signal";
+CM_ SG_ 1267 DATC_AlvCnt8Val "Unverified opendbc signal";
+CM_ SG_ 1267 DATC_SmrtVntOnOffSta "Unverified opendbc signal";
+CM_ SG_ 1267 DATC_PsAutoDis "Unverified opendbc signal";
+CM_ SG_ 1267 DATC_RrAutoDis "Unverified opendbc signal";
+CM_ SG_ 1267 HU_PhoneActivity_PE "Unverified opendbc signal";
+CM_ SG_ 1267 HU_VRActivity_PE "Unverified opendbc signal";
+CM_ SG_ 1267 DATC_RrDrvModDis "Unverified opendbc signal";
+CM_ SG_ 1267 DATC_DisplayThemes "Unverified opendbc signal";
+CM_ SG_ 1267 DATC_AUTOStepPS "Unverified opendbc signal";
+CM_ SG_ 1267 DATC_AUTOStepRR "Unverified opendbc signal";
+CM_ BO_ 1278 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1278 HU_Type "Unverified opendbc signal";
+CM_ SG_ 1278 HU_Navi_RspADASMapMsg "Unverified opendbc signal";
+CM_ SG_ 1278 HU_DistributeInfo "Unverified opendbc signal";
+CM_ SG_ 1278 HU_OptionInfo "Unverified opendbc signal";
+CM_ SG_ 1278 HU_NaviHandshakingSupport "Unverified opendbc signal";
+CM_ SG_ 1278 HU_AMP_EQVariant "Unverified opendbc signal";
+CM_ SG_ 1278 HU_AdasSupport "Unverified opendbc signal";
+CM_ BO_ 1584 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1584 AMP_RrTTSSound "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_NaviSound "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_TTSSound "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_SDVCStep "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_Beep1Mode "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_MasterBeepVolumeStep "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_SignalDoctor "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_ASDMode "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_ANCMode "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_VirtualVenueMode "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_QLIMode "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_DriverMode "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_VoiceGuideTTS "Unverified opendbc signal";
+CM_ SG_ 1584 AMP_Beep1KBDMode "Unverified opendbc signal";
+CM_ BO_ 1585 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1585 AMP_Mute "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_AudioMode "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_WrnPromptMode "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_SPDIFMute "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_Reset "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_QuietMode "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_DSCMode "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_RANCMode "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_CenterpointMode "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_QLSMode "Unverified opendbc signal";
+CM_ SG_ 1585 AMP_SiriMode "Unverified opendbc signal";
+CM_ BO_ 1586 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1586 AMP_LogSnapshot "Unverified opendbc signal";
+CM_ SG_ 1586 VESS_LogSnapshot "Unverified opendbc signal";
+CM_ SG_ 1586 AMP_VersionReq "Unverified opendbc signal";
+CM_ BO_ 1587 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1587 AMP_EngASDMasterGain "Unverified opendbc signal";
+CM_ SG_ 1587 AMP_Beep1Frequency "Unverified opendbc signal";
+CM_ BO_ 1588 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1588 AMP_NaviVolumeStep "Unverified opendbc signal";
+CM_ SG_ 1588 ATS_Beep_OutputCh_Select "Unverified opendbc signal";
+CM_ SG_ 1588 ATS_BeepVolumeStep "Unverified opendbc signal";
+CM_ SG_ 1588 ATS_BeepFrequency "Unverified opendbc signal";
+CM_ SG_ 1588 AMP_ESEVMasterGain "Unverified opendbc signal";
+CM_ SG_ 1588 AMP_NaviVoice_Priority "Unverified opendbc signal";
+CM_ SG_ 1588 AMP_ESEVMode "Unverified opendbc signal";
+CM_ BO_ 1589 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1589 AMP_MTSVolumeStep "Unverified opendbc signal";
+CM_ SG_ 1589 AMP_eASDMode "Unverified opendbc signal";
+CM_ SG_ 1589 AMP_eASDCstVolumeSet "Unverified opendbc signal";
+CM_ SG_ 1589 AMP_eASDAPSSet "Unverified opendbc signal";
+CM_ SG_ 1589 AMP_eASDCstMode "Unverified opendbc signal";
+CM_ SG_ 1589 AMP_eASDCstReset "Unverified opendbc signal";
+CM_ BO_ 1590 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1590 AMP_HFVolumeStep "Unverified opendbc signal";
+CM_ SG_ 1590 DVRS_Beep_OutputCh_Select "Unverified opendbc signal";
+CM_ SG_ 1590 DVRS_BeepVolumeStep "Unverified opendbc signal";
+CM_ SG_ 1590 DVRS_BeepFrequency "Unverified opendbc signal";
+CM_ SG_ 1590 AMP_SiriVolumeStep "Unverified opendbc signal";
+CM_ BO_ 1591 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1591 AMP_MainVolumeSet "Unverified opendbc signal";
+CM_ SG_ 1591 AMP_BalanceSet "Unverified opendbc signal";
+CM_ SG_ 1591 AMP_FadeSet "Unverified opendbc signal";
+CM_ SG_ 1591 AMP_BassSet "Unverified opendbc signal";
+CM_ SG_ 1591 AMP_MidSet "Unverified opendbc signal";
+CM_ SG_ 1591 AMP_TrebleSet "Unverified opendbc signal";
+CM_ BO_ 1593 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1593 DATC_Beep1_OutputCh_Select "Unverified opendbc signal";
+CM_ SG_ 1593 DATC_Beep1VolumeStep "Unverified opendbc signal";
+CM_ SG_ 1593 DATC_Beep1Frequency "Unverified opendbc signal";
+CM_ BO_ 1597 "Unverified: Imported from opendbc. Validation required.";
+CM_ SG_ 1597 AMP_SetMaxMainVolStep "Unverified opendbc signal";
+BA_DEF_ BO_ "GenMsgBackgroundColor" STRING ;
+BA_DEF_ BO_ "GenMsgForegroundColor" STRING ;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_ BO_ "matchingcriteria" INT 0 0;
+BA_DEF_ BO_ "filterlabeling" INT 0 0;
+BA_DEF_DEF_ "GenMsgBackgroundColor" "#1e1e1e";
+BA_DEF_DEF_ "GenMsgForegroundColor" "#dcdcdc";
+BA_DEF_DEF_ "matchingcriteria" 0;
+BA_DEF_DEF_ "filterlabeling" 0;
+BA_DEF_DEF_ "matchingcriteria" 0;
+BA_DEF_DEF_ "filterlabeling" 0;
+VAL_ 685 Battery_Precond_State 21 "On" 5 "Preparing" 1 "Off";
+VAL_ 1261 Precond_Request 31 "On" 0 "Off";
+VAL_ 1042 Brake_Pedal 4 "Pressed" 0 "Not_Pressed";
+VAL_ 1077 Power_State 255 "Car_Off" 0 "Car_on";
+VAL_ 843 Headlight_Switch 3 "Off" 2 "Parking" 1 "Auto" 0 "Low_Beam";
+VAL_ 896 Driver_Temp_C 0 "OFF";
+VAL_ 896 Passenger_Temp_C 0 "OFF";
