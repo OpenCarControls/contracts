@@ -26,6 +26,14 @@ pairing_window_seconds = 60
 # declaring a timeout and asking the user to try again.
 scan_timeout_seconds = 30
 
+[ble.payload]
+# ATT MTU the app requests after connecting. The device supports it.
+att_mtu = 247
+# Largest encoded AppToDevice / DeviceToApp message, in bytes: att_mtu minus
+# the 3-byte ATT header. Messages are not fragmented, so every write and
+# notification must fit in one ATT packet.
+max_message_bytes = 244
+
 [ble.notes]
 pairing = "Recommended before enabling control commands."
-mtu = "Use the largest negotiated MTU available; protobuf payloads may span multiple ATT packets."
+mtu = "Request ble.payload.att_mtu after connecting. Messages are not fragmented: each encoded message must fit in ble.payload.max_message_bytes."
