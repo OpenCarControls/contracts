@@ -98,6 +98,7 @@ BO_ 593 CLUSTER_WARNINGS: 8 Vector__XXX
    SG_ Rear_Defrost_State : 7|1@1+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 764 BATTERY_INFO_764: 8 Vector__XXX
+   SG_ Battery_Current : 0|16@1- (0.1,0) [-3276.8|3276.7] "A" Vector__XXX
    SG_ State_Of_Charge : 56|8@1+ (0.5,0) [0|100] "%" Vector__XXX
 
 BO_ 1230 BMS_INFO: 8 Vector__XXX
@@ -154,6 +155,9 @@ BO_ 782 CHARGING_POWER: 8 Vector__XXX
 BO_ 268 THERMAL_METRICS: 8 Vector__XXX
    SG_ Thermal_Metric_1 : 40|8@1+ (1,0) [0|255] "" Vector__XXX
    SG_ Thermal_Metric_2 : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 567 BATTERY_INFO_567: 8 Vector__XXX
+   SG_ Battery_Voltage : 40|16@1+ (0.1,0) [0|6553.5] "V" Vector__XXX
 
 BO_ 412 CANDIDATE_19C: 8 Vector__XXX
    SG_ Cand_AC_Current_19C : 32|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
@@ -1137,6 +1141,8 @@ CM_ SG_ 780 Proximity_Voltage "Verified on an EV6 against CAN logs: charge inlet
 CM_ SG_ 780 Plug_Connected "Verified on an EV6 against CAN logs: 1 while a charging cable is plugged in, AC or DC. Changes right at plug-in and unplug.";
 CM_ SG_ 806 AC_Charger "Verified on an EV6 against CAN logs: 1 once the car has recognised an AC charger, about 7 s after plug-in. Never set on DC.";
 CM_ SG_ 806 Charging "Verified on an EV6 against CAN logs: 1 while energy flows into the battery, AC or DC.";
+CM_ SG_ 764 Battery_Current "Verified on an EV6 against CAN logs: high-voltage battery current, positive when discharging. Times Battery_Voltage it matches CHARGING_POWER on DC (within 1 kW) and gives 2.2 kW into the battery on a 2.6-2.7 kW L2 charger. Peaks at +198 A on a hard launch and -57 A in regen.";
+CM_ SG_ 567 Battery_Voltage "Verified on an EV6 against CAN logs: high-voltage battery voltage. About 702 V at rest at 42% SOC, rises to 760 V while DC charging and sags under load.";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
