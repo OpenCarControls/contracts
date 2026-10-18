@@ -155,6 +155,21 @@ BO_ 268 THERMAL_METRICS: 8 Vector__XXX
    SG_ Thermal_Metric_1 : 40|8@1+ (1,0) [0|255] "" Vector__XXX
    SG_ Thermal_Metric_2 : 48|8@1+ (1,0) [0|255] "" Vector__XXX
 
+BO_ 412 CANDIDATE_19C: 8 Vector__XXX
+   SG_ Cand_AC_Current_19C : 32|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
+
+BO_ 413 CHARGER_SESSION: 8 Vector__XXX
+   SG_ Charger_Type : 16|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ DC_Sequence_Stage : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 780 CHARGE_INLET: 8 Vector__XXX
+   SG_ Proximity_Voltage : 32|8@1+ (0.1,0) [0|25.5] "V" Vector__XXX
+   SG_ Plug_Connected : 40|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 806 CHARGING_STATUS: 8 Vector__XXX
+   SG_ AC_Charger : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Charging : 32|1@1+ (1,0) [0|1] "" Vector__XXX
+
 BO_ 603 CANDIDATE_25B: 8 Vector__XXX
    SG_ Cand_Curr_25B_50 : 50|10@1+ (1,0) [0|1023] "" Vector__XXX
 
@@ -1114,6 +1129,14 @@ CM_ SG_ 843 Headlight_Switch "Wrong on an EV6: steps through every value once a 
 CM_ SG_ 550 Outdoor_Temperature "Verified on an EV6 against CAN logs: matches the dashboard outside temperature.";
 CM_ SG_ 551 Odometer "Verified on an EV6 against CAN logs: matches the dashboard odometer.";
 CM_ SG_ 764 State_Of_Charge "Verified on an EV6 against CAN logs and live: matches the dashboard SOC.";
+CM_ BO_ 412 "Candidate from EV6 CAN logs: only seen on one L2 charger.";
+CM_ SG_ 412 Cand_AC_Current_19C "Candidate: reads 11.9 A while charging on a 240 V 15 A circuit (2.6-2.7 kW) and 0 on DC or idle.";
+CM_ SG_ 413 Charger_Type "Verified on an EV6 against CAN logs: charger type. The car tries DC first, so it reads DC for the first seconds on an AC charger, then None, then AC about 7 s after plug-in.";
+CM_ SG_ 413 DC_Sequence_Stage "Verified on an EV6 against CAN logs: DC charging sequence. 1 plugged in, 2 and 3 talking to the charger, 4 ready, 5 starting, 6 charging, 8 to 11 ending. An AC charger goes from 1 straight to 9 to 11 while the car gives up on DC; stages 2 to 6 mean the charger really is DC.";
+CM_ SG_ 780 Proximity_Voltage "Verified on an EV6 against CAN logs: charge inlet proximity voltage. About 4.4 V unplugged, 1.5 V plugged in and latched, 2.7 V while the plug release button is pressed. AC and DC.";
+CM_ SG_ 780 Plug_Connected "Verified on an EV6 against CAN logs: 1 while a charging cable is plugged in, AC or DC. Changes right at plug-in and unplug.";
+CM_ SG_ 806 AC_Charger "Verified on an EV6 against CAN logs: 1 once the car has recognised an AC charger, about 7 s after plug-in. Never set on DC.";
+CM_ SG_ 806 Charging "Verified on an EV6 against CAN logs: 1 while energy flows into the battery, AC or DC.";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
@@ -2021,3 +2044,4 @@ VAL_ 1124 Window_RrLftWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly
 VAL_ 1124 Window_RrLftWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
 VAL_ 1124 Window_RrRtWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_Open" 1 "Slightly_Open" 0 "Closed";
 VAL_ 1124 Window_RrRtWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
+VAL_ 413 Charger_Type 2 "DC" 1 "AC" 0 "None";
