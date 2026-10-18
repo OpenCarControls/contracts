@@ -73,7 +73,7 @@ BO_ 411 CHARGING_INFO: 8 Vector__XXX
    SG_ Charging_Current : 32|10@1+ (1,0) [0|1023] "A" Vector__XXX
 
 BO_ 685 BMS_PRECOND_STATUS: 8 Vector__XXX
-   SG_ Battery_Precond_State : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Battery_Precond_State : 8|5@1+ (1,0) [0|31] "" Vector__XXX
 
 BO_ 1261 NAV_PRECOND_STATUS: 8 Vector__XXX
    SG_ Precond_Request : 56|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -125,11 +125,11 @@ BO_ 1096 STEERING_WHEEL_BUTTONS: 8 Vector__XXX
 
 BO_ 1141 PASSENGER_SEAT_HEATING: 8 Vector__XXX
    SG_ Passenger_Seat_Heating_Opt : 0|3@1+ (1,0) [0|7] "" Vector__XXX
-   SG_ Passenger_Seat_Heating_Oper : 3|9@1+ (1,0) [0|511] "" Vector__XXX
+   SG_ Passenger_Seat_Heating_Oper : 3|4@1+ (1,0) [0|15] "" Vector__XXX
 
 BO_ 1174 DRIVER_SEAT_HEATING: 8 Vector__XXX
    SG_ Driver_Seat_Heating_Opt : 0|3@1+ (1,0) [0|7] "" Vector__XXX
-   SG_ Driver_Seat_Heating_Oper : 3|11@1+ (1,0) [0|2047] "" Vector__XXX
+   SG_ Driver_Seat_Heating_Oper : 3|4@1+ (1,0) [0|15] "" Vector__XXX
 
 BO_ 706 MOTOR_TORQUE: 8 Vector__XXX
    SG_ Motor_Torque_Percent : 24|8@1- (1,0) [-128|127] "%" Vector__XXX
@@ -1160,6 +1160,19 @@ CM_ SG_ 818 Charge_Time_To_Limit "Seconds to the charge limit on DC; the logs ha
 CM_ SG_ 818 Charge_Time_To_80 "Seconds to 80% on DC, as shown next to the time to 100%. On L2 the values (1020 at 42% SOC) don't fit seconds and may be minutes.";
 CM_ SG_ 1144 DRIVE_MODE "Wrong on an EV6: barely sent and the values make no sense. Use DRIVE_MODE_STATUS Drive_Mode.";
 CM_ SG_ 428 Speed_kph "Plausible in EV6 drive logs (about 50 where the notes say 50 km/h), not checked against the display; only seen on a car set to km/h, it may follow the display units on a car set to mph.";
+CM_ SG_ 795 Steering_Wheel_Heating_State "Wrong on an EV6: toggles about once a second whatever the heater does. Use ICU_08_200ms HSWS_SysWrngSta_ICU.";
+CM_ SG_ 795 Climate_AC_State "Not the A/C state: 0 at a time the A/C was on, follows the A/C button but also changes with Auto and Heat. Use DATC_05_200ms DATC_AcDis.";
+CM_ SG_ 795 Climate_Fan_Speed "Verified on an EV6 against CAN logs: blower level plus one (manual levels 1 to 8 read 2 to 9), 0 with the climate off; follows the blower in Auto.";
+CM_ SG_ 795 Climate_Airflow_Direction "Verified on an EV6 against CAN logs.";
+CM_ SG_ 795 Climate_Recirculation_State "Verified on an EV6 against CAN logs: recirculation on or off.";
+CM_ SG_ 896 Driver_Temp_C "Verified on an EV6 against CAN logs: driver target temperature.";
+CM_ SG_ 896 Passenger_Temp_C "Verified on an EV6 against CAN logs: passenger target temperature; OFF while Driver only is on.";
+CM_ SG_ 896 Driver_Temp_F "Not Fahrenheit on a car set to Celsius: repeats the Driver_Temp_C steps. Not checked in Fahrenheit.";
+CM_ SG_ 896 Passenger_Temp_F "Not Fahrenheit on a car set to Celsius: repeats the Passenger_Temp_C steps. Not checked in Fahrenheit.";
+CM_ SG_ 593 Rear_Defrost_State "Wrong on an EV6: toggles every few seconds whatever the rear defroster does. No rear defroster state found on this bus.";
+CM_ SG_ 685 Battery_Precond_State "Verified on an EV6 against CAN logs: battery preconditioning, manual or for navigation to a charger. Also reads 2 while DC charging.";
+CM_ SG_ 1174 Driver_Seat_Heating_Oper "Verified on an EV6 against CAN logs: driver seat heating level. 3 to 5 may be ventilation (not checked).";
+CM_ SG_ 1141 Passenger_Seat_Heating_Oper "Verified on an EV6 against CAN logs: passenger seat heating level. 3 to 5 may be ventilation (not checked).";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
@@ -1371,25 +1384,25 @@ CM_ SG_ 898 DATC_ClmtTxtPopupOSD "Unverified opendbc signal";
 CM_ SG_ 898 DATC_TempDispUnitSta "Unverified opendbc signal";
 CM_ SG_ 898 DATC_DrvAutoDis "Unverified opendbc signal";
 CM_ SG_ 898 DATC_FrClmtScrnDis "Unverified opendbc signal";
-CM_ SG_ 898 DATC_AcDis "Unverified opendbc signal";
+CM_ SG_ 898 DATC_AcDis "Verified on an EV6 against CAN logs: A/C on (1) or off (0), follows the A/C button.";
 CM_ SG_ 898 DATC_IntakeSta "Unverified opendbc signal";
 CM_ BO_ 899 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 899 DATC_Crc6Val "Unverified opendbc signal";
 CM_ SG_ 899 DATC_AlvCnt6Val "Unverified opendbc signal";
 CM_ SG_ 899 DATC_SyncDis "Unverified opendbc signal";
-CM_ SG_ 899 DATC_OpSta "Unverified opendbc signal";
-CM_ SG_ 899 DATC_FrDfgSta "Unverified opendbc signal";
+CM_ SG_ 899 DATC_OpSta "Verified on an EV6 against CAN logs: climate control on or off; 0 with the car off. Not yet checked during remote climate.";
+CM_ SG_ 899 DATC_FrDfgSta "Verified on an EV6 against CAN logs: windshield defog on or off.";
 CM_ SG_ 899 DATC_SmrtVntDis "Unverified opendbc signal";
 CM_ SG_ 899 DATC_AutoDfgBlnkDis "Unverified opendbc signal";
 CM_ SG_ 899 DATC_AutoDfgSysOffDis "Unverified opendbc signal";
 CM_ SG_ 899 DATC_ArClnIND "Unverified opendbc signal";
-CM_ SG_ 899 DATC_RrDfgInd "Unverified opendbc signal";
+CM_ SG_ 899 DATC_RrDfgInd "Stays 0 when the rear defroster is switched on.";
 CM_ BO_ 900 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 900 DATC_Crc7Val "Unverified opendbc signal";
 CM_ SG_ 900 DATC_AlvCnt7Val "Unverified opendbc signal";
 CM_ SG_ 900 DATC_FrDrvBlwDis "Unverified opendbc signal";
 CM_ SG_ 900 DATC_FrPsBlwDis "Unverified opendbc signal";
-CM_ SG_ 900 DATC_HeatDis "Unverified opendbc signal";
+CM_ SG_ 900 DATC_HeatDis "Verified on an EV6 against CAN logs: 1 while Heat is on.";
 CM_ SG_ 900 DATC_DrvOnlyDis "Unverified opendbc signal";
 CM_ SG_ 900 DATC_AUTOStep "Unverified opendbc signal";
 CM_ SG_ 900 DATC_IntakeDis "Unverified opendbc signal";
@@ -1561,7 +1574,7 @@ CM_ SG_ 1047 ICU_Crc7Val "Unverified opendbc signal";
 CM_ SG_ 1047 ICU_AlvCnt7Val "Unverified opendbc signal";
 CM_ BO_ 1048 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1048 ICU_Crc8Val "Unverified opendbc signal";
-CM_ SG_ 1048 HSWS_SysWrngSta_ICU "Unverified opendbc signal";
+CM_ SG_ 1048 HSWS_SysWrngSta_ICU "Verified on an EV6 against CAN logs: heated steering wheel, 4 while on, 0 while off. Despite the name, not a warning.";
 CM_ SG_ 1048 ICU_AlvCnt8Val "Unverified opendbc signal";
 CM_ SG_ 1048 DriveTypeOption "Unverified opendbc signal";
 CM_ SG_ 1048 Warn_RrLftSBRMATSwSta "Unverified opendbc signal";
@@ -2068,3 +2081,9 @@ VAL_ 1124 Window_RrRtWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_
 VAL_ 1124 Window_RrRtWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
 VAL_ 413 Charger_Type 2 "DC" 1 "AC" 0 "None";
 VAL_ 54 Drive_Mode 2 "Sport" 1 "Normal" 0 "Eco";
+VAL_ 1048 HSWS_SysWrngSta_ICU 4 "On" 0 "Off";
+VAL_ 899 DATC_OpSta 2 "Off" 1 "On" 0 "Not_Available";
+VAL_ 899 DATC_FrDfgSta 1 "On" 0 "Off";
+VAL_ 795 Climate_Airflow_Direction 5 "Windshield" 4 "Feet_And_Windshield" 3 "Feet" 2 "Body_And_Feet" 1 "Body" 0 "Auto";
+VAL_ 1174 Driver_Seat_Heating_Oper 8 "Level_3" 7 "Level_2" 6 "Level_1" 2 "Off";
+VAL_ 1141 Passenger_Seat_Heating_Oper 8 "Level_3" 7 "Level_2" 6 "Level_1" 2 "Off";
