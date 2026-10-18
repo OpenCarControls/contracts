@@ -122,6 +122,19 @@ message AdvancedState {
     GEAR_DRIVE = 4;
   }
 
+  // Represent the battery preconditioning states.
+  enum PreconditioningState {
+    // Unknown, e.g. while the car is off, asleep or charging.
+    PRECONDITIONING_STATE_UNSPECIFIED = 0;
+    // Not preconditioning.
+    PRECONDITIONING_STATE_OFF = 1;
+    // Preconditioning was requested; the battery heater isn't on yet. This lasts about a
+    // minute but varies, so it isn't a countdown.
+    PRECONDITIONING_STATE_PREPARING = 2;
+    // The battery heater is on. This is when the cluster shows the battery icon.
+    PRECONDITIONING_STATE_HEATING = 3;
+  }
+
   // Battery voltage.
   optional uint32 battery_voltage = 1;
   // Instantaneous power flow to and from the battery in watts. Positive means charging, negative means discharging.
@@ -130,8 +143,8 @@ message AdvancedState {
   optional float battery_minimum_temperature = 3;
   // Maximum battery temperature in Celsius.
   optional float battery_maximum_temperature = 4;
-  // Whether battery preconditioning is enabled.
-  optional bool is_preconditioning_enabled = 5;
+  // Battery preconditioning state.
+  optional PreconditioningState preconditioning_state = 5;
 
   // Current gear state.
   optional Gear gear = 6;

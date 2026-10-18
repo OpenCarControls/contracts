@@ -169,6 +169,9 @@ BO_ 818 CHARGE_TIME_ESTIMATE: 8 Vector__XXX
    SG_ Charge_Time_To_Limit : 0|16@1+ (1,0) [0|65535] "s" Vector__XXX
    SG_ Charge_Time_To_80 : 16|16@1+ (1,0) [0|65535] "s" Vector__XXX
 
+BO_ 605 CANDIDATE_25D: 8 Vector__XXX
+   SG_ Cand_Heater_Power_25D : 16|8@1+ (0.1,0) [0|25.5] "kW" Vector__XXX
+
 BO_ 412 CANDIDATE_19C: 8 Vector__XXX
    SG_ Cand_AC_Current_19C : 32|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
 
@@ -1170,9 +1173,11 @@ CM_ SG_ 896 Passenger_Temp_C "Verified on an EV6 against CAN logs: passenger tar
 CM_ SG_ 896 Driver_Temp_F "Not Fahrenheit on a car set to Celsius: repeats the Driver_Temp_C steps. Not checked in Fahrenheit.";
 CM_ SG_ 896 Passenger_Temp_F "Not Fahrenheit on a car set to Celsius: repeats the Passenger_Temp_C steps. Not checked in Fahrenheit.";
 CM_ SG_ 593 Rear_Defrost_State "Wrong on an EV6: toggles every few seconds whatever the rear defroster does. No rear defroster state found on this bus.";
-CM_ SG_ 685 Battery_Precond_State "Verified on an EV6 against CAN logs: battery preconditioning, manual or for navigation to a charger. Also reads 2 while DC charging.";
+CM_ SG_ 685 Battery_Precond_State "Verified on an EV6 against CAN logs: battery preconditioning. Preparing at the request; On when the battery heater switches on (about 60 s later, varies), which is when the cluster shows the battery icon. 2 while the car is off, asleep or charging.";
 CM_ SG_ 1174 Driver_Seat_Heating_Oper "Verified on an EV6 against CAN logs: driver seat heating level. 3 to 5 may be ventilation (not checked).";
 CM_ SG_ 1141 Passenger_Seat_Heating_Oper "Verified on an EV6 against CAN logs: passenger seat heating level. 3 to 5 may be ventilation (not checked).";
+CM_ SG_ 1261 Precond_Request "Not an on/off request: 0x1F with bytes 5-6 at FF FF when no route is set, and route data (e.g. 08 48 00) when navigating to a DC charger, about 6 s before preconditioning starts. Probably route information for the BMU; the old value table (31 = On, 0 = Off) was backwards.";
+CM_ SG_ 605 Cand_Heater_Power_25D "Candidate from EV6 CAN logs: 45-46 while the battery heater runs during preconditioning, matching the extra ~4.5 kW drawn from the battery, so probably 0.1 kW steps; 0 otherwise. Only seen in summer, so cabin heating may use it too.";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
@@ -2064,7 +2069,6 @@ BA_DEF_DEF_ "filterlabeling" 0;
 BA_DEF_DEF_ "matchingcriteria" 0;
 BA_DEF_DEF_ "filterlabeling" 0;
 VAL_ 685 Battery_Precond_State 21 "On" 5 "Preparing" 1 "Off";
-VAL_ 1261 Precond_Request 31 "On" 0 "Off";
 VAL_ 1042 Brake_Pedal 4 "Pressed" 0 "Not_Pressed";
 VAL_ 1077 Power_State 255 "Car_Off" 0 "Car_on";
 VAL_ 843 Headlight_Switch 3 "Off" 2 "Parking" 1 "Auto" 0 "Low_Beam";
