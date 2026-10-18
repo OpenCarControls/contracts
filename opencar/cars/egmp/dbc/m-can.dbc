@@ -553,6 +553,7 @@ BO_ 1043 BLINKERS: 8 Vector__XXX
    SG_ COUNTER_ALT : 15|4@0+ (1,0) [0|15] "" Vector__XXX
    SG_ LEFT_LAMP : 20|1@0+ (1,0) [0|1] "" Vector__XXX
    SG_ RIGHT_LAMP : 22|1@0+ (1,0) [0|1] "" Vector__XXX
+   SG_ HAZARD_ON : 26|1@0+ (1,0) [0|1] "" Vector__XXX
    SG_ LEFT_LAMP_ALT : 59|1@0+ (1,0) [0|1] "" Vector__XXX
    SG_ RIGHT_LAMP_ALT : 61|1@0+ (1,0) [0|1] "" Vector__XXX
    SG_ USE_ALT_LAMP : 62|1@0+ (1,0) [0|1] "" Vector__XXX
@@ -1107,6 +1108,12 @@ BO_ 1597 HU_AMP_P: 8 Vector__XXX
 
 
 
+CM_ SG_ 938 Port_Open "Verified on an EV6 against CAN logs and live: charge port door. Set to Open as soon as the door starts opening. Does not change when a charger is plugged in or charging.";
+CM_ SG_ 1043 HAZARD_ON "Verified on an EV6 against CAN logs: 1 while the hazard switch is on.";
+CM_ SG_ 843 Headlight_Switch "Wrong on an EV6: steps through every value once a second whatever the switch position, in CAN logs.";
+CM_ SG_ 550 Outdoor_Temperature "Verified on an EV6 against CAN logs: matches the dashboard outside temperature.";
+CM_ SG_ 551 Odometer "Verified on an EV6 against CAN logs: matches the dashboard odometer.";
+CM_ SG_ 764 State_Of_Charge "Verified on an EV6 against CAN logs and live: matches the dashboard SOC.";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
@@ -1488,11 +1495,11 @@ CM_ SG_ 1040 ICU_BS2_FQSTAT "Unverified opendbc signal";
 CM_ SG_ 1040 ICU_BS2SoH "Unverified opendbc signal";
 CM_ SG_ 1040 ICU_BS2SoF "Unverified opendbc signal";
 CM_ BO_ 1043 "Unverified: Imported from opendbc. Validation required.";
-CM_ SG_ 1043 LEFT_STALK "Unverified opendbc signal";
-CM_ SG_ 1043 RIGHT_STALK "Unverified opendbc signal";
+CM_ SG_ 1043 LEFT_STALK "Verified on an EV6 against CAN logs: 1 for the whole left indicator sequence, also with the hazards on.";
+CM_ SG_ 1043 RIGHT_STALK "Verified on an EV6 against CAN logs: 1 for the whole right indicator sequence, also with the hazards on.";
 CM_ SG_ 1043 COUNTER_ALT "Unverified opendbc signal";
-CM_ SG_ 1043 LEFT_LAMP "Unverified opendbc signal";
-CM_ SG_ 1043 RIGHT_LAMP "Unverified opendbc signal";
+CM_ SG_ 1043 LEFT_LAMP "Verified on an EV6 against CAN logs: follows the left indicator lamp as it flashes.";
+CM_ SG_ 1043 RIGHT_LAMP "Verified on an EV6 against CAN logs: follows the right indicator lamp as it flashes.";
 CM_ SG_ 1043 LEFT_LAMP_ALT "Unverified opendbc signal";
 CM_ SG_ 1043 RIGHT_LAMP_ALT "Unverified opendbc signal";
 CM_ SG_ 1043 USE_ALT_LAMP "Unverified opendbc signal";
@@ -1521,12 +1528,12 @@ CM_ SG_ 1048 Brake_SwSta_ICU "Unverified opendbc signal";
 CM_ BO_ 1050 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1050 BCM_Crc7Val "Unverified opendbc signal";
 CM_ SG_ 1050 BCM_AlvCnt7Val "Unverified opendbc signal";
-CM_ SG_ 1050 Lamp_HiPrioHzrdReq "Unverified opendbc signal";
-CM_ SG_ 1050 Lamp_LoPrioHzrdReq "Unverified opendbc signal";
-CM_ SG_ 1050 Lamp_IntTailLmpOnReq "Unverified opendbc signal";
-CM_ SG_ 1050 Lamp_ExtrnlTailLmpOnReq "Unverified opendbc signal";
-CM_ SG_ 1050 Lamp_HdLmpLoOnReq "Unverified opendbc signal";
-CM_ SG_ 1050 Lamp_HdLmpHiOnReq "Unverified opendbc signal";
+CM_ SG_ 1050 Lamp_HiPrioHzrdReq "Does not change when the hazards are switched on; use BLINKERS HAZARD_ON.";
+CM_ SG_ 1050 Lamp_LoPrioHzrdReq "Does not change when the hazards are switched on; the 17-bit length is likely wrong.";
+CM_ SG_ 1050 Lamp_IntTailLmpOnReq "Verified on an EV6 against CAN logs: 1 with the position lights or low beams on.";
+CM_ SG_ 1050 Lamp_ExtrnlTailLmpOnReq "Verified on an EV6 against CAN logs: 1 with the position lights or low beams on.";
+CM_ SG_ 1050 Lamp_HdLmpLoOnReq "Verified on an EV6 against CAN logs and live: 1 with the low beams on, also during a high beam flash.";
+CM_ SG_ 1050 Lamp_HdLmpHiOnReq "Verified on an EV6 against CAN logs: 1 during a high beam flash.";
 CM_ SG_ 1050 Lamp_AvTailLmpSta "Unverified opendbc signal";
 CM_ BO_ 1051 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1051 BCM_Crc8Val "Unverified opendbc signal";
@@ -1595,10 +1602,10 @@ CM_ SG_ 1090 BCM_Crc12Val "Unverified opendbc signal";
 CM_ SG_ 1090 BCM_AlvCnt12Val "Unverified opendbc signal";
 CM_ SG_ 1090 BCM_SmkOptTyp "Unverified opendbc signal";
 CM_ SG_ 1090 BCM_SunRoofOptTyp "Unverified opendbc signal";
-CM_ SG_ 1090 Window_DrvrSdWdwSta_BCM "Unverified opendbc signal";
-CM_ SG_ 1090 Window_AsstSdWdwSta_BCM "Unverified opendbc signal";
-CM_ SG_ 1090 Window_RrLftWdwSta_BCM "Unverified opendbc signal";
-CM_ SG_ 1090 Window_RrRtWdwSta_BCM "Unverified opendbc signal";
+CM_ SG_ 1090 Window_DrvrSdWdwSta_BCM "Wrong on an EV6: stays 0 while the windows move, in CAN logs and live. Use BCM_15_200ms.";
+CM_ SG_ 1090 Window_AsstSdWdwSta_BCM "Wrong on an EV6: stays 0 while the windows move, in CAN logs and live. Use BCM_15_200ms.";
+CM_ SG_ 1090 Window_RrLftWdwSta_BCM "Wrong on an EV6: stays 0 while the windows move, in CAN logs and live. Use BCM_15_200ms.";
+CM_ SG_ 1090 Window_RrRtWdwSta_BCM "Wrong on an EV6: stays 0 while the windows move, in CAN logs and live. Use BCM_15_200ms.";
 CM_ SG_ 1090 SunRoof_GlassPosSta "Unverified opendbc signal";
 CM_ SG_ 1090 SunRoof_BlindPosSta "Unverified opendbc signal";
 CM_ SG_ 1090 SunRoof_GlassErrSta "Unverified opendbc signal";
@@ -1654,15 +1661,15 @@ CM_ SG_ 1099 WPC_SWVerMinor2 "Unverified opendbc signal";
 CM_ BO_ 1124 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1124 BCM_Crc15Val "Unverified opendbc signal";
 CM_ SG_ 1124 BCM_AlvCnt15Val "Unverified opendbc signal";
-CM_ SG_ 1124 Window_DrvrSdWdwActSta "Unverified opendbc signal";
-CM_ SG_ 1124 Window_AsstSdWdwActSta "Unverified opendbc signal";
-CM_ SG_ 1124 Window_RrLftWdwActSta "Unverified opendbc signal";
-CM_ SG_ 1124 Window_RrRtWdwActSta "Unverified opendbc signal";
-CM_ SG_ 1124 Window_DrvrSdWdwDetailOpnSta "Unverified opendbc signal";
-CM_ SG_ 1124 Window_AsstSdWdwDetailOpnSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_DrvrSdWdwActSta "Verified on an EV6 against CAN logs: driver window motor action.";
+CM_ SG_ 1124 Window_AsstSdWdwActSta "Verified on an EV6 against CAN logs: passenger window motor action.";
+CM_ SG_ 1124 Window_RrLftWdwActSta "Always Not_Available on an EV6 while the rear windows move; the rear window state is not on this bus.";
+CM_ SG_ 1124 Window_RrRtWdwActSta "Always Not_Available on an EV6 while the rear windows move; the rear window state is not on this bus.";
+CM_ SG_ 1124 Window_DrvrSdWdwDetailOpnSta "Verified on an EV6 against CAN logs: driver window position, steps 0 to 3 from closed to fully open.";
+CM_ SG_ 1124 Window_AsstSdWdwDetailOpnSta "Verified on an EV6 against CAN logs: passenger window position, steps 0 to 3 from closed to fully open.";
 CM_ SG_ 1124 Window_DrvrSdWdwErrAntPinch "Unverified opendbc signal";
-CM_ SG_ 1124 Window_RrLftWdwDetailOpnSta "Unverified opendbc signal";
-CM_ SG_ 1124 Window_RrRtWdwDetailOpnSta "Unverified opendbc signal";
+CM_ SG_ 1124 Window_RrLftWdwDetailOpnSta "Always Not_Available on an EV6 while the rear windows move; the rear window state is not on this bus.";
+CM_ SG_ 1124 Window_RrRtWdwDetailOpnSta "Always Not_Available on an EV6 while the rear windows move; the rear window state is not on this bus.";
 CM_ SG_ 1124 Window_AsstSdWdwErrAntPinch "Unverified opendbc signal";
 CM_ SG_ 1124 Window_RrLftWdwErrAntPinch "Unverified opendbc signal";
 CM_ SG_ 1124 Window_RrRtWdwErrAntPinch "Unverified opendbc signal";
@@ -2005,3 +2012,12 @@ VAL_ 1077 Power_State 255 "Car_Off" 0 "Car_on";
 VAL_ 843 Headlight_Switch 3 "Off" 2 "Parking" 1 "Auto" 0 "Low_Beam";
 VAL_ 896 Driver_Temp_C 0 "OFF";
 VAL_ 896 Passenger_Temp_C 0 "OFF";
+VAL_ 938 Port_Open 2 "Closed" 1 "Open";
+VAL_ 1124 Window_DrvrSdWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_Open" 1 "Slightly_Open" 0 "Closed";
+VAL_ 1124 Window_DrvrSdWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
+VAL_ 1124 Window_AsstSdWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_Open" 1 "Slightly_Open" 0 "Closed";
+VAL_ 1124 Window_AsstSdWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
+VAL_ 1124 Window_RrLftWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_Open" 1 "Slightly_Open" 0 "Closed";
+VAL_ 1124 Window_RrLftWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
+VAL_ 1124 Window_RrRtWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_Open" 1 "Slightly_Open" 0 "Closed";
+VAL_ 1124 Window_RrRtWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
