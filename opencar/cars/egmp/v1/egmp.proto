@@ -36,6 +36,9 @@ message BasicState {
     CHARGE_PORT_STATE_V2L_ACTIVE = 11;
     // The charge port is connected to a V2L (Vehicle-to-Load) device but there is an error.
     CHARGE_PORT_STATE_V2L_ERROR = 12;
+    // A cable is plugged into the charge port, but the car doesn't know the charger type
+    // yet. E-GMP cars try DC first, so this lasts a few seconds on an AC charger too.
+    CHARGE_PORT_STATE_CONNECTED = 13;
   }
 
   // Odometer in kilometers.
