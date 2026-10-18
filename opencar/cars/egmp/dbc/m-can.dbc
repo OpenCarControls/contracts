@@ -1140,8 +1140,8 @@ BO_ 1597 HU_AMP_P: 8 Vector__XXX
 CM_ SG_ 938 Port_Open "Verified on an EV6 against CAN logs and live: charge port door. Set to Open as soon as the door starts opening. Does not change when a charger is plugged in or charging.";
 CM_ SG_ 1043 HAZARD_ON "Verified on an EV6 against CAN logs: 1 while the hazard switch is on.";
 CM_ SG_ 843 Headlight_Switch "Wrong on an EV6: steps through every value once a second whatever the switch position, in CAN logs.";
-CM_ SG_ 550 Outdoor_Temperature "Verified on an EV6 against CAN logs: matches the dashboard outside temperature.";
-CM_ SG_ 551 Odometer "Verified on an EV6 against CAN logs: matches the dashboard odometer.";
+CM_ SG_ 550 Outdoor_Temperature "Verified on an EV6 against CAN logs: matches the dashboard outside temperature. Only checked on a car set to km and Celsius; it may follow the display units on a car set to miles or Fahrenheit.";
+CM_ SG_ 551 Odometer "Verified on an EV6 against CAN logs: matches the dashboard odometer. Only checked on a car set to km and Celsius; it may follow the display units on a car set to miles or Fahrenheit.";
 CM_ SG_ 764 State_Of_Charge "Verified on an EV6 against CAN logs and live: matches the dashboard SOC.";
 CM_ BO_ 412 "Candidate from EV6 CAN logs: only seen on one L2 charger.";
 CM_ SG_ 412 Cand_AC_Current_19C "Candidate: reads 11.9 A while charging on a 240 V 15 A circuit (2.6-2.7 kW) and 0 on DC or idle.";
@@ -1154,11 +1154,12 @@ CM_ SG_ 806 Charging "Verified on an EV6 against CAN logs: 1 while energy flows 
 CM_ SG_ 764 Battery_Current "Verified on an EV6 against CAN logs: high-voltage battery current, positive when discharging. Times Battery_Voltage it matches CHARGING_POWER on DC (within 1 kW) and gives 2.2 kW into the battery on a 2.6-2.7 kW L2 charger. Peaks at +198 A on a hard launch and -57 A in regen.";
 CM_ SG_ 567 Battery_Voltage "Verified on an EV6 against CAN logs: high-voltage battery voltage. About 702 V at rest at 42% SOC, rises to 760 V while DC charging and sags under load.";
 CM_ SG_ 54 Drive_Mode "Verified on an EV6 against CAN logs: active drive mode, changes as the mode button is pressed. Reads 0 (Eco) with the car off. Other modes (e.g. Snow) not seen yet.";
-CM_ SG_ 695 Range "Verified on an EV6 against CAN logs: range shown on the cluster, for the active drive mode only; the other modes are not sent. Bit 11 of the message blips for about 2 s when a navigation route starts or stops.";
+CM_ SG_ 695 Range "Verified on an EV6 against CAN logs: range shown on the cluster, for the active drive mode only; the other modes are not sent. Bit 11 of the message blips for about 2 s when a navigation route starts or stops. Only checked on a car set to km and Celsius; it may follow the display units on a car set to miles or Fahrenheit.";
 CM_ BO_ 818 "Verified on an EV6 against CAN logs on DC: the car's charging time estimates, always whole minutes. Sent all the time, also driving, as the estimate for a DC fast charge; it keeps its value after unplug and reads 0 with the car off.";
 CM_ SG_ 818 Charge_Time_To_Limit "Seconds to the charge limit on DC; the logs had the DC limit at 100%, so this may be time to 100%. On L2 the values (2580 at 42% SOC) don't fit seconds and may be minutes; needs a capture with the cluster in view.";
 CM_ SG_ 818 Charge_Time_To_80 "Seconds to 80% on DC, as shown next to the time to 100%. On L2 the values (1020 at 42% SOC) don't fit seconds and may be minutes.";
 CM_ SG_ 1144 DRIVE_MODE "Wrong on an EV6: barely sent and the values make no sense. Use DRIVE_MODE_STATUS Drive_Mode.";
+CM_ SG_ 428 Speed_kph "Plausible in EV6 drive logs (about 50 where the notes say 50 km/h), not checked against the display; only seen on a car set to km/h, it may follow the display units on a car set to mph.";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
