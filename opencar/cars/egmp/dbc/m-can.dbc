@@ -159,6 +159,16 @@ BO_ 268 THERMAL_METRICS: 8 Vector__XXX
 BO_ 567 BATTERY_INFO_567: 8 Vector__XXX
    SG_ Battery_Voltage : 40|16@1+ (0.1,0) [0|6553.5] "V" Vector__XXX
 
+BO_ 54 DRIVE_MODE_STATUS: 8 Vector__XXX
+   SG_ Drive_Mode : 58|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 695 CLUSTER_RANGE: 8 Vector__XXX
+   SG_ Range : 0|10@1+ (1,0) [0|1023] "km" Vector__XXX
+
+BO_ 818 CHARGE_TIME_ESTIMATE: 8 Vector__XXX
+   SG_ Charge_Time_To_Limit : 0|16@1+ (1,0) [0|65535] "s" Vector__XXX
+   SG_ Charge_Time_To_80 : 16|16@1+ (1,0) [0|65535] "s" Vector__XXX
+
 BO_ 412 CANDIDATE_19C: 8 Vector__XXX
    SG_ Cand_AC_Current_19C : 32|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
 
@@ -1143,6 +1153,12 @@ CM_ SG_ 806 AC_Charger "Verified on an EV6 against CAN logs: 1 once the car has 
 CM_ SG_ 806 Charging "Verified on an EV6 against CAN logs: 1 while energy flows into the battery, AC or DC.";
 CM_ SG_ 764 Battery_Current "Verified on an EV6 against CAN logs: high-voltage battery current, positive when discharging. Times Battery_Voltage it matches CHARGING_POWER on DC (within 1 kW) and gives 2.2 kW into the battery on a 2.6-2.7 kW L2 charger. Peaks at +198 A on a hard launch and -57 A in regen.";
 CM_ SG_ 567 Battery_Voltage "Verified on an EV6 against CAN logs: high-voltage battery voltage. About 702 V at rest at 42% SOC, rises to 760 V while DC charging and sags under load.";
+CM_ SG_ 54 Drive_Mode "Verified on an EV6 against CAN logs: active drive mode, changes as the mode button is pressed. Reads 0 (Eco) with the car off. Other modes (e.g. Snow) not seen yet.";
+CM_ SG_ 695 Range "Verified on an EV6 against CAN logs: range shown on the cluster, for the active drive mode only; the other modes are not sent. Bit 11 of the message blips for about 2 s when a navigation route starts or stops.";
+CM_ BO_ 818 "Verified on an EV6 against CAN logs on DC: the car's charging time estimates, always whole minutes. Sent all the time, also driving, as the estimate for a DC fast charge; it keeps its value after unplug and reads 0 with the car off.";
+CM_ SG_ 818 Charge_Time_To_Limit "Seconds to the charge limit on DC; the logs had the DC limit at 100%, so this may be time to 100%. On L2 the values (2580 at 42% SOC) don't fit seconds and may be minutes; needs a capture with the cluster in view.";
+CM_ SG_ 818 Charge_Time_To_80 "Seconds to 80% on DC, as shown next to the time to 100%. On L2 the values (1020 at 42% SOC) don't fit seconds and may be minutes.";
+CM_ SG_ 1144 DRIVE_MODE "Wrong on an EV6: barely sent and the values make no sense. Use DRIVE_MODE_STATUS Drive_Mode.";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
@@ -1708,7 +1724,6 @@ CM_ SG_ 1125 DATC_Crc14Val "Unverified opendbc signal";
 CM_ SG_ 1125 DATC_AlvCnt14Val "Unverified opendbc signal";
 CM_ SG_ 1125 DATC_Beep1Sound "Unverified opendbc signal";
 CM_ BO_ 1144 "Unverified: Imported from opendbc. Validation required.";
-CM_ SG_ 1144 DRIVE_MODE "Unverified opendbc signal";
 CM_ SG_ 1144 DRIVE_MODE2 "Unverified opendbc signal";
 CM_ BO_ 1151 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1151 AUTO_BUTTON "Unverified opendbc signal";
@@ -2051,3 +2066,4 @@ VAL_ 1124 Window_RrLftWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "
 VAL_ 1124 Window_RrRtWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_Open" 1 "Slightly_Open" 0 "Closed";
 VAL_ 1124 Window_RrRtWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
 VAL_ 413 Charger_Type 2 "DC" 1 "AC" 0 "None";
+VAL_ 54 Drive_Mode 2 "Sport" 1 "Normal" 0 "Eco";
