@@ -161,6 +161,7 @@ BO_ 567 BATTERY_INFO_567: 8 Vector__XXX
    SG_ Battery_Voltage : 40|16@1+ (0.1,0) [0|6553.5] "V" Vector__XXX
 
 BO_ 54 DRIVE_MODE_STATUS: 8 Vector__XXX
+   SG_ Gear : 32|4@1+ (1,0) [0|15] "" Vector__XXX
    SG_ Drive_Mode : 58|3@1+ (1,0) [0|7] "" Vector__XXX
 
 BO_ 695 CLUSTER_RANGE: 8 Vector__XXX
@@ -1167,6 +1168,7 @@ CM_ SG_ 806 AC_Charger "Verified on an EV6 against CAN logs: 1 once the car has 
 CM_ SG_ 806 Charging "Verified on an EV6 against CAN logs: 1 while energy flows into the battery, AC or DC.";
 CM_ SG_ 764 Battery_Current "Verified on an EV6 against CAN logs: high-voltage battery current, positive when discharging. Times Battery_Voltage it matches CHARGING_POWER on DC (within 1 kW) and gives 2.2 kW into the battery on a 2.6-2.7 kW L2 charger. Peaks at +198 A on a hard launch and -57 A in regen.";
 CM_ SG_ 567 Battery_Voltage "Verified on an EV6 against CAN logs: high-voltage battery voltage. About 702 V at rest at 42% SOC, rises to 760 V while DC charging and sags under load.";
+CM_ SG_ 54 Gear "Verified on an EV6 against CAN logs: selected gear, follows every shift in log_09 within about a second, including the brief Neutral between Drive and Reverse. Reads 0 (Park) with the car off, asleep or charging. Bit 36 next to it is set while the car is off or not yet ready. Undefined message 0x039 byte 0 carries the same values but reads 9 while the car is off or charging.";
 CM_ SG_ 54 Drive_Mode "Verified on an EV6 against CAN logs: active drive mode, changes as the mode button is pressed. Reads 0 (Eco) with the car off. Snow reads 5 (the Normal bits plus bit 60).";
 CM_ SG_ 695 Range "Verified on an EV6 against CAN logs: range shown on the cluster, for the active drive mode only; the other modes are not sent. Stays in km when the car displays miles. Bit 11 of the message blips for about 2 s when a navigation route starts or stops.";
 CM_ BO_ 818 "Verified on an EV6 against CAN logs: the car's estimate for a DC fast charge, always whole minutes, sent all the time (also driving and while AC charging); 0 with the car off. Matches the cluster while DC charging. For the charge in progress use CHARGING_TIME.";
@@ -1644,7 +1646,7 @@ CM_ SG_ 1058 BCM_AlvCnt10Val "Unverified opendbc signal";
 CM_ SG_ 1058 Wiper_PrkngPosSta "Unverified opendbc signal";
 CM_ SG_ 1058 Wiper_RainSnsrOptionTyp "Unverified opendbc signal";
 CM_ SG_ 1058 Wiper_RainSnsrSta "Unverified opendbc signal";
-CM_ SG_ 1058 BCM_GearPosPSta "Unverified opendbc signal";
+CM_ SG_ 1058 BCM_GearPosPSta "Verified on an EV6 against CAN logs: 1 in Park, 0 in any other gear. Use DRIVE_MODE_STATUS Gear for the gear itself.";
 CM_ SG_ 1058 BCM_SunRoofOpnSta "Unverified opendbc signal";
 CM_ SG_ 1058 SunRoof_RrBlindErrSta "Unverified opendbc signal";
 CM_ BO_ 1063 "Unverified: Imported from opendbc. Validation required.";
@@ -2100,6 +2102,7 @@ VAL_ 1124 Window_RrLftWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "
 VAL_ 1124 Window_RrRtWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_Open" 1 "Slightly_Open" 0 "Closed";
 VAL_ 1124 Window_RrRtWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
 VAL_ 413 Charger_Type 2 "DC" 1 "AC" 0 "None";
+VAL_ 54 Gear 7 "Reverse" 6 "Neutral" 5 "Drive" 0 "Park";
 VAL_ 54 Drive_Mode 5 "Snow" 2 "Sport" 1 "Normal" 0 "Eco";
 VAL_ 1048 HSWS_SysWrngSta_ICU 4 "On" 0 "Off";
 VAL_ 899 DATC_OpSta 2 "Off" 1 "On" 0 "Not_Available";
