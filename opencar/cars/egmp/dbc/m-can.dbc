@@ -78,8 +78,9 @@ BO_ 685 BMS_PRECOND_STATUS: 8 Vector__XXX
 BO_ 1261 NAV_PRECOND_STATUS: 8 Vector__XXX
    SG_ Precond_Request : 56|8@1+ (1,0) [0|255] "" Vector__XXX
 
-BO_ 1042 BRAKE_PEDAL_STATUS: 8 Vector__XXX
-   SG_ Brake_Pedal : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+BO_ 1042 REAR_LAMP_STATUS: 8 Vector__XXX
+   SG_ Reverse_Lamp : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Brake_Lamp : 50|1@1+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 1077 POWER_CAN_STATUS: 8 Vector__XXX
    SG_ Crc_Val : 0|12@1+ (1,0) [0|4095] "" Vector__XXX
@@ -187,6 +188,9 @@ BO_ 605 CANDIDATE_25D: 8 Vector__XXX
 
 BO_ 412 CANDIDATE_19C: 8 Vector__XXX
    SG_ Cand_AC_Current_19C : 32|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
+
+BO_ 100 AUTO_HOLD_STATUS: 8 Vector__XXX
+   SG_ Auto_Hold : 24|8@1+ (1,0) [0|255] "" Vector__XXX
 
 BO_ 413 CHARGER_SESSION: 8 Vector__XXX
    SG_ Charger_Type : 16|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -670,7 +674,8 @@ BO_ 1058 BCM_10_200ms: 8 Vector__XXX
    SG_ BCM_AlvCnt10Val : 12|4@1+ (1,0) [0|15] "" Vector__XXX
    SG_ Wiper_PrkngPosSta : 16|4@1+ (1,0) [0|15] "" Vector__XXX
    SG_ Wiper_RainSnsrOptionTyp : 20|2@1+ (1,0) [0|3] "" Vector__XXX
-   SG_ Wiper_RainSnsrSta : 22|28@1+ (1,0) [0|2.68435e+08] "" Vector__XXX
+   SG_ Wiper_RainSnsrWipeReq : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Rear_Camera_Button : 48|1@1+ (1,0) [0|1] "" Vector__XXX
    SG_ BCM_GearPosPSta : 50|2@1+ (1,0) [0|3] "" Vector__XXX
    SG_ BCM_SunRoofOpnSta : 52|4@1+ (1,0) [0|15] "" Vector__XXX
    SG_ SunRoof_RrBlindErrSta : 56|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -1209,6 +1214,9 @@ CM_ SG_ 1044 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 1044 AlvCnt_Val "Unverified opendbc signal";
 CM_ SG_ 1077 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 1077 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 1042 Reverse_Lamp "Verified on an EV6 against CAN logs: 1 while in Reverse (reverse lights).";
+CM_ SG_ 1042 Brake_Lamp "Verified on an EV6 against CAN logs: brake lights, 1 with the brake pedal pressed and also during strong regen without the pedal (log_15). Use ICU_08_200ms Brake_SwSta_ICU for the pedal itself. Was the 8-bit Brake_Pedal, which also caught the reverse lights.";
+CM_ SG_ 100 Auto_Hold "Verified on an EV6 against CAN logs: Auto Hold switched On (48) or Off (4) with its button. The value while it is actively holding the car was not captured.";
 CM_ SG_ 1077 Power_State "Checked on an EV6 against CAN logs: Car_on when on or ready, Car_Off when off or in accessory. Use BCM_02_200ms and DRIVE_MODE_STATUS Ready for the full power state.";
 CM_ SG_ 593 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 593 AlvCnt_Val "Unverified opendbc signal";
@@ -1603,7 +1611,7 @@ CM_ SG_ 1048 Lamp_FootLampOnReq "Unverified opendbc signal";
 CM_ SG_ 1048 Lamp_MoodLampOnReq "Unverified opendbc signal";
 CM_ SG_ 1048 ICU_PowerAutoCutModSta "Unverified opendbc signal";
 CM_ SG_ 1048 ICU_SoCBattStaMsgReq "Unverified opendbc signal";
-CM_ SG_ 1048 Brake_SwSta_ICU "Unverified opendbc signal";
+CM_ SG_ 1048 Brake_SwSta_ICU "Verified on an EV6 against CAN logs: brake pedal switch, 1 while the pedal is pressed. On/off only; stays 0 during regen braking, unlike REAR_LAMP_STATUS Brake_Lamp.";
 CM_ BO_ 1050 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1050 BCM_Crc7Val "Unverified opendbc signal";
 CM_ SG_ 1050 BCM_AlvCnt7Val "Unverified opendbc signal";
@@ -1617,7 +1625,7 @@ CM_ SG_ 1050 Lamp_AvTailLmpSta "Unverified opendbc signal";
 CM_ BO_ 1051 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1051 BCM_Crc8Val "Unverified opendbc signal";
 CM_ SG_ 1051 BCM_AlvCnt8Val "Unverified opendbc signal";
-CM_ SG_ 1051 Lamp_HbaCtrlModTyp "Unverified opendbc signal";
+CM_ SG_ 1051 Lamp_HbaCtrlModTyp "Verified on an EV6 against CAN logs: 1 with auto high beam enabled, 0 when disabled. 0x11B byte 3 bit 5 follows it.";
 CM_ SG_ 1051 Lamp_IFSCtrlModTyp "Unverified opendbc signal";
 CM_ SG_ 1051 Lamp_RrFogLmpOnReq "Unverified opendbc signal";
 CM_ SG_ 1051 Lamp_HdLmpWlcmCmd "Unverified opendbc signal";
@@ -1640,9 +1648,10 @@ CM_ BO_ 1058 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1058 BCM_Crc10Val "Unverified opendbc signal";
 CM_ SG_ 1058 Wiper_RainSnsrPartNum "Unverified opendbc signal";
 CM_ SG_ 1058 BCM_AlvCnt10Val "Unverified opendbc signal";
-CM_ SG_ 1058 Wiper_PrkngPosSta "Unverified opendbc signal";
+CM_ SG_ 1058 Wiper_PrkngPosSta "Verified on an EV6 against CAN logs: 1 with the wipers parked, 0 during each sweep (single wipes, low and high, washer wipes). The stalk position and the rain sensor sensitivity were not found on this bus.";
 CM_ SG_ 1058 Wiper_RainSnsrOptionTyp "Unverified opendbc signal";
-CM_ SG_ 1058 Wiper_RainSnsrSta "Unverified opendbc signal";
+CM_ SG_ 1058 Wiper_RainSnsrWipeReq "Verified on an EV6 against CAN logs: pulses for about 0.1 s when the rain sensor asks for a wipe, i.e. on switching to Auto and on each sensitivity increase (not decrease). Replaces the opendbc 28-bit Wiper_RainSnsrSta, which spanned unrelated bits.";
+CM_ SG_ 1058 Rear_Camera_Button "Verified on an EV6 against CAN logs: pulses for 0.2 s at each rear camera button press (in Park), whether it turns the camera on or off; not the camera state.";
 CM_ SG_ 1058 BCM_GearPosPSta "Verified on an EV6 against CAN logs: 1 in Park, 0 in any other gear. Use DRIVE_MODE_STATUS Gear for the gear itself.";
 CM_ SG_ 1058 BCM_SunRoofOpnSta "Unverified opendbc signal";
 CM_ SG_ 1058 SunRoof_RrBlindErrSta "Unverified opendbc signal";
@@ -2084,7 +2093,7 @@ BA_DEF_DEF_ "filterlabeling" 0;
 BA_DEF_DEF_ "matchingcriteria" 0;
 BA_DEF_DEF_ "filterlabeling" 0;
 VAL_ 685 Battery_Precond_State 21 "On" 5 "Preparing" 1 "Off";
-VAL_ 1042 Brake_Pedal 4 "Pressed" 0 "Not_Pressed";
+VAL_ 100 Auto_Hold 48 "On" 4 "Off";
 VAL_ 1077 Power_State 255 "Car_Off" 0 "Car_on";
 VAL_ 843 Headlight_Switch 3 "Off" 2 "Parking" 1 "Auto" 0 "Low_Beam";
 VAL_ 896 Driver_Temp_C 0 "OFF";
