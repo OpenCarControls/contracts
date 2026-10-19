@@ -41,6 +41,16 @@ message BasicState {
     CHARGE_PORT_STATE_CONNECTED = 13;
   }
 
+  // Represent the unit the car displays temperatures in.
+  enum TemperatureUnit {
+    // Unknown unit.
+    TEMPERATURE_UNIT_UNSPECIFIED = 0;
+    // The car displays temperatures in Celsius.
+    TEMPERATURE_UNIT_CELSIUS = 1;
+    // The car displays temperatures in Fahrenheit.
+    TEMPERATURE_UNIT_FAHRENHEIT = 2;
+  }
+
   // Odometer in kilometers.
   optional uint32 odometer = 1;
 
@@ -72,7 +82,7 @@ message BasicState {
   optional ChargePortState charge_port_state = 13;
   // Power flow through the charge port in watts. Positive means charging, negative means V2L discharging.
   optional int32 power_flow_watt = 14;
-  // Estimated time remaining to full charge or empty in minutes.
+  // While charging, the estimated time to the charge limit in minutes.
   optional uint32 time_remaining_minutes = 15;
 
   // Are the vehicle doors locked.
@@ -104,6 +114,18 @@ message BasicState {
   optional bool are_hazard_lights_on = 28;
   // Timestamp of the last time the lights were flashed, in seconds since Unix epoch.
   optional uint64 lights_flash_timestamp = 29;
+  // AC charge limit as a percentage (0-100).
+  optional uint32 ac_charge_limit_percent = 30;
+  // DC charge limit as a percentage (0-100).
+  optional uint32 dc_charge_limit_percent = 31;
+  // While DC charging, the estimated time to 80% in minutes, which the car shows next to
+  // the time to the charge limit (time_remaining_minutes).
+  optional uint32 time_to_80_percent_minutes = 32;
+  // The unit the car displays temperatures in. Temperature fields are always in Celsius.
+  // To show the climate target temperature as the car does in Fahrenheit, use
+  // (target_climate_temperature - 14) * 2 + 56: the car steps 1 °F per 0.5 °C, so a plain
+  // conversion doesn't match its display.
+  optional TemperatureUnit temperature_unit = 33;
 }
 
 // Advanced state that can only be shared over BLE.

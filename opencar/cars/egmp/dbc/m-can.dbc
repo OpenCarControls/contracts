@@ -91,6 +91,7 @@ BO_ 550 AMBIENT_TEMPERATURE: 8 Vector__XXX
 
 BO_ 551 ODOMETER: 8 Vector__XXX
    SG_ Odometer : 8|24@1+ (0.1,0) [0|1.67772e+06] "km" Vector__XXX
+   SG_ Outdoor_Temperature_F : 50|8@1+ (0.5,-40) [-40|87.5] "F" Vector__XXX
 
 BO_ 593 CLUSTER_WARNINGS: 8 Vector__XXX
    SG_ Crc_Val : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
@@ -160,7 +161,7 @@ BO_ 567 BATTERY_INFO_567: 8 Vector__XXX
    SG_ Battery_Voltage : 40|16@1+ (0.1,0) [0|6553.5] "V" Vector__XXX
 
 BO_ 54 DRIVE_MODE_STATUS: 8 Vector__XXX
-   SG_ Drive_Mode : 58|2@1+ (1,0) [0|3] "" Vector__XXX
+   SG_ Drive_Mode : 58|3@1+ (1,0) [0|7] "" Vector__XXX
 
 BO_ 695 CLUSTER_RANGE: 8 Vector__XXX
    SG_ Range : 0|10@1+ (1,0) [0|1023] "km" Vector__XXX
@@ -168,6 +169,16 @@ BO_ 695 CLUSTER_RANGE: 8 Vector__XXX
 BO_ 818 CHARGE_TIME_ESTIMATE: 8 Vector__XXX
    SG_ Charge_Time_To_Limit : 0|16@1+ (1,0) [0|65535] "s" Vector__XXX
    SG_ Charge_Time_To_80 : 16|16@1+ (1,0) [0|65535] "s" Vector__XXX
+
+BO_ 337 CHARGE_LIMITS: 8 Vector__XXX
+   SG_ AC_Charge_Limit : 24|8@1+ (0.5,0) [0|127.5] "%" Vector__XXX
+   SG_ DC_Charge_Limit : 32|8@1+ (0.5,0) [0|127.5] "%" Vector__XXX
+
+BO_ 435 CABIN_TEMPERATURE: 8 Vector__XXX
+   SG_ Cabin_Temperature : 40|8@1+ (0.5,-40) [-40|87.5] "C" Vector__XXX
+
+BO_ 504 CHARGING_TIME: 8 Vector__XXX
+   SG_ Charging_Time_To_Limit : 40|16@1+ (1,0) [0|65535] "min" Vector__XXX
 
 BO_ 605 CANDIDATE_25D: 8 Vector__XXX
    SG_ Cand_Heater_Power_25D : 16|8@1+ (0.1,0) [0|25.5] "kW" Vector__XXX
@@ -1142,9 +1153,9 @@ BO_ 1597 HU_AMP_P: 8 Vector__XXX
 
 CM_ SG_ 938 Port_Open "Verified on an EV6 against CAN logs and live: charge port door. Set to Open as soon as the door starts opening. Does not change when a charger is plugged in or charging.";
 CM_ SG_ 1043 HAZARD_ON "Verified on an EV6 against CAN logs: 1 while the hazard switch is on.";
-CM_ SG_ 843 Headlight_Switch "Wrong on an EV6: steps through every value once a second whatever the switch position, in CAN logs.";
-CM_ SG_ 550 Outdoor_Temperature "Verified on an EV6 against CAN logs: matches the dashboard outside temperature. Only checked on a car set to km and Celsius; it may follow the display units on a car set to miles or Fahrenheit.";
-CM_ SG_ 551 Odometer "Verified on an EV6 against CAN logs: matches the dashboard odometer. Only checked on a car set to km and Celsius; it may follow the display units on a car set to miles or Fahrenheit.";
+CM_ SG_ 843 Headlight_Switch "Wrong on an EV6: steps through every value once a second whatever the switch position. The switch position is not on this bus; BCM_07_200ms has the lamp outputs.";
+CM_ SG_ 550 Outdoor_Temperature "Verified on an EV6 against CAN logs: matches the dashboard outside temperature while the car displays Celsius; Not_Available (255) while it displays Fahrenheit, then ODOMETER Outdoor_Temperature_F has it.";
+CM_ SG_ 551 Odometer "Verified on an EV6 against CAN logs: matches the dashboard odometer. Stays in km when the car displays miles.";
 CM_ SG_ 764 State_Of_Charge "Verified on an EV6 against CAN logs and live: matches the dashboard SOC.";
 CM_ BO_ 412 "Candidate from EV6 CAN logs: only seen on one L2 charger.";
 CM_ SG_ 412 Cand_AC_Current_19C "Candidate: reads 11.9 A while charging on a 240 V 15 A circuit (2.6-2.7 kW) and 0 on DC or idle.";
@@ -1156,13 +1167,13 @@ CM_ SG_ 806 AC_Charger "Verified on an EV6 against CAN logs: 1 once the car has 
 CM_ SG_ 806 Charging "Verified on an EV6 against CAN logs: 1 while energy flows into the battery, AC or DC.";
 CM_ SG_ 764 Battery_Current "Verified on an EV6 against CAN logs: high-voltage battery current, positive when discharging. Times Battery_Voltage it matches CHARGING_POWER on DC (within 1 kW) and gives 2.2 kW into the battery on a 2.6-2.7 kW L2 charger. Peaks at +198 A on a hard launch and -57 A in regen.";
 CM_ SG_ 567 Battery_Voltage "Verified on an EV6 against CAN logs: high-voltage battery voltage. About 702 V at rest at 42% SOC, rises to 760 V while DC charging and sags under load.";
-CM_ SG_ 54 Drive_Mode "Verified on an EV6 against CAN logs: active drive mode, changes as the mode button is pressed. Reads 0 (Eco) with the car off. Other modes (e.g. Snow) not seen yet.";
-CM_ SG_ 695 Range "Verified on an EV6 against CAN logs: range shown on the cluster, for the active drive mode only; the other modes are not sent. Bit 11 of the message blips for about 2 s when a navigation route starts or stops. Only checked on a car set to km and Celsius; it may follow the display units on a car set to miles or Fahrenheit.";
-CM_ BO_ 818 "Verified on an EV6 against CAN logs on DC: the car's charging time estimates, always whole minutes. Sent all the time, also driving, as the estimate for a DC fast charge; it keeps its value after unplug and reads 0 with the car off.";
-CM_ SG_ 818 Charge_Time_To_Limit "Seconds to the charge limit on DC; the logs had the DC limit at 100%, so this may be time to 100%. On L2 the values (2580 at 42% SOC) don't fit seconds and may be minutes; needs a capture with the cluster in view.";
-CM_ SG_ 818 Charge_Time_To_80 "Seconds to 80% on DC, as shown next to the time to 100%. On L2 the values (1020 at 42% SOC) don't fit seconds and may be minutes.";
+CM_ SG_ 54 Drive_Mode "Verified on an EV6 against CAN logs: active drive mode, changes as the mode button is pressed. Reads 0 (Eco) with the car off. Snow reads 5 (the Normal bits plus bit 60).";
+CM_ SG_ 695 Range "Verified on an EV6 against CAN logs: range shown on the cluster, for the active drive mode only; the other modes are not sent. Stays in km when the car displays miles. Bit 11 of the message blips for about 2 s when a navigation route starts or stops.";
+CM_ BO_ 818 "Verified on an EV6 against CAN logs: the car's estimate for a DC fast charge, always whole minutes, sent all the time (also driving and while AC charging); 0 with the car off. Matches the cluster while DC charging. For the charge in progress use CHARGING_TIME.";
+CM_ SG_ 818 Charge_Time_To_Limit "Seconds for a DC fast charge to the DC limit (100% in all logs, so it may be to 100%).";
+CM_ SG_ 818 Charge_Time_To_80 "Verified on an EV6 against CAN logs: seconds for a DC fast charge to 80%, as the cluster shows next to the time to the limit while DC charging.";
 CM_ SG_ 1144 DRIVE_MODE "Wrong on an EV6: barely sent and the values make no sense. Use DRIVE_MODE_STATUS Drive_Mode.";
-CM_ SG_ 428 Speed_kph "Plausible in EV6 drive logs (about 50 where the notes say 50 km/h), not checked against the display; only seen on a car set to km/h, it may follow the display units on a car set to mph.";
+CM_ SG_ 428 Speed_kph "Plausible in EV6 drive logs (about 50 where the notes say 50 km/h), not checked against the display; only seen parked while the car displayed miles, so mph is untested (range and odometer stay in km).";
 CM_ SG_ 795 Steering_Wheel_Heating_State "Wrong on an EV6: toggles about once a second whatever the heater does. Use ICU_08_200ms HSWS_SysWrngSta_ICU.";
 CM_ SG_ 795 Climate_AC_State "Not the A/C state: 0 at a time the A/C was on, follows the A/C button but also changes with Auto and Heat. Use DATC_05_200ms DATC_AcDis.";
 CM_ SG_ 795 Climate_Fan_Speed "Verified on an EV6 against CAN logs: blower level plus one (manual levels 1 to 8 read 2 to 9), 0 with the climate off; follows the blower in Auto.";
@@ -1172,12 +1183,18 @@ CM_ SG_ 896 Driver_Temp_C "Verified on an EV6 against CAN logs: driver target te
 CM_ SG_ 896 Passenger_Temp_C "Verified on an EV6 against CAN logs: passenger target temperature; OFF while Driver only is on.";
 CM_ SG_ 896 Driver_Temp_F "Not Fahrenheit on a car set to Celsius: repeats the Driver_Temp_C steps. Not checked in Fahrenheit.";
 CM_ SG_ 896 Passenger_Temp_F "Not Fahrenheit on a car set to Celsius: repeats the Passenger_Temp_C steps. Not checked in Fahrenheit.";
-CM_ SG_ 593 Rear_Defrost_State "Wrong on an EV6: toggles every few seconds whatever the rear defroster does. No rear defroster state found on this bus.";
+CM_ SG_ 593 Rear_Defrost_State "Wrong on an EV6: toggles every few seconds whatever the rear defroster does. No rear defroster state on this bus (nothing changed with it on for 27 s).";
 CM_ SG_ 685 Battery_Precond_State "Verified on an EV6 against CAN logs: battery preconditioning. Preparing at the request; On when the battery heater switches on (about 60 s later, varies), which is when the cluster shows the battery icon. 2 while the car is off, asleep or charging.";
 CM_ SG_ 1174 Driver_Seat_Heating_Oper "Verified on an EV6 against CAN logs: driver seat heating level. 3 to 5 may be ventilation (not checked).";
 CM_ SG_ 1141 Passenger_Seat_Heating_Oper "Verified on an EV6 against CAN logs: passenger seat heating level. 3 to 5 may be ventilation (not checked).";
 CM_ SG_ 1261 Precond_Request "Not an on/off request: 0x1F with bytes 5-6 at FF FF when no route is set, and route data (e.g. 08 48 00) when navigating to a DC charger, about 6 s before preconditioning starts. Probably route information for the BMU; the old value table (31 = On, 0 = Off) was backwards.";
 CM_ SG_ 605 Cand_Heater_Power_25D "Candidate from EV6 CAN logs: 45-46 while the battery heater runs during preconditioning, matching the extra ~4.5 kW drawn from the battery, so probably 0.1 kW steps; 0 otherwise. Only seen in summer, so cabin heating may use it too.";
+CM_ SG_ 337 AC_Charge_Limit "Verified on an EV6 against CAN logs with timed notes: AC charge limit set in the head unit, applied about 3 s after the change. 0x1F9 bytes 2-3 carry the same pair.";
+CM_ SG_ 337 DC_Charge_Limit "Verified on an EV6 against CAN logs with timed notes: DC charge limit set in the head unit.";
+CM_ SG_ 435 Cabin_Temperature "Verified on an EV6 against CAN logs with a thermometer next to the cabin sensor: about 1 C above it (10 to 20 C while heating); drops with the climate off.";
+CM_ SG_ 504 Charging_Time_To_Limit "Verified on an EV6 against CAN logs with timed notes: minutes to the charge limit for the charge in progress, AC and DC, as the cluster shows; 0 when not charging. Byte 6 was only set once (420 min).";
+CM_ SG_ 551 Outdoor_Temperature_F "Verified on an EV6 against CAN logs: outside temperature while the car displays Fahrenheit (44.5 F for 45 F shown, 7 C); 255 while it displays Celsius.";
+CM_ SG_ 898 DATC_TempDispUnitSta "Verified on an EV6 against CAN logs with timed notes: temperature display unit.";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
@@ -1386,7 +1403,6 @@ CM_ SG_ 898 DATC_AlvCnt5Val "Unverified opendbc signal";
 CM_ SG_ 898 DATC_FrDrvModDis "Unverified opendbc signal";
 CM_ SG_ 898 DATC_FrPassModDis "Unverified opendbc signal";
 CM_ SG_ 898 DATC_ClmtTxtPopupOSD "Unverified opendbc signal";
-CM_ SG_ 898 DATC_TempDispUnitSta "Unverified opendbc signal";
 CM_ SG_ 898 DATC_DrvAutoDis "Unverified opendbc signal";
 CM_ SG_ 898 DATC_FrClmtScrnDis "Unverified opendbc signal";
 CM_ SG_ 898 DATC_AcDis "Verified on an EV6 against CAN logs: A/C on (1) or off (0), follows the A/C button.";
@@ -1395,7 +1411,7 @@ CM_ BO_ 899 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 899 DATC_Crc6Val "Unverified opendbc signal";
 CM_ SG_ 899 DATC_AlvCnt6Val "Unverified opendbc signal";
 CM_ SG_ 899 DATC_SyncDis "Unverified opendbc signal";
-CM_ SG_ 899 DATC_OpSta "Verified on an EV6 against CAN logs: climate control on or off; 0 with the car off. Not yet checked during remote climate.";
+CM_ SG_ 899 DATC_OpSta "Verified on an EV6 against CAN logs and with timed notes: climate control on or off; Not_Available until the car starts. Not yet checked during remote climate.";
 CM_ SG_ 899 DATC_FrDfgSta "Verified on an EV6 against CAN logs: windshield defog on or off.";
 CM_ SG_ 899 DATC_SmrtVntDis "Unverified opendbc signal";
 CM_ SG_ 899 DATC_AutoDfgBlnkDis "Unverified opendbc signal";
@@ -2084,10 +2100,13 @@ VAL_ 1124 Window_RrLftWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "
 VAL_ 1124 Window_RrRtWdwDetailOpnSta 7 "Not_Available" 3 "Fully_Open" 2 "Partly_Open" 1 "Slightly_Open" 0 "Closed";
 VAL_ 1124 Window_RrRtWdwActSta 15 "Not_Available" 6 "Auto_Up" 5 "Auto_Down" 2 "Manual_Up" 1 "Manual_Down" 0 "Idle";
 VAL_ 413 Charger_Type 2 "DC" 1 "AC" 0 "None";
-VAL_ 54 Drive_Mode 2 "Sport" 1 "Normal" 0 "Eco";
+VAL_ 54 Drive_Mode 5 "Snow" 2 "Sport" 1 "Normal" 0 "Eco";
 VAL_ 1048 HSWS_SysWrngSta_ICU 4 "On" 0 "Off";
 VAL_ 899 DATC_OpSta 2 "Off" 1 "On" 0 "Not_Available";
 VAL_ 899 DATC_FrDfgSta 1 "On" 0 "Off";
 VAL_ 795 Climate_Airflow_Direction 5 "Windshield" 4 "Feet_And_Windshield" 3 "Feet" 2 "Body_And_Feet" 1 "Body" 0 "Auto";
 VAL_ 1174 Driver_Seat_Heating_Oper 8 "Level_3" 7 "Level_2" 6 "Level_1" 2 "Off";
 VAL_ 1141 Passenger_Seat_Heating_Oper 8 "Level_3" 7 "Level_2" 6 "Level_1" 2 "Off";
+VAL_ 550 Outdoor_Temperature 255 "Not_Available";
+VAL_ 551 Outdoor_Temperature_F 255 "Not_Available";
+VAL_ 898 DATC_TempDispUnitSta 1 "Fahrenheit" 0 "Celsius";
