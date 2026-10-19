@@ -51,6 +51,20 @@ message BasicState {
     TEMPERATURE_UNIT_FAHRENHEIT = 2;
   }
 
+  // Represent the seat heating levels, as the car's seat buttons step through them.
+  enum SeatClimate {
+    // Unknown seat state
+    SEAT_CLIMATE_UNSPECIFIED = 0;
+    // Seat heating off
+    SEAT_CLIMATE_OFF = 1;
+    // Seat heating at level 1 (lowest)
+    SEAT_CLIMATE_HEAT_LEVEL_1 = 2;
+    // Seat heating at level 2
+    SEAT_CLIMATE_HEAT_LEVEL_2 = 3;
+    // Seat heating at level 3 (highest)
+    SEAT_CLIMATE_HEAT_LEVEL_3 = 4;
+  }
+
   // Odometer in kilometers.
   optional uint32 odometer = 1;
 
@@ -127,6 +141,10 @@ message BasicState {
   // (target_climate_temperature - 14) * 2 + 56: the car steps 1 °F per 0.5 °C, so a plain
   // conversion doesn't match its display.
   optional TemperatureUnit temperature_unit = 33;
+  // Driver seat heating level.
+  optional SeatClimate driver_seat_climate = 34;
+  // Front passenger seat heating level.
+  optional SeatClimate passenger_seat_climate = 35;
 }
 
 // Advanced state that can only be shared over BLE.
@@ -234,6 +252,10 @@ message ClimateControlCommand {
   optional bool rear_window_defrost_on = 4;
   // Whether the steering wheel heater is on.
   optional bool steering_wheel_heater_on = 5;
+  // Driver seat heating level to set.
+  optional BasicState.SeatClimate driver_seat_climate = 6;
+  // Front passenger seat heating level to set.
+  optional BasicState.SeatClimate passenger_seat_climate = 7;
 }
 
 // Command to control the windows.
