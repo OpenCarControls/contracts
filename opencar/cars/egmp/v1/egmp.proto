@@ -54,7 +54,8 @@ message BasicState {
   // Odometer in kilometers.
   optional uint32 odometer = 1;
 
-  // Whether the car is currently being driven (i.e. not parked with the motor off).
+  // Whether the car is being driven: ready and in a gear other than Park, so it stays true
+  // while stopped in traffic.
   optional bool is_driving = 2;
   // Speed in km/h. Should be 0 if is_driving is false. Negative means reverse.
   optional int32 speed = 3;
@@ -157,6 +158,21 @@ message AdvancedState {
     PRECONDITIONING_STATE_HEATING = 3;
   }
 
+  // Represent the car's power states, as the start button steps through them.
+  enum PowerState {
+    // Unknown power state
+    POWER_STATE_UNSPECIFIED = 0;
+    // The car is off. It can still be charging.
+    POWER_STATE_OFF = 1;
+    // Accessory power: the infotainment is on.
+    POWER_STATE_ACCESSORY = 2;
+    // The car is on but not ready to drive, e.g. pressing start without the brake, or a DC
+    // fast charger plugged in while the car was ready.
+    POWER_STATE_ON = 3;
+    // The car is ready to drive.
+    POWER_STATE_READY = 4;
+  }
+
   // Battery voltage.
   optional uint32 battery_voltage = 1;
   // Instantaneous power flow to and from the battery in watts. Positive means charging, negative means discharging.
@@ -170,6 +186,8 @@ message AdvancedState {
 
   // Current gear state.
   optional Gear gear = 6;
+  // Current power state.
+  optional PowerState power_state = 7;
 }
 
 // This contains a single basic command.

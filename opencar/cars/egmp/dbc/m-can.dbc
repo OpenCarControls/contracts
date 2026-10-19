@@ -161,6 +161,7 @@ BO_ 567 BATTERY_INFO_567: 8 Vector__XXX
    SG_ Battery_Voltage : 40|16@1+ (0.1,0) [0|6553.5] "V" Vector__XXX
 
 BO_ 54 DRIVE_MODE_STATUS: 8 Vector__XXX
+   SG_ Ready : 28|1@1+ (1,0) [0|1] "" Vector__XXX
    SG_ Gear : 32|4@1+ (1,0) [0|15] "" Vector__XXX
    SG_ Drive_Mode : 58|3@1+ (1,0) [0|7] "" Vector__XXX
 
@@ -1168,7 +1169,8 @@ CM_ SG_ 806 AC_Charger "Verified on an EV6 against CAN logs: 1 once the car has 
 CM_ SG_ 806 Charging "Verified on an EV6 against CAN logs: 1 while energy flows into the battery, AC or DC.";
 CM_ SG_ 764 Battery_Current "Verified on an EV6 against CAN logs: high-voltage battery current, positive when discharging. Times Battery_Voltage it matches CHARGING_POWER on DC (within 1 kW) and gives 2.2 kW into the battery on a 2.6-2.7 kW L2 charger. Peaks at +198 A on a hard launch and -57 A in regen.";
 CM_ SG_ 567 Battery_Voltage "Verified on an EV6 against CAN logs: high-voltage battery voltage. About 702 V at rest at 42% SOC, rises to 760 V while DC charging and sags under load.";
-CM_ SG_ 54 Gear "Verified on an EV6 against CAN logs: selected gear, follows every shift in log_09 within about a second, including the brief Neutral between Drive and Reverse. Reads 0 (Park) with the car off, asleep or charging. Bit 36 next to it is set while the car is off or not yet ready. Undefined message 0x039 byte 0 carries the same values but reads 9 while the car is off or charging.";
+CM_ SG_ 54 Ready "Verified on an EV6 against CAN logs: 1 while the car is ready to drive, in any gear; 0 when off, in accessory or on but not ready, and while charging with the car off. Drops when a DC charger is plugged in while ready, as the cluster does. Bit 30 is set with it, and bits 26 and 30 rise a few hundred ms before it at start-up.";
+CM_ SG_ 54 Gear "Verified on an EV6 against CAN logs: selected gear, follows every shift in log_09 within about a second, including the brief Neutral between Drive and Reverse. Reads 0 (Park) with the car off, asleep or charging. Bit 36 next to it is cleared while the high-voltage system is live: ready, or charging. Undefined message 0x039 byte 0 carries the same values but reads 9 while the car is off or charging.";
 CM_ SG_ 54 Drive_Mode "Verified on an EV6 against CAN logs: active drive mode, changes as the mode button is pressed. Reads 0 (Eco) with the car off. Snow reads 5 (the Normal bits plus bit 60).";
 CM_ SG_ 695 Range "Verified on an EV6 against CAN logs: range shown on the cluster, for the active drive mode only; the other modes are not sent. Stays in km when the car displays miles. Bit 11 of the message blips for about 2 s when a navigation route starts or stops.";
 CM_ BO_ 818 "Verified on an EV6 against CAN logs: the car's estimate for a DC fast charge, always whole minutes, sent all the time (also driving and while AC charging); 0 with the car off. Matches the cluster while DC charging. For the charge in progress use CHARGING_TIME.";
@@ -1207,6 +1209,7 @@ CM_ SG_ 1044 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 1044 AlvCnt_Val "Unverified opendbc signal";
 CM_ SG_ 1077 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 1077 AlvCnt_Val "Unverified opendbc signal";
+CM_ SG_ 1077 Power_State "Checked on an EV6 against CAN logs: Car_on when on or ready, Car_Off when off or in accessory. Use BCM_02_200ms and DRIVE_MODE_STATUS Ready for the full power state.";
 CM_ SG_ 593 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 593 AlvCnt_Val "Unverified opendbc signal";
 CM_ SG_ 1096 Crc_Val "Unverified opendbc signal";
@@ -1536,9 +1539,9 @@ CM_ SG_ 992 BAlarm_BglrAlrmSta "Unverified opendbc signal";
 CM_ SG_ 992 BAlarm_PncAlrmSta "Unverified opendbc signal";
 CM_ SG_ 992 BAlarm_BrglrHrnRlySta "Unverified opendbc signal";
 CM_ SG_ 992 BCM_KeyInSta "Unverified opendbc signal";
-CM_ SG_ 992 BCM_AccInSta "Unverified opendbc signal";
-CM_ SG_ 992 BCM_Ign1InSta "Unverified opendbc signal";
-CM_ SG_ 992 BCM_Ign2InSta "Unverified opendbc signal";
+CM_ SG_ 992 BCM_AccInSta "Verified on an EV6 against CAN logs: 1 in accessory, on and ready; 0 with the car off.";
+CM_ SG_ 992 BCM_Ign1InSta "Verified on an EV6 against CAN logs: 1 when on and ready; 0 when off or in accessory.";
+CM_ SG_ 992 BCM_Ign2InSta "Verified on an EV6 against CAN logs: follows BCM_Ign1InSta, about a second later when starting to ready.";
 CM_ BO_ 997 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 997 BCM_Crc5Val "Unverified opendbc signal";
 CM_ SG_ 997 BCM_AlvCnt5Val "Unverified opendbc signal";
