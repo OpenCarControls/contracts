@@ -1,0 +1,9 @@
+# Platform metadata — single source of truth for both firmware and the mobile app.
+# The platform_id is the CRC32 (ISO 3309 / zlib) of the platform_name string,
+# pre-computed to avoid any algorithm-variant mismatch across Rust / Swift / Kotlin.
+# Do NOT change the platform_id of an existing vehicle — it is part of the wire format.
+platform_name = "opencar.cars.egmp.v1"
+platform_id   = "0x79D7FCCA"
+# Number of CAN buses this vehicle implementation requires.
+# xtask validates that the board config provides at least this many [[can_buses]] entries.
+can_bus_count = 1 # TODO: Starts with 1 for now, but we will certainly use 2, maybe even 3.

@@ -1,0 +1,317 @@
+syntax = "proto3";
+
+package opencar.cars.egmp.v1;
+
+// Platform routing metadata (platform_name, platform_id CRC32) lives in meta.toml
+// alongside this file — it is the single source of truth consumed by both the
+// firmware build (xtask) and the mobile app build system.
+
+// Basic state that can be broadcasted on any communication protocol.
+message BasicState {
+  // Represent the different possible state of the charge port.
+  enum ChargePortState {
+    // Unknown state
+    CHARGE_PORT_STATE_UNSPECIFIED = 0;
+    // The charge port is closed and not connected to any charger.
+    CHARGE_PORT_STATE_CLOSED = 1;
+    // The charge port is open and not connected to any charger.
+    CHARGE_PORT_STATE_OPEN = 2;
+    // The charge port is connected to an AC charger.
+    CHARGE_PORT_STATE_AC_CONNECTED = 3;
+    // The charge port is actively charging with an AC charger.
+    CHARGE_PORT_STATE_AC_CHARGING = 4;
+    // The charge port is connected to an AC charger but there is an error.
+    CHARGE_PORT_STATE_AC_ERROR = 5;
+    // The charge port is connected to a DC charger.
+    CHARGE_PORT_STATE_DC_CONNECTED = 6;
+    // The charge port is negotiating with a DC charger but not actively charging yet.
+    CHARGE_PORT_STATE_DC_NEGOTIATING = 7;
+    // The charge port is actively charging with a DC charger.
+    CHARGE_PORT_STATE_DC_CHARGING = 8;
+    // The charge port is connected to a DC charger but there is an error.
+    CHARGE_PORT_STATE_DC_ERROR = 9;
+    // The charge port is connected to a V2L (Vehicle-to-Load) device.
+    CHARGE_PORT_STATE_V2L_CONNECTED = 10;
+    // The charge port is actively supplying power to a V2L (Vehicle-to-Load) device.
+    CHARGE_PORT_STATE_V2L_ACTIVE = 11;
+    // The charge port is connected to a V2L (Vehicle-to-Load) device but there is an error.
+    CHARGE_PORT_STATE_V2L_ERROR = 12;
+    // A cable is plugged into the charge port, but the car doesn't know the charger type
+    // yet. E-GMP cars try DC first, so this lasts a few seconds on an AC charger too.
+    CHARGE_PORT_STATE_CONNECTED = 13;
+  }
+
+  // Represent the unit the car displays temperatures in.
+  enum TemperatureUnit {
+    // Unknown unit.
+    TEMPERATURE_UNIT_UNSPECIFIED = 0;
+    // The car displays temperatures in Celsius.
+    TEMPERATURE_UNIT_CELSIUS = 1;
+    // The car displays temperatures in Fahrenheit.
+    TEMPERATURE_UNIT_FAHRENHEIT = 2;
+  }
+
+  // Represent the seat heating levels, as the car's seat buttons step through them.
+  enum SeatClimate {
+    // Unknown seat state
+    SEAT_CLIMATE_UNSPECIFIED = 0;
+    // Seat heating off
+    SEAT_CLIMATE_OFF = 1;
+    // Seat heating at level 1 (lowest)
+    SEAT_CLIMATE_HEAT_LEVEL_1 = 2;
+    // Seat heating at level 2
+    SEAT_CLIMATE_HEAT_LEVEL_2 = 3;
+    // Seat heating at level 3 (highest)
+    SEAT_CLIMATE_HEAT_LEVEL_3 = 4;
+  }
+
+  // Represent the window positions, in the steps the car reports them.
+  enum WindowPosition {
+    // Unknown window position.
+    WINDOW_POSITION_UNSPECIFIED = 0;
+    // The window is closed.
+    WINDOW_POSITION_CLOSED = 1;
+    // The window is slightly open, about the first third of its travel.
+    WINDOW_POSITION_SLIGHTLY_OPEN = 2;
+    // The window is partly open, between slightly and fully open.
+    WINDOW_POSITION_PARTLY_OPEN = 3;
+    // The window is fully open.
+    WINDOW_POSITION_FULLY_OPEN = 4;
+  }
+
+  // Represent the unit the car displays distances and speeds in.
+  enum DistanceUnit {
+    // Unknown unit.
+    DISTANCE_UNIT_UNSPECIFIED = 0;
+    // The car displays kilometers and km/h.
+    DISTANCE_UNIT_KILOMETERS = 1;
+    // The car displays miles and mph.
+    DISTANCE_UNIT_MILES = 2;
+  }
+
+  // Odometer in kilometers.
+  optional uint32 odometer = 1;
+
+  // Whether the car is being driven: ready and in a gear other than Park, so it stays true
+  // while stopped in traffic.
+  optional bool is_driving = 2;
+  // Speed in km/h. Should be 0 if is_driving is false. Negative means reverse.
+  optional int32 speed = 3;
+
+  // Outdoor temperature in Celsius.
+  optional float outdoor_temperature = 4;
+  // Indoor temperature in Celsius.
+  optional float indoor_temperature = 5;
+  // Whether the climate control is on.
+  optional bool is_climate_on = 6;
+  // Target temperature for the climate control in Celsius.
+  optional float target_climate_temperature = 7;
+  // Whether the windshield defrost is on.
+  optional bool is_windshield_defrost_on = 8;
+  // Whether the rear window defrost is on.
+  optional bool is_rear_window_defrost_on = 9;
+  // Whether the steering wheel heater is on.
+  optional bool is_steering_wheel_heater_on = 10;
+
+  // State of charge as a percentage (0-100).
+  optional uint32 battery_soc = 11;
+  // Estimated remaining range in kilometers.
+  optional uint32 battery_range_km = 12;
+  // State of the charge port.
+  optional ChargePortState charge_port_state = 13;
+  // Power flow through the charge port in watts. Positive means charging, negative means V2L discharging.
+  optional int32 power_flow_watt = 14;
+  // While charging, the estimated time to the charge limit in minutes.
+  optional uint32 time_remaining_minutes = 15;
+
+  // Are the vehicle doors locked.
+  optional bool are_doors_locked = 16;
+  // Whether the driver door is open.
+  optional bool is_driver_door_open = 17;
+  // Driver window position.
+  optional WindowPosition driver_window_position = 18;
+  // Whether the passenger door is open.
+  optional bool is_passenger_door_open = 19;
+  // Front passenger window position.
+  optional WindowPosition passenger_window_position = 20;
+  // Whether the rear left door is open.
+  optional bool is_rear_left_door_open = 21;
+  // Rear left window position.
+  optional WindowPosition rear_left_window_position = 22;
+  // Whether the rear right door is open.
+  optional bool is_rear_right_door_open = 23;
+  // Rear right window position.
+  optional WindowPosition rear_right_window_position = 24;
+  // Whether the hood (frunk) is open.
+  optional bool is_frunk_open = 25;
+  // Whether the rear trunk is open.
+  optional bool is_trunk_open = 26;
+
+  // Whether the lights are on.
+  optional bool are_lights_on = 27;
+  // Whether the hazard lights are on.
+  optional bool are_hazard_lights_on = 28;
+  // Timestamp of the last time the lights were flashed, in seconds since Unix epoch.
+  optional uint64 lights_flash_timestamp = 29;
+  // AC charge limit as a percentage (0-100).
+  optional uint32 ac_charge_limit_percent = 30;
+  // DC charge limit as a percentage (0-100).
+  optional uint32 dc_charge_limit_percent = 31;
+  // While DC charging, the estimated time to 80% in minutes, which the car shows next to
+  // the time to the charge limit (time_remaining_minutes).
+  optional uint32 time_to_80_percent_minutes = 32;
+  // The unit the car displays temperatures in. Temperature fields are always in Celsius.
+  // To show the climate target temperature as the car does in Fahrenheit, use
+  // (target_climate_temperature - 14) * 2 + 56: the car steps 1 °F per 0.5 °C, so a plain
+  // conversion doesn't match its display.
+  optional TemperatureUnit temperature_unit = 33;
+  // Driver seat heating level.
+  optional SeatClimate driver_seat_climate = 34;
+  // Front passenger seat heating level.
+  optional SeatClimate passenger_seat_climate = 35;
+  // The unit the car displays distances and speeds in. Distance and speed fields are always
+  // in kilometers and km/h.
+  optional DistanceUnit distance_unit = 36;
+}
+
+// Advanced state that can only be shared over BLE.
+message AdvancedState {
+  // Represent the different possible gear states.
+  enum Gear {
+    // Unknown gear state
+    GEAR_UNSPECIFIED = 0;
+    // Park gear
+    GEAR_PARK = 1;
+    // Reverse gear
+    GEAR_REVERSE = 2;
+    // Neutral gear
+    GEAR_NEUTRAL = 3;
+    // Drive gear
+    GEAR_DRIVE = 4;
+  }
+
+  // Represent the battery preconditioning states.
+  enum PreconditioningState {
+    // Unknown, e.g. while the car is off, asleep or charging.
+    PRECONDITIONING_STATE_UNSPECIFIED = 0;
+    // Not preconditioning.
+    PRECONDITIONING_STATE_OFF = 1;
+    // Preconditioning was requested; the battery heater isn't on yet. This lasts about a
+    // minute but varies, so it isn't a countdown.
+    PRECONDITIONING_STATE_PREPARING = 2;
+    // The battery heater is on. This is when the cluster shows the battery icon.
+    PRECONDITIONING_STATE_HEATING = 3;
+  }
+
+  // Represent the car's power states, as the start button steps through them.
+  enum PowerState {
+    // Unknown power state
+    POWER_STATE_UNSPECIFIED = 0;
+    // The car is off. It can still be charging.
+    POWER_STATE_OFF = 1;
+    // Accessory power: the infotainment is on.
+    POWER_STATE_ACCESSORY = 2;
+    // The car is on but not ready to drive, e.g. pressing start without the brake, or a DC
+    // fast charger plugged in while the car was ready.
+    POWER_STATE_ON = 3;
+    // The car is ready to drive.
+    POWER_STATE_READY = 4;
+  }
+
+  // Battery voltage.
+  optional uint32 battery_voltage = 1;
+  // Instantaneous power flow to and from the battery in watts. Positive means charging, negative means discharging.
+  optional int32 instantaneous_power_watt = 2;
+  // Minimum battery temperature in Celsius.
+  optional float battery_minimum_temperature = 3;
+  // Maximum battery temperature in Celsius.
+  optional float battery_maximum_temperature = 4;
+  // Battery preconditioning state.
+  optional PreconditioningState preconditioning_state = 5;
+
+  // Current gear state.
+  optional Gear gear = 6;
+  // Current power state.
+  optional PowerState power_state = 7;
+}
+
+// This contains a single basic command.
+message BasicCommand {
+  // A basic command.
+  oneof action {
+    // A command to lock or unlock the car's doors.
+    DoorLockCommand door_lock_command = 1;
+    // A command to open or close the charge port.
+    ChargePortCommand charge_port_command = 2;
+    // A command to flash the car's lights.
+    FlashLightsCommand flash_lights_command = 3;
+    // A command to control the climate settings.
+    ClimateControlCommand climate_control_command = 4;
+    // A command to control the windows.
+    WindowCommand window_command = 5;
+  }
+}
+
+// Command to lock or unlock the car's doors.
+message DoorLockCommand {
+  // Indicate if the doors should be locked or unlocked.
+  bool lock = 1;
+}
+
+// Command to open or close the charge port.
+message ChargePortCommand {
+  // Indicate if the charge port should be opened or closed.
+  bool open = 1;
+}
+
+// Command to flash the car's lights.
+message FlashLightsCommand {}
+
+// Command to control the climate settings.
+message ClimateControlCommand {
+  // Whether to turn the climate control on or off.
+  bool climate_on = 1;
+  // Target temperature for the climate control in Celsius.
+  optional float target_temperature = 2;
+  // Whether the windshield defrost is on.
+  optional bool windshield_defrost_on = 3;
+  // Whether the rear window defrost is on.
+  optional bool rear_window_defrost_on = 4;
+  // Whether the steering wheel heater is on.
+  optional bool steering_wheel_heater_on = 5;
+  // Driver seat heating level to set.
+  optional BasicState.SeatClimate driver_seat_climate = 6;
+  // Front passenger seat heating level to set.
+  optional BasicState.SeatClimate passenger_seat_climate = 7;
+}
+
+// Command to control the windows.
+message WindowCommand {
+  // Represent the different possible window actions.
+  enum WindowAction {
+    // Unknown window action
+    WINDOW_ACTION_UNSPECIFIED = 0;
+    // Close the windows.
+    WINDOW_ACTION_CLOSE = 1;
+    // Vent the windows (open slightly for ventilation).
+    WINDOW_ACTION_VENT = 2;
+  }
+
+  // The window action to perform.
+  WindowAction action = 1;
+}
+
+// This contains a single advanced command.
+message AdvancedCommand {
+  // An advanced command.
+  oneof action {
+    // A command to toggle the battery preconditioning.
+    BatteryPreconditioningCommand battery_preconditioning_command = 1;
+  }
+}
+
+// Command to toggle the battery preconditioning.
+message BatteryPreconditioningCommand {
+  // Indicate if battery preconditioning should be enabled or disabled.
+  bool enable = 1;
+}
