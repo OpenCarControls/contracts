@@ -128,20 +128,20 @@ message BasicState {
   optional bool are_doors_locked = 16;
   // Whether the driver door is open.
   optional bool is_driver_door_open = 17;
-  // Whether the driver window is open. Use driver_window_position.
-  optional bool is_driver_window_open = 18 [deprecated = true];
+  // Driver window position.
+  optional WindowPosition driver_window_position = 18;
   // Whether the passenger door is open.
   optional bool is_passenger_door_open = 19;
-  // Whether the passenger window is open. Use passenger_window_position.
-  optional bool is_passenger_window_open = 20 [deprecated = true];
+  // Front passenger window position.
+  optional WindowPosition passenger_window_position = 20;
   // Whether the rear left door is open.
   optional bool is_rear_left_door_open = 21;
-  // Whether the rear left window is open.
-  optional bool is_rear_left_window_open = 22;
+  // Rear left window position.
+  optional WindowPosition rear_left_window_position = 22;
   // Whether the rear right door is open.
   optional bool is_rear_right_door_open = 23;
-  // Whether the rear right window is open.
-  optional bool is_rear_right_window_open = 24;
+  // Rear right window position.
+  optional WindowPosition rear_right_window_position = 24;
   // Whether the hood (frunk) is open.
   optional bool is_frunk_open = 25;
   // Whether the rear trunk is open.
@@ -172,10 +172,6 @@ message BasicState {
   // The unit the car displays distances and speeds in. Distance and speed fields are always
   // in kilometers and km/h.
   optional DistanceUnit distance_unit = 36;
-  // Driver window position.
-  optional WindowPosition driver_window_position = 37;
-  // Front passenger window position.
-  optional WindowPosition passenger_window_position = 38;
 }
 
 // Advanced state that can only be shared over BLE.
