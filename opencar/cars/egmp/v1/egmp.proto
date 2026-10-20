@@ -65,6 +65,16 @@ message BasicState {
     SEAT_CLIMATE_HEAT_LEVEL_3 = 4;
   }
 
+  // Represent the unit the car displays distances and speeds in.
+  enum DistanceUnit {
+    // Unknown unit.
+    DISTANCE_UNIT_UNSPECIFIED = 0;
+    // The car displays kilometers and km/h.
+    DISTANCE_UNIT_KILOMETERS = 1;
+    // The car displays miles and mph.
+    DISTANCE_UNIT_MILES = 2;
+  }
+
   // Odometer in kilometers.
   optional uint32 odometer = 1;
 
@@ -145,6 +155,9 @@ message BasicState {
   optional SeatClimate driver_seat_climate = 34;
   // Front passenger seat heating level.
   optional SeatClimate passenger_seat_climate = 35;
+  // The unit the car displays distances and speeds in. Distance and speed fields are always
+  // in kilometers and km/h.
+  optional DistanceUnit distance_unit = 36;
 }
 
 // Advanced state that can only be shared over BLE.

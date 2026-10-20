@@ -101,6 +101,9 @@ BO_ 593 CLUSTER_WARNINGS: 8 Vector__XXX
 
 BO_ 764 BATTERY_INFO_764: 8 Vector__XXX
    SG_ Battery_Current : 0|16@1- (0.1,0) [-3276.8|3276.7] "A" Vector__XXX
+   SG_ Battery_Min_Temperature : 16|8@1- (1,0) [-128|127] "C" Vector__XXX
+   SG_ Battery_Max_Temperature : 24|8@1- (1,0) [-128|127] "C" Vector__XXX
+   SG_ Aux_Battery_Voltage : 48|8@1+ (0.1,0) [0|25.5] "V" Vector__XXX
    SG_ State_Of_Charge : 56|8@1+ (0.5,0) [0|100] "%" Vector__XXX
 
 BO_ 1230 BMS_INFO: 8 Vector__XXX
@@ -176,6 +179,7 @@ BO_ 818 CHARGE_TIME_ESTIMATE: 8 Vector__XXX
 BO_ 337 CHARGE_LIMITS: 8 Vector__XXX
    SG_ AC_Charge_Limit : 24|8@1+ (0.5,0) [0|127.5] "%" Vector__XXX
    SG_ DC_Charge_Limit : 32|8@1+ (0.5,0) [0|127.5] "%" Vector__XXX
+   SG_ Battery_Max_Temperature_Copy : 56|8@1- (1,0) [-128|127] "C" Vector__XXX
 
 BO_ 435 CABIN_TEMPERATURE: 8 Vector__XXX
    SG_ Cabin_Temperature : 40|8@1+ (0.5,-40) [-40|87.5] "C" Vector__XXX
@@ -187,6 +191,7 @@ BO_ 605 CANDIDATE_25D: 8 Vector__XXX
    SG_ Cand_Heater_Power_25D : 16|8@1+ (0.1,0) [0|25.5] "kW" Vector__XXX
 
 BO_ 412 CANDIDATE_19C: 8 Vector__XXX
+   SG_ Cand_19C_16 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
    SG_ Cand_AC_Current_19C : 32|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
 
 BO_ 100 AUTO_HOLD_STATUS: 8 Vector__XXX
@@ -209,6 +214,28 @@ BO_ 603 CANDIDATE_25B: 8 Vector__XXX
 
 BO_ 796 CANDIDATE_31C: 8 Vector__XXX
    SG_ Cand_Volt_31C_1 : 1|13@1+ (0.1,0) [0|819] "V" Vector__XXX
+
+BO_ 338 BATTERY_TEMPERATURES_152: 8 Vector__XXX
+   SG_ Battery_Min_Temperature_Copy : 0|8@1- (1,0) [-128|127] "C" Vector__XXX
+   SG_ Cand_Battery_Temp_152_8 : 8|8@1- (1,0) [-128|127] "C" Vector__XXX
+   SG_ Cand_Battery_Temp_152_16 : 16|8@1- (1,0) [-128|127] "C" Vector__XXX
+
+BO_ 427 CLUSTER_DISPLAY_UNITS: 8 Vector__XXX
+   SG_ Distance_Unit : 30|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Display_Speed : 48|16@1+ (0.5,0) [0|32767.5] "" Vector__XXX
+
+BO_ 738 REGEN_STATUS: 8 Vector__XXX
+   SG_ Regen_Auto : 26|1@1+ (1,0) [0|1] "" Vector__XXX
+   SG_ Regen_Level : 40|8@1+ (0.05,0) [0|12.75] "" Vector__XXX
+
+BO_ 739 I_PEDAL_STATUS: 8 Vector__XXX
+   SG_ I_Pedal : 57|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 929 TIRE_PRESSURES: 8 Vector__XXX
+   SG_ Tire_Pressure_FL : 32|8@1+ (1,0) [0|255] "psi" Vector__XXX
+   SG_ Tire_Pressure_FR : 40|8@1+ (1,0) [0|255] "psi" Vector__XXX
+   SG_ Tire_Pressure_RL : 48|8@1+ (1,0) [0|255] "psi" Vector__XXX
+   SG_ Tire_Pressure_RR : 56|8@1+ (1,0) [0|255] "psi" Vector__XXX
 
 BO_ 199 HU_EV_E: 8 Vector__XXX
    SG_ HU_V2LModeSet : 0|3@1+ (1,0) [0|7] "" Vector__XXX
@@ -1165,7 +1192,8 @@ CM_ SG_ 550 Outdoor_Temperature "Verified on an EV6 against CAN logs: matches th
 CM_ SG_ 551 Odometer "Verified on an EV6 against CAN logs: matches the dashboard odometer. Stays in km when the car displays miles.";
 CM_ SG_ 764 State_Of_Charge "Verified on an EV6 against CAN logs and live: matches the dashboard SOC.";
 CM_ BO_ 412 "Candidate from EV6 CAN logs: only seen on one L2 charger.";
-CM_ SG_ 412 Cand_AC_Current_19C "Candidate: reads 11.9 A while charging on a 240 V 15 A circuit (2.6-2.7 kW) and 0 on DC or idle.";
+CM_ SG_ 412 Cand_AC_Current_19C "Candidate: reads 11.9-12.0 A while charging on a 240 V 15 A circuit (2.6-2.7 kW) and 0 on DC or idle. Reads 12.3-12.4 A from plug-in until charging starts, so maybe the charger's advertised limit then. 0x30D byte 5 carries the same values.";
+CM_ SG_ 412 Cand_19C_16 "Candidate from EV6 CAN logs: ramps from 0 to 210 in steps of 20 per frame when L2 charging starts and holds 210 until it stops, on every L2 log (one charger). Maybe the AC voltage, but 210 V x 11.9 A = 2.5 kW, not the 2.7 kW the car shows; Car Scanner doesn't show the AC voltage to check it.";
 CM_ SG_ 413 Charger_Type "Verified on an EV6 against CAN logs: charger type. The car tries DC first, so it reads DC for the first seconds on an AC charger, then None, then AC about 7 s after plug-in.";
 CM_ SG_ 413 DC_Sequence_Stage "Verified on an EV6 against CAN logs: DC charging sequence. 1 plugged in, 2 and 3 talking to the charger, 4 ready, 5 starting, 6 charging, 8 to 11 ending. An AC charger goes from 1 straight to 9 to 11 while the car gives up on DC; stages 2 to 6 mean the charger really is DC.";
 CM_ SG_ 780 Proximity_Voltage "Verified on an EV6 against CAN logs: charge inlet proximity voltage. About 4.4 V unplugged, 1.5 V plugged in and latched, 2.7 V while the plug release button is pressed. AC and DC.";
@@ -1182,7 +1210,7 @@ CM_ BO_ 818 "Verified on an EV6 against CAN logs: the car's estimate for a DC fa
 CM_ SG_ 818 Charge_Time_To_Limit "Seconds for a DC fast charge to the DC limit (100% in all logs, so it may be to 100%).";
 CM_ SG_ 818 Charge_Time_To_80 "Verified on an EV6 against CAN logs: seconds for a DC fast charge to 80%, as the cluster shows next to the time to the limit while DC charging.";
 CM_ SG_ 1144 DRIVE_MODE "Wrong on an EV6: barely sent and the values make no sense. Use DRIVE_MODE_STATUS Drive_Mode.";
-CM_ SG_ 428 Speed_kph "Plausible in EV6 drive logs (about 50 where the notes say 50 km/h), not checked against the display; only seen parked while the car displayed miles, so mph is untested (range and odometer stay in km).";
+CM_ SG_ 428 Speed_kph "Verified on an EV6 against CAN logs with timed notes: speed in km/h, also while the car displays miles (log_32: 17-18 where the cluster showed 10 mph | 17 km/h), like the range and odometer. CLUSTER_DISPLAY_UNITS Display_Speed has it in the display unit.";
 CM_ SG_ 795 Steering_Wheel_Heating_State "Wrong on an EV6: toggles about once a second whatever the heater does. Use ICU_08_200ms HSWS_SysWrngSta_ICU.";
 CM_ SG_ 795 Climate_AC_State "Not the A/C state: 0 at a time the A/C was on, follows the A/C button but also changes with Auto and Heat. Use DATC_05_200ms DATC_AcDis.";
 CM_ SG_ 795 Climate_Fan_Speed "Verified on an EV6 against CAN logs: blower level plus one (manual levels 1 to 8 read 2 to 9), 0 with the climate off; follows the blower in Auto.";
@@ -1205,6 +1233,25 @@ CM_ SG_ 504 Charging_Time_To_Limit "Verified on an EV6 against CAN logs with tim
 CM_ SG_ 551 Outdoor_Temperature_F "Verified on an EV6 against CAN logs: outside temperature while the car displays Fahrenheit (44.5 F for 45 F shown, 7 C); 255 while it displays Celsius.";
 CM_ SG_ 898 DATC_TempDispUnitSta "Verified on an EV6 against CAN logs with timed notes: temperature display unit.";
 CM_ BO_ 162 "Wheel mapping (FL, FR, RL, RR) is assumed and requires live verification.";
+CM_ SG_ 764 Battery_Min_Temperature "Verified on an EV6 against CAN logs and Car Scanner: lowest battery module temperature, 12 C where Car Scanner showed 12 C (log_31); rises from 26 to 29 C during a DC fast charge (log_21). Never below 8 C in the logs, so the sign is assumed. BATTERY_TEMPERATURES_152 byte 0 carries the same value.";
+CM_ SG_ 764 Battery_Max_Temperature "Verified on an EV6 against CAN logs and Car Scanner: highest battery module temperature, 13 C where Car Scanner showed 13 C (log_31); rises from 28 to 31 C during a DC fast charge (log_21), always at or above Battery_Min_Temperature. CHARGE_LIMITS byte 7 carries the same value.";
+CM_ SG_ 764 Aux_Battery_Voltage "Verified on an EV6 against CAN logs and Car Scanner: 12 V battery voltage. 13.5-14.3 V while the car is on or charging (DC-DC converter running), falls to about 12.1 V within seconds of switching off and climbs back when charging starts (log_31). Car Scanner read 13.9 V at the OBD port when this read 13.6 V. Reads 0 for one frame while the car switches off.";
+CM_ SG_ 337 Battery_Max_Temperature_Copy "Checked on an EV6 against CAN logs: same value as BATTERY_INFO_764 Battery_Max_Temperature, changing at the same moments in log_21.";
+CM_ BO_ 338 "Checked on an EV6 against CAN logs: battery temperatures, changing slowly during a DC fast charge (log_21).";
+CM_ SG_ 338 Battery_Min_Temperature_Copy "Checked on an EV6 against CAN logs: same value as BATTERY_INFO_764 Battery_Min_Temperature.";
+CM_ SG_ 338 Cand_Battery_Temp_152_8 "Candidate from EV6 CAN logs: between the battery minimum and maximum temperatures (13 C at 12/13 C in log_31, 27-30 C during a DC charge in log_21). Maybe a coolant or average temperature; Car Scanner showed 12 C coolant, which doesn't tell it apart.";
+CM_ SG_ 338 Cand_Battery_Temp_152_16 "Candidate from EV6 CAN logs: like Cand_Battery_Temp_152_8 (12 C in log_31, 27-30 C in log_21).";
+CM_ SG_ 427 Distance_Unit "Verified on an EV6 against CAN logs with timed notes: distance display unit, set when switching to miles and cleared when switching back to km (log_30 at 6:52 and 7:11).";
+CM_ SG_ 427 Display_Speed "Verified on an EV6 against CAN logs with timed notes: speed in the display unit, 0.5 steps. In km/h it is twice CLUSTER_INFO_428 Speed_kph (65 km/h reads 130); in miles it matched the seven mph readings in log_32. Byte 7 has always been 0, but no log goes above 119 km/h, so the 16-bit width is assumed: the car goes faster than the 127.5 that byte 6 alone can hold.";
+CM_ BO_ 738 "Verified on an EV6 against CAN logs with a video of the cluster (log_32): regenerative braking level and Auto.";
+CM_ SG_ 738 Regen_Auto "Verified on an EV6 against CAN logs with a video of the cluster: 1 while the paddles are in Auto regen (log_32 from 1:28 to 1:52), 0 for fixed levels and i-Pedal.";
+CM_ SG_ 738 Regen_Level "Verified on an EV6 against CAN logs with a video of the cluster: regen strength, 0 to 3 for the paddle levels and 4 for the maximum (i-Pedal, or the maximum without i-Pedal). In Auto it moves smoothly between them (0.1, 0.8, 1.9 seen) and the cluster numbers the steps one higher (Auto level 1 to 5). Not_Available with the car off and while smart cruise drives the car. Resets to 3 in Park and Reverse.";
+CM_ SG_ 739 I_Pedal "Verified on an EV6 against CAN logs with a video of the cluster: 1 in i-Pedal, 0 at fixed levels, in Auto and at the maximum level without i-Pedal (log_32 1:52 to 1:56). Keeps its last value with the car off.";
+CM_ BO_ 929 "Verified on an EV6 against CAN logs with the cluster's tire screen: tire pressures in whole psi, with the cluster set to psi; it can also show kPa, which was never captured and may change these bytes. Not_Available until the sensors report, a minute or two into a drive. Front left (log_33, deflated to 32 psi) and rear left (log_34, 36 psi) are confirmed; front right and rear right are assumed from the usual order, as neither was ever set apart. Bytes 0-1 hold a 14-bit CRC.";
+CM_ SG_ 929 Tire_Pressure_FL "Verified on an EV6 against CAN logs with the cluster's tire screen: front left (dropped from 35 to 32 psi when only that tire was deflated, log_33).";
+CM_ SG_ 929 Tire_Pressure_FR "Assumed front right from the usual wheel order; never set apart from the others.";
+CM_ SG_ 929 Tire_Pressure_RL "Verified on an EV6 against CAN logs with the cluster's tire screen: rear left (toggled 35/36 psi with the cluster's rear left, log_34).";
+CM_ SG_ 929 Tire_Pressure_RR "Assumed rear right from the usual wheel order; never set apart from the others.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 1041 AlvCnt_Val "Unverified opendbc signal";
@@ -2119,3 +2166,10 @@ VAL_ 1141 Passenger_Seat_Heating_Oper 8 "Level_3" 7 "Level_2" 6 "Level_1" 2 "Off
 VAL_ 550 Outdoor_Temperature 255 "Not_Available";
 VAL_ 551 Outdoor_Temperature_F 255 "Not_Available";
 VAL_ 898 DATC_TempDispUnitSta 1 "Fahrenheit" 0 "Celsius";
+VAL_ 427 Distance_Unit 1 "Miles" 0 "Kilometers";
+VAL_ 738 Regen_Level 126 "Not_Available";
+VAL_ 929 Tire_Pressure_FL 255 "Not_Available";
+VAL_ 929 Tire_Pressure_FR 255 "Not_Available";
+VAL_ 929 Tire_Pressure_RL 255 "Not_Available";
+VAL_ 929 Tire_Pressure_RR 255 "Not_Available";
+VAL_ 764 Aux_Battery_Voltage 0 "Not_Available";
