@@ -29,11 +29,31 @@ scan_timeout_seconds = 30
 [ble.payload]
 # ATT MTU the app requests after connecting. The device supports it.
 att_mtu = 247
-# Largest encoded AppToDevice / DeviceToApp message, in bytes: att_mtu minus
-# the 3-byte ATT header. Messages are not fragmented, so every write and
-# notification must fit in one ATT packet.
-max_message_bytes = 244
+# Largest ATT value (one write or notification), in bytes: att_mtu minus the
+# 3-byte ATT header. One chunk (header + data) always fits in this.
+max_chunk_bytes = 244
+# Largest reassembled AppToDevice / DeviceToApp message, in bytes. Messages
+# larger than one chunk are fragmented, see [ble.fragmentation].
+max_message_bytes = 4096
+
+[ble.fragmentation]
+# Every write and notification is one chunk: a 1-byte header followed by a
+# slice of the encoded message. See docs/ble-fragmentation.md.
+# Header bit 7 is LAST (1 on the final chunk), bits 0-6 are the chunk index
+# (0 for the first chunk, +1 per chunk, no wrap, at most 128 chunks).
+header_bytes = 1
+last_chunk_flag = 0x80
+chunk_index_mask = 0x7f
+max_chunks = 128
+# Chunk data per ATT packet at the requested MTU: max_chunk_bytes - header_bytes.
+max_chunk_data_bytes = 243
+# Smallest negotiated ATT MTU that can carry max_message_bytes in max_chunks.
+min_att_mtu = 64
+# A partial message is discarded if the next chunk does not arrive within this
+# time, on disconnect, on a chunk index gap, or when a new chunk 0 arrives.
+reassembly_timeout_ms = 2000
 
 [ble.notes]
 pairing = "Recommended before enabling control commands."
-mtu = "Request ble.payload.att_mtu after connecting. Messages are not fragmented: each encoded message must fit in ble.payload.max_message_bytes."
+mtu = "Request ble.payload.att_mtu after connecting. Chunk data size is the negotiated MTU minus 4 bytes (3 ATT + 1 chunk header)."
+fragmentation = "Every message is sent as chunks with a 1-byte header (LAST flag + 7-bit index), up to ble.payload.max_message_bytes reassembled. Partial messages are discarded on disconnect, index gap, or timeout. See docs/ble-fragmentation.md."

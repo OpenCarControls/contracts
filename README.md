@@ -10,7 +10,7 @@ This project uses an **Envelope Pattern** to route messages.
 
 1. **`proto/core.proto` (The Envelope):** Handles routing, timestamps, message IDs, and system health. It contains a `car_id` to identify the vehicle type (e.g., "hmg", "tesla"), but is otherwise agnostic to the specific commands or states within the opaque `bytes payload`.
 2. **`proto/cars/*.proto` (The Payload):** Contains the actual, highly-specific state and commands for a given vehicle. These are compiled into raw bytes and placed inside the core envelope.
-3. **`opencar/core/v1/transport.toml` (Transport Bindings):** Defines cross-repo transport details that are not protobuf messages themselves but still must stay in sync, such as MQTT topic templates, BLE GATT service/characteristic UUIDs and the BLE message size limit (`ble.payload`).
+3. **`opencar/core/v1/transport.toml` (Transport Bindings):** Defines cross-repo transport details that are not protobuf messages themselves but still must stay in sync, such as MQTT topic templates, BLE GATT service/characteristic UUIDs and the BLE message size limit (`ble.payload`) and chunk framing (`ble.fragmentation`, see [`docs/ble-fragmentation.md`](docs/ble-fragmentation.md)).
 
 This allows the core firmware to route messages without needing to understand the contents of the payload, keeping the codebase modular. The `car_id` allows the final destination (like the mobile app) to know which schema to use for decoding.
 
