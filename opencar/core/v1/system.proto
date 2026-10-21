@@ -24,11 +24,12 @@ message SystemCommand {
     // A restart command.
     RestartCommand restart_command = 1;
 
-    // Enables or disables the on-demand CAN debug streaming mode. BLE only.
-    SetCanDebugEnabled set_can_debug_enabled = 2;
+    // Deprecated: the BLE CAN debug stream was removed from the firmware; CAN
+    // logging now goes to SavvyCAN over WiFi. The firmware ignores this.
+    SetCanDebugEnabled set_can_debug_enabled = 2 [deprecated = true];
 
-    // Replaces the active CAN debug blocklist. BLE only.
-    UpdateCanDebugFilters update_can_debug_filters = 3;
+    // Deprecated: see set_can_debug_enabled. The firmware ignores this.
+    UpdateCanDebugFilters update_can_debug_filters = 3 [deprecated = true];
 
     // Returns the currently bonded BLE phones.
     ListPairedPhonesCommand list_paired_phones = 4;
@@ -47,6 +48,9 @@ message SystemCommand {
 // This command tells the system to restart.
 message RestartCommand {}
 
+// Deprecated: the BLE CAN debug stream was removed from the firmware and the
+// message is ignored. Kept so field numbers stay reserved (append-only).
+//
 // Enables or disables on-demand CAN debug streaming over BLE.
 //
 // When enabled, raw CAN frames (before vehicle-specific filtering) are batched
@@ -55,6 +59,8 @@ message RestartCommand {}
 //
 // This command is sent via the existing AppToDevice BLE characteristic.
 message SetCanDebugEnabled {
+  option deprecated = true;
+
   // Whether to enable (true) or disable (false) CAN debug streaming.
   bool enabled = 1;
 
@@ -64,6 +70,8 @@ message SetCanDebugEnabled {
   repeated uint32 bus_ids = 2;
 }
 
+// Deprecated: see SetCanDebugEnabled. Ignored by the firmware.
+//
 // Replaces the full CAN debug blocklist. Silently ignored if CAN debug is
 // not currently active.
 //
@@ -71,6 +79,8 @@ message SetCanDebugEnabled {
 // list. The firmware replaces its stored list atomically on receipt. To clear
 // all filters (pass everything), send an empty list.
 message UpdateCanDebugFilters {
+  option deprecated = true;
+
   // The new blocklist. Any frame matching any entry is excluded from the
   // CanDebugUpdate stream. An empty list means all frames are forwarded.
   repeated CanDebugFilter filters = 1;
