@@ -1,5 +1,12 @@
 # Open Car Contracts 🏎️📡
 
+> [!WARNING]
+> **This project is under active construction.** These contracts are pre-1.0 and
+> may change. The firmware and app that consume them are experimental and must
+> not be used on a real vehicle. There is no warranty (see [LICENSE](LICENSE)).
+> This is an independent project, not affiliated with or endorsed by any vehicle
+> manufacturer.
+
 This repository is the **Single Source of Truth** for all data communication in the Open Car Controller project. It contains the Protocol Buffer (`.proto`) definitions that dictate exactly how the vehicle hardware and the mobile companion app talk to each other over BLE and MQTT, plus transport-level metadata (for example MQTT topic templates and BLE GATT UUIDs in `opencar/core/v1/transport.toml`).
 
 By separating these contracts into their own repository, we ensure that both the firmware and the mobile app are mathematically guaranteed to stay in sync.
@@ -69,3 +76,7 @@ Before submitting a PR, ensure your changes pass these checks by running:
 This repository uses a **Single Global Version** (e.g., `v1.2.0`).
 
 When a new feature is added to any car, the entire repository's version is bumped.
+
+## Contributing
+
+Contributions are welcome; please read [CONTRIBUTING.md](CONTRIBUTING.md) first and open an issue before starting anything large. Report security problems privately as described in [SECURITY.md](SECURITY.md).
