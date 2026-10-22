@@ -237,6 +237,21 @@ BO_ 929 TIRE_PRESSURES: 8 Vector__XXX
    SG_ Tire_Pressure_RL : 48|8@1+ (1,0) [0|255] "psi" Vector__XXX
    SG_ Tire_Pressure_RR : 56|8@1+ (1,0) [0|255] "psi" Vector__XXX
 
+BO_ 1264 LOCAL_TIME: 8 Vector__XXX
+   SG_ Hours : 8|5@1+ (1,0) [0|23] "h" Vector__XXX
+   SG_ Minutes : 16|6@1+ (1,0) [0|59] "min" Vector__XXX
+   SG_ Seconds : 24|6@1+ (1,0) [0|59] "s" Vector__XXX
+   SG_ Month : 34|4@1+ (1,0) [1|12] "" Vector__XXX
+   SG_ Year : 40|8@1+ (1,2000) [2000|2255] "" Vector__XXX
+   SG_ Day : 48|5@1+ (1,0) [1|31] "" Vector__XXX
+
+BO_ 1259 LOCAL_TIME2: 8 Vector__XXX
+   SG_ Weekday : 0|7@1+ (1,0) [0|127] "" Vector__XXX
+   SG_ Hours : 11|5@1+ (1,0) [0|23] "h" Vector__XXX
+   SG_ Minutes : 16|6@1+ (1,0) [0|59] "min" Vector__XXX
+   SG_ Seconds : 24|6@1+ (1,0) [0|59] "s" Vector__XXX
+   SG_ NEW_SIGNAL_3 : 39|1@0+ (1,0) [0|1] "" Vector__XXX
+
 BO_ 199 HU_EV_E: 8 Vector__XXX
    SG_ HU_V2LModeSet : 0|3@1+ (1,0) [0|7] "" Vector__XXX
    SG_ HU_V2GModeSet : 3|3@1+ (1,0) [0|7] "" Vector__XXX
@@ -1007,12 +1022,6 @@ BO_ 1258 HU_GW_P_1258: 8 Vector__XXX
    SG_ CF_Tmu_RoadType8 : 28|24@1+ (1,0) [0|1.67772e+07] "" Vector__XXX
    SG_ CF_Tmu_RoadType10 : 52|4@1+ (1,0) [0|15] "" Vector__XXX
 
-BO_ 1259 LOCAL_TIME2: 8 Vector__XXX
-   SG_ HOURS : 15|5@0+ (1,0) [0|31] "" Vector__XXX
-   SG_ MINUTES : 21|6@0+ (1,0) [0|63] "" Vector__XXX
-   SG_ SECONDS : 24|6@1+ (1,0) [0|63] "" Vector__XXX
-   SG_ NEW_SIGNAL_3 : 39|1@0+ (1,0) [0|1] "" Vector__XXX
-
 BO_ 1260 HU_GW_P_1260: 8 Vector__XXX
    SG_ CR_Tmu_DrvDistance1 : 0|10@1+ (1,0) [0|1023] "" Vector__XXX
    SG_ CR_Tmu_DrvDistance2 : 10|10@1+ (1,0) [0|1023] "" Vector__XXX
@@ -1053,11 +1062,6 @@ BO_ 1263 HU_EV_P_1263: 8 Vector__XXX
    SG_ CR_HU_DepartSet1_TempSet : 33|6@1+ (1,0) [0|63] "" Vector__XXX
    SG_ CF_HU_DepartSet1_PreCondSet : 39|8@1+ (1,0) [0|255] "" Vector__XXX
    SG_ CF_HU_DepartSet1_DefrostCtr : 47|1@1+ (1,0) [0|1] "" Vector__XXX
-
-BO_ 1264 LOCAL_TIME: 8 Vector__XXX
-   SG_ HOURS : 12|5@0+ (1,0) [0|31] "" Vector__XXX
-   SG_ MINUTES : 21|6@0+ (1,0) [0|63] "" Vector__XXX
-   SG_ SECONDS : 31|8@0+ (1,0) [0|59] "" Vector__XXX
 
 BO_ 1265 HU_GW_PE: 8 Vector__XXX
    SG_ AMP_UpdateIGNIhn : 0|11@1+ (1,0) [0|2047] "" Vector__XXX
@@ -1252,6 +1256,12 @@ CM_ SG_ 929 Tire_Pressure_FL "Verified on an EV6 against CAN logs with the clust
 CM_ SG_ 929 Tire_Pressure_FR "Assumed front right from the usual wheel order; never set apart from the others.";
 CM_ SG_ 929 Tire_Pressure_RL "Verified on an EV6 against CAN logs with the cluster's tire screen: rear left (toggled 35/36 psi with the cluster's rear left, log_34).";
 CM_ SG_ 929 Tire_Pressure_RR "Assumed rear right from the usual wheel order; never set apart from the others.";
+CM_ BO_ 1264 "Verified on an EV6 against CAN logs: the head unit clock, local time with the date, sent every 250 ms and stepping once a second. Matches the date of all 53 captures (June to October) and the time each of log_01 to log_34 was saved (EDT). Reads all ones for the first frames after the car wakes up. Byte 0 (0x8A) and bit 38 (set) never changed; they may hold the 12/24 h or daylight saving settings, never changed in a capture.";
+CM_ SG_ 1264 Hours "Verified on an EV6 against CAN logs: 0-23 whatever the clock format shown (only 24 h was captured).";
+CM_ SG_ 1264 Year "Verified on an EV6 against CAN logs: 26 for 2026.";
+CM_ BO_ 1259 "Verified on an EV6 against CAN logs: the same local time as LOCAL_TIME with the day of the week instead of the date, sent every 200 ms and stepping once a second, at most a second off LOCAL_TIME.";
+CM_ SG_ 1259 Weekday "Verified on an EV6 against CAN logs: one bit per day, in the order of the departure-day bits of HU_EV_P_1263 (Sunday in bit 0 up to Monday in bit 6). Sunday, Saturday, Friday and Monday were captured; Tuesday to Thursday follow from that order.";
+CM_ SG_ 1259 NEW_SIGNAL_3 "Unverified opendbc signal";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 1041 AlvCnt_Val "Unverified opendbc signal";
@@ -1970,11 +1980,6 @@ CM_ SG_ 1258 CF_Tmu_RoadType6 "Unverified opendbc signal";
 CM_ SG_ 1258 CF_Tmu_RoadType9 "Unverified opendbc signal";
 CM_ SG_ 1258 CF_Tmu_RoadType8 "Unverified opendbc signal";
 CM_ SG_ 1258 CF_Tmu_RoadType10 "Unverified opendbc signal";
-CM_ BO_ 1259 "Unverified: Imported from opendbc. Validation required.";
-CM_ SG_ 1259 HOURS "Unverified opendbc signal";
-CM_ SG_ 1259 MINUTES "Unverified opendbc signal";
-CM_ SG_ 1259 SECONDS "Unverified opendbc signal";
-CM_ SG_ 1259 NEW_SIGNAL_3 "Unverified opendbc signal";
 CM_ BO_ 1260 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1260 CR_Tmu_DrvDistance1 "Unverified opendbc signal";
 CM_ SG_ 1260 CR_Tmu_DrvDistance2 "Unverified opendbc signal";
@@ -2013,10 +2018,6 @@ CM_ SG_ 1263 CF_HU_DepartSet1_TempUnit "Unverified opendbc signal";
 CM_ SG_ 1263 CR_HU_DepartSet1_TempSet "Unverified opendbc signal";
 CM_ SG_ 1263 CF_HU_DepartSet1_PreCondSet "Unverified opendbc signal";
 CM_ SG_ 1263 CF_HU_DepartSet1_DefrostCtr "Unverified opendbc signal";
-CM_ BO_ 1264 "Unverified: Imported from opendbc. Validation required.";
-CM_ SG_ 1264 HOURS "Unverified opendbc signal";
-CM_ SG_ 1264 MINUTES "Unverified opendbc signal";
-CM_ SG_ 1264 SECONDS "Unverified opendbc signal";
 CM_ BO_ 1265 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1265 AMP_UpdateIGNIhn "Unverified opendbc signal";
 CM_ SG_ 1265 HU_Background_Time_Info "Unverified opendbc signal";
@@ -2173,3 +2174,4 @@ VAL_ 929 Tire_Pressure_FR 255 "Not_Available";
 VAL_ 929 Tire_Pressure_RL 255 "Not_Available";
 VAL_ 929 Tire_Pressure_RR 255 "Not_Available";
 VAL_ 764 Aux_Battery_Voltage 0 "Not_Available";
+VAL_ 1259 Weekday 64 "Monday" 32 "Tuesday" 16 "Wednesday" 8 "Thursday" 4 "Friday" 2 "Saturday" 1 "Sunday";
