@@ -106,8 +106,11 @@ BO_ 764 BATTERY_INFO_764: 8 Vector__XXX
    SG_ Aux_Battery_Voltage : 48|8@1+ (0.1,0) [0|25.5] "V" Vector__XXX
    SG_ State_Of_Charge : 56|8@1+ (0.5,0) [0|100] "%" Vector__XXX
 
-BO_ 1230 BMS_INFO: 8 Vector__XXX
-   SG_ BMS_State_Of_Charge : 0|16@1+ (0.1,0) [0|100] "%" Vector__XXX
+BO_ 1230 MEDIA_STATUS: 8 Vector__XXX
+   SG_ Media_Source : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Media_Popup : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Track_Seconds : 32|8@1+ (1,0) [0|251] "s" Vector__XXX
+   SG_ Track_Seconds_High : 40|8@1+ (1,0) [0|255] "" Vector__XXX
 
 BO_ 843 LIGHT_STALK_STATUS: 8 Vector__XXX
    SG_ Headlight_Switch : 6|2@1+ (1,0) [0|3] "" Vector__XXX
@@ -251,6 +254,26 @@ BO_ 1259 LOCAL_TIME2: 8 Vector__XXX
    SG_ Minutes : 16|6@1+ (1,0) [0|59] "min" Vector__XXX
    SG_ Seconds : 24|6@1+ (1,0) [0|59] "s" Vector__XXX
    SG_ NEW_SIGNAL_3 : 39|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 56 POWER_MODE: 8 Vector__XXX
+   SG_ Power_Mode : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1256 NAV_ROUTE: 8 Vector__XXX
+   SG_ Distance_Unit : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+   SG_ Distance_Tenths : 4|4@1+ (1,0) [0|9] "" Vector__XXX
+   SG_ ETA_Hours : 8|8@1+ (1,0) [0|23] "h" Vector__XXX
+   SG_ ETA_Minutes : 16|8@1+ (1,0) [0|59] "min" Vector__XXX
+   SG_ Cand_Nav_Route_24 : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Distance : 32|16@1+ (1,0) [0|65535] "" Vector__XXX
+   SG_ Destination_Flag : 48|4@1+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1228 NAV_GUIDANCE: 8 Vector__XXX
+   SG_ Cand_Guidance_Type : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Cand_Compass_Heading : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1600 LANE_GUIDANCE: 8 Vector__XXX
+   SG_ Cand_Junction_Distance : 0|16@1+ (1,0) [0|65535] "m" Vector__XXX
+   SG_ Cand_Route_Active_640 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
 
 BO_ 199 HU_EV_E: 8 Vector__XXX
    SG_ HU_V2LModeSet : 0|3@1+ (1,0) [0|7] "" Vector__XXX
@@ -1228,7 +1251,7 @@ CM_ SG_ 593 Rear_Defrost_State "Wrong on an EV6: toggles every few seconds whate
 CM_ SG_ 685 Battery_Precond_State "Verified on an EV6 against CAN logs: battery preconditioning. Preparing at the request; On when the battery heater switches on (about 60 s later, varies), which is when the cluster shows the battery icon. 2 while the car is off, asleep or charging.";
 CM_ SG_ 1174 Driver_Seat_Heating_Oper "Verified on an EV6 against CAN logs: driver seat heating level. 3 to 5 may be ventilation (not checked).";
 CM_ SG_ 1141 Passenger_Seat_Heating_Oper "Verified on an EV6 against CAN logs: passenger seat heating level. 3 to 5 may be ventilation (not checked).";
-CM_ SG_ 1261 Precond_Request "Not an on/off request: 0x1F with bytes 5-6 at FF FF when no route is set, and route data (e.g. 08 48 00) when navigating to a DC charger, about 6 s before preconditioning starts. Probably route information for the BMU; the old value table (31 = On, 0 = Off) was backwards.";
+CM_ SG_ 1261 Precond_Request "Not an on/off request: 0x1F with bytes 5-6 at FF FF when no route is set, and route data (e.g. 08 48 00) when navigating to a DC charger, about 6 s before preconditioning starts. Probably route information for the BMU; the old value table (31 = On, 0 = Off) was backwards. wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) overwrites bytes 5-7 with 10 A0 00 while it keeps preconditioning on.";
 CM_ SG_ 605 Cand_Heater_Power_25D "Candidate from EV6 CAN logs: 45-46 while the battery heater runs during preconditioning, matching the extra ~4.5 kW drawn from the battery, so probably 0.1 kW steps; 0 otherwise. Only seen in summer, so cabin heating may use it too.";
 CM_ SG_ 337 AC_Charge_Limit "Verified on an EV6 against CAN logs with timed notes: AC charge limit set in the head unit, applied about 3 s after the change. 0x1F9 bytes 2-3 carry the same pair.";
 CM_ SG_ 337 DC_Charge_Limit "Verified on an EV6 against CAN logs with timed notes: DC charge limit set in the head unit.";
@@ -1243,7 +1266,7 @@ CM_ SG_ 764 Aux_Battery_Voltage "Verified on an EV6 against CAN logs and Car Sca
 CM_ SG_ 337 Battery_Max_Temperature_Copy "Checked on an EV6 against CAN logs: same value as BATTERY_INFO_764 Battery_Max_Temperature, changing at the same moments in log_21.";
 CM_ BO_ 338 "Checked on an EV6 against CAN logs: battery temperatures, changing slowly during a DC fast charge (log_21).";
 CM_ SG_ 338 Battery_Min_Temperature_Copy "Checked on an EV6 against CAN logs: same value as BATTERY_INFO_764 Battery_Min_Temperature.";
-CM_ SG_ 338 Cand_Battery_Temp_152_8 "Candidate from EV6 CAN logs: between the battery minimum and maximum temperatures (13 C at 12/13 C in log_31, 27-30 C during a DC charge in log_21). Maybe a coolant or average temperature; Car Scanner showed 12 C coolant, which doesn't tell it apart.";
+CM_ SG_ 338 Cand_Battery_Temp_152_8 "Candidate from EV6 CAN logs: between the battery minimum and maximum temperatures (13 C at 12/13 C in log_31, 27-30 C during a DC charge in log_21). Maybe a coolant or average temperature; Car Scanner showed 12 C coolant, which doesn't tell it apart. wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) reads it as the battery maximum, which the EV6 logs contradict.";
 CM_ SG_ 338 Cand_Battery_Temp_152_16 "Candidate from EV6 CAN logs: like Cand_Battery_Temp_152_8 (12 C in log_31, 27-30 C in log_21).";
 CM_ SG_ 427 Distance_Unit "Verified on an EV6 against CAN logs with timed notes: distance display unit, set when switching to miles and cleared when switching back to km (log_30 at 6:52 and 7:11).";
 CM_ SG_ 427 Display_Speed "Verified on an EV6 against CAN logs with timed notes: speed in the display unit, 0.5 steps. In km/h it is twice CLUSTER_INFO_428 Speed_kph (65 km/h reads 130); in miles it matched the seven mph readings in log_32. Byte 7 has always been 0, but no log goes above 119 km/h, so the 16-bit width is assumed: the car goes faster than the 127.5 that byte 6 alone can hold.";
@@ -1262,6 +1285,27 @@ CM_ SG_ 1264 Year "Verified on an EV6 against CAN logs: 26 for 2026.";
 CM_ BO_ 1259 "Verified on an EV6 against CAN logs: the same local time as LOCAL_TIME with the day of the week instead of the date, sent every 200 ms and stepping once a second, at most a second off LOCAL_TIME.";
 CM_ SG_ 1259 Weekday "Verified on an EV6 against CAN logs: one bit per day, in the order of the departure-day bits of HU_EV_P_1263 (Sunday in bit 0 up to Monday in bit 6). Sunday, Saturday, Friday and Monday were captured; Tuesday to Thursday follow from that order.";
 CM_ SG_ 1259 NEW_SIGNAL_3 "Unverified opendbc signal";
+CM_ BO_ 1230 "Verified on an EV6 against CAN logs: head unit media status, sent once a second. Reads FE C3 then all FF while the car is off. Frames with bytes 4-5 at 28 04 or other odd values come in between around track changes; ignore them. The track text itself goes out over ISO-TP, one CAN ID per source as listed by wicant-i-precondition (github.com/L1Z3/wicant-i-precondition): Android Auto on 0x6D2 (UTF-16LE title only, no flow control; seen in every log with music), Bluetooth 0x6D4, CarPlay 0x6D6, radio 0x6DC, USB 0x6EA, apps 0x6E0.";
+CM_ SG_ 1230 Media_Source "Verified on an EV6 against CAN logs: Android Auto (0xDE) in every log with music, Off (0x14) in the captures without Bluetooth or Android Auto, and switching from Off to Android Auto when the phone connected (log_11). The other values come from wicant-i-precondition (github.com/L1Z3/wicant-i-precondition): 0x10/0x11 Bluetooth, 0x22-0x23 and 0x42-0x49 radio, 0xC4-0xCA USB, 0xDC/0xDD CarPlay.";
+CM_ SG_ 1230 Media_Popup "Unverified: always 0x01 while the head unit is on in the logs. wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) writes 0x11 for three frames to make the cluster pop up the track text it then sends over ISO-TP.";
+CM_ SG_ 1230 Track_Seconds "Verified on an EV6 against CAN logs: playback position of the current track, back to 0 at each Android Auto title change on 0x6D2 and counting once a second. Counts 0-251, then Track_Seconds_High goes up by one (log_20, 4:12 into a track): position = Track_Seconds_High x 252 + Track_Seconds.";
+CM_ SG_ 1230 Track_Seconds_High "Verified on an EV6 against CAN logs: see Track_Seconds. Only 0 and 1 seen (no track longer than about 8 min was played).";
+CM_ BO_ 56 "Checked on an EV6 against CAN logs: power mode, the same state wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) reads READY from. To investigate: it may be the high-voltage contactor or ICCU state rather than a plain power mode (3 looks like a precharge before Ready, 6 has the car awake for charging or a remote command), and byte 1 changes with each value (01/05 at 2, 0B/0C at 3, 00 at 4, 8x at 6). Not told apart yet from captures of remote commands, the 12 V top-up while asleep (orange ICCU light on the charge port) and V2L, ideally with Car Scanner showing the BMS relay status.";
+CM_ SG_ 56 Power_Mode "Verified on an EV6 against CAN logs: 4 exactly while DRIVE_MODE_STATUS Ready is set (log_09, log_30), 1 when off. Candidate meanings for the rest: 2 on without Ready, 3 for a fraction of a second while switching to Ready, 6 awake while plugged in or for a remote command.";
+CM_ BO_ 1256 "Verified on an EV6 against CAN logs: the route summary the cluster shows during built-in navigation (the destination name goes over ISO-TP on 0x6E7, prefixed with 0xF4). All FF except byte 3 without a route; Android Auto navigation does not use it.";
+CM_ SG_ 1256 Distance_Unit "From wicant-i-precondition (github.com/L1Z3/wicant-i-precondition), which writes this message to show a countdown on the cluster; consistent with the EV6 logs (km in every route). Shown together with Distance_Tenths only in km or mi and below 100.";
+CM_ SG_ 1256 Distance_Tenths "Checked on an EV6 against CAN logs: tenths of Distance (7.9, 5.2 and 9.3 km for the three routes in the logs).";
+CM_ SG_ 1256 ETA_Hours "Verified on an EV6 against CAN logs: hour of the estimated arrival time, local time. 23:24 for a route set at 23:12:49 (log_30); while parked it moves a minute later every minute, like the arrival time does.";
+CM_ SG_ 1256 ETA_Minutes "Verified on an EV6 against CAN logs: minutes of the estimated arrival time, see ETA_Hours.";
+CM_ SG_ 1256 Cand_Nav_Route_24 "Candidate from EV6 CAN logs: without a route it steps by 3 as the car turns, like NAV_GUIDANCE Cand_Compass_Heading minus one; with a route 0x0B or 0x29, meaning unknown.";
+CM_ SG_ 1256 Distance "From wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) (written to the cluster), consistent with the EV6 logs: whole part of the distance left, in Distance_Unit; 65535 hides the number.";
+CM_ SG_ 1256 Destination_Flag "From wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) (written to the cluster), consistent with the EV6 logs (Destination in every route): flag icon next to the distance.";
+CM_ BO_ 1228 "Candidate from EV6 CAN logs: the cluster turn-by-turn area. wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) sets byte 0 to 0x02 to show the NAV_ROUTE distance.";
+CM_ SG_ 1228 Cand_Guidance_Type "Candidate from EV6 CAN logs: 0x08 without a route; 0x0D or 0x02 with one, probably the next maneuver. 0x09 for a moment while a route starts.";
+CM_ SG_ 1228 Cand_Compass_Heading "Candidate from EV6 CAN logs: without a route, 0-45 in steps of 3 following the car as it turns and wrapping from 45 to 0, so likely a 16-point compass heading; the direction of 0 is unknown.";
+CM_ BO_ 1600 "Candidate from EV6 CAN logs: lane guidance, also without a route. Each countdown starts when 0x680 sends an ISO-TP frame F1 <lane count> 00 <one code per lane> and ends when 0x680 sends all zeros (10 drive logs).";
+CM_ SG_ 1600 Cand_Junction_Distance "Candidate from EV6 CAN logs: distance to the next junction with lane guidance. Starts at 300 m or less, counts down in 10 m steps at the car's speed to 0-10, FF FF between junctions.";
+CM_ SG_ 1600 Cand_Route_Active_640 "Candidate from EV6 CAN logs: 0x0A while a built-in navigation route is active, 0 otherwise.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 1041 AlvCnt_Val "Unverified opendbc signal";
@@ -1283,17 +1327,17 @@ CM_ SG_ 1141 Passenger_Seat_Heating_Opt "Unverified opendbc signal";
 CM_ SG_ 1174 Driver_Seat_Heating_Opt "Unverified opendbc signal";
 CM_ SG_ 896 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 896 AlvCnt_Val "Unverified opendbc signal";
-CM_ BO_ 199 "Unverified: Imported from opendbc. Validation required.";
+CM_ BO_ 199 "Checked on an EV6 against CAN logs: head unit requests to the BMU, sent in short bursts on events. wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) sends this message to start (bytes 3-4 40 03, then E0 07) and stop (00 00, then E0 07) battery preconditioning, and to request utility mode (bytes 2-4 80 E0 07).";
 CM_ SG_ 199 HU_V2LModeSet "Unverified opendbc signal";
 CM_ SG_ 199 HU_V2GModeSet "Unverified opendbc signal";
 CM_ SG_ 199 HU_V2XInstantRunSet "Unverified opendbc signal";
 CM_ SG_ 199 HU_V2XDischrgLimSocValSet "Unverified opendbc signal";
 CM_ SG_ 199 HU_EcoClmtLimSet "Unverified opendbc signal";
-CM_ SG_ 199 HU_UtilModeSetReq "Unverified opendbc signal";
+CM_ SG_ 199 HU_UtilModeSetReq "Unverified on our logs: wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) sends 2 to request utility mode.";
 CM_ SG_ 199 HU_ChgInCurrSet "Unverified opendbc signal";
 CM_ SG_ 199 HU_EV_BatteryConditioning "Unverified opendbc signal";
-CM_ SG_ 199 NAVI_precond_EVStationFlag "Unverified opendbc signal";
-CM_ SG_ 199 NAVI_precond_EVStationType "Unverified opendbc signal";
+CM_ SG_ 199 NAVI_precond_EVStationFlag "Verified on an EV6 against CAN logs: 2 when a route to a DC charger starts (preconditioning follows), 1 for a route home, 0 when the route is cancelled; each request is followed by 7. log_30, Idle - Nav captures.";
+CM_ SG_ 199 NAVI_precond_EVStationType "Checked on an EV6 against CAN logs: 3 with a DC charger destination, 0 for other destinations or a cancel, 7 after each request.";
 CM_ SG_ 199 HU_QckChrgCustomSet "Unverified opendbc signal";
 CM_ BO_ 255 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 255 BCM_Crc20Val "Unverified opendbc signal";
@@ -2174,4 +2218,10 @@ VAL_ 929 Tire_Pressure_FR 255 "Not_Available";
 VAL_ 929 Tire_Pressure_RL 255 "Not_Available";
 VAL_ 929 Tire_Pressure_RR 255 "Not_Available";
 VAL_ 764 Aux_Battery_Voltage 0 "Not_Available";
+VAL_ 1230 Media_Source 20 "Off" 222 "Android_Auto";
+VAL_ 56 Power_Mode 1 "Off" 4 "Ready";
+VAL_ 1256 Distance_Unit 0 "m" 1 "km" 2 "mi" 3 "ft" 4 "yd" 15 "Not_Available";
+VAL_ 1256 ETA_Hours 255 "Not_Available";
+VAL_ 1256 Destination_Flag 0 "Destination" 1 "Waypoint_1" 2 "Waypoint_2" 3 "Waypoint_3" 4 "Waypoint_4" 15 "None";
+VAL_ 199 NAVI_precond_EVStationFlag 0 "Cancel" 1 "Destination" 2 "EV_Station" 7 "No_Request";
 VAL_ 1259 Weekday 64 "Monday" 32 "Tuesday" 16 "Wednesday" 8 "Thursday" 4 "Friday" 2 "Saturday" 1 "Sunday";
