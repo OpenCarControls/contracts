@@ -271,6 +271,13 @@ BO_ 1228 NAV_GUIDANCE: 8 Vector__XXX
    SG_ Cand_Guidance_Type : 0|8@1+ (1,0) [0|255] "" Vector__XXX
    SG_ Cand_Compass_Heading : 24|8@1+ (1,0) [0|255] "" Vector__XXX
 
+BO_ 418 CRUISE_STATUS: 8 Vector__XXX
+   SG_ Cruise_State : 24|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Cruise_Set_Speed : 32|8@1+ (1,0) [0|255] "kph" Vector__XXX
+
+BO_ 1255 SPEED_LIMIT_4E7: 8 Vector__XXX
+   SG_ Cand_Displayed_Speed_Limit : 56|8@1+ (1,0) [0|255] "kph" Vector__XXX
+
 BO_ 1600 LANE_GUIDANCE: 8 Vector__XXX
    SG_ Cand_Junction_Distance : 0|16@1+ (1,0) [0|65535] "m" Vector__XXX
    SG_ Cand_Route_Active_640 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -1303,10 +1310,17 @@ CM_ SG_ 1256 Destination_Flag "From wicant-i-precondition (github.com/L1Z3/wican
 CM_ BO_ 1228 "Candidate from EV6 CAN logs: the cluster turn-by-turn area. wicant-i-precondition (github.com/L1Z3/wicant-i-precondition) sets byte 0 to 0x02 to show the NAV_ROUTE distance.";
 CM_ SG_ 1228 Cand_Guidance_Type "Candidate from EV6 CAN logs: 0x08 without a route; 0x0D or 0x02 with one, probably the next maneuver. 0x09 for a moment while a route starts.";
 CM_ SG_ 1228 Cand_Compass_Heading "Candidate from EV6 CAN logs: without a route, 0-45 in steps of 3 following the car as it turns and wrapping from 45 to 0, so likely a 16-point compass heading; the direction of 0 is unknown.";
+CM_ BO_ 418 "Checked on an EV6 against CAN logs: smart cruise control. Byte 0 also changes with it (0x14 engaged, 0x44 after a cancel), meaning unknown.";
+CM_ SG_ 418 Cruise_State "Verified on an EV6 against CAN logs: 2 while cruise control is engaged, 0 otherwise (log_03, log_12, and the highway parts of log_20/22/24). 0x1A4 byte 1 leaves 07 at the same time.";
+CM_ SG_ 418 Cruise_Set_Speed "Verified on an EV6 against CAN logs: the set speed. 70, then 60, then 50 km/h as set in log_12, stepping by 1 while the stalk is held; 50 in log_03. Stays at the last value after a cancel (Cruise_State 0) and reads 0 before cruise is first set. Only captured in km/h.";
+CM_ BO_ 1255 "Candidate from EV6 CAN logs: speed limit, probably the one the cluster shows. 0x1FB bytes 4 and 5 carry the same values times two.";
+CM_ SG_ 1255 Cand_Displayed_Speed_Limit "Candidate from EV6 CAN logs: 50, 70, 60, 30, 70, 50, 30 over log_12, changing with the road like HU_Navi_ISLW_PE Navi_ISLW_SpdLimit, but read 60 where the map said 30, so probably the camera-and-map limit the cluster shows. 0 when none is known. Not checked against the cluster.";
 CM_ BO_ 1600 "Candidate from EV6 CAN logs: lane guidance, also without a route. Each countdown starts when 0x680 sends an ISO-TP frame F1 <lane count> 00 <one code per lane> and ends when 0x680 sends all zeros (10 drive logs).";
 CM_ SG_ 1600 Cand_Junction_Distance "Candidate from EV6 CAN logs: distance to the next junction with lane guidance. Starts at 300 m or less, counts down in 10 m steps at the car's speed to 0-10, FF FF between junctions.";
 CM_ SG_ 1600 Cand_Route_Active_640 "Candidate from EV6 CAN logs: 0x0A while a built-in navigation route is active, 0 otherwise.";
 CM_ BO_ 763 "Requires more live testing. Behavior in charging logs is erratic.";
+CM_ SG_ 1041 Passenger_Seatbelt_Fastened "Verified on an EV6 against CAN logs: front passenger seatbelt, follows all six buckles and unbuckles in log_05 within a second. The rear seatbelts and seat occupancy are not on this bus (log_05).";
+CM_ SG_ 1041 Driver_Seatbelt_Fastened "Verified on an EV6 against CAN logs: driver seatbelt, follows all six buckles and unbuckles in log_05 within a second.";
 CM_ SG_ 1041 Crc_Val "Unverified opendbc signal";
 CM_ SG_ 1041 AlvCnt_Val "Unverified opendbc signal";
 CM_ SG_ 938 Crc_Val "Unverified opendbc signal";
@@ -1637,8 +1651,8 @@ CM_ SG_ 963 SunRoof_RearBlindOprSta "Unverified opendbc signal";
 CM_ BO_ 992 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 992 BCM_Crc2Val "Unverified opendbc signal";
 CM_ SG_ 992 BCM_AlvCnt2Val "Unverified opendbc signal";
-CM_ SG_ 992 BAlarm_BglrAlrmCurrentSta "Unverified opendbc signal";
-CM_ SG_ 992 BAlarm_BglrAlrmSta "Unverified opendbc signal";
+CM_ SG_ 992 BAlarm_BglrAlrmCurrentSta "Verified on an EV6 against CAN logs: anti-theft alarm state, 4 when armed by locking with the key fob, 7 right after unlocking with it, back to 1 a few seconds later. Locking from inside does not arm it (log_08). A triggered alarm was never captured.";
+CM_ SG_ 992 BAlarm_BglrAlrmSta "Verified on an EV6 against CAN logs: 1 while the alarm is armed (locked with the key fob), 0 otherwise (log_08).";
 CM_ SG_ 992 BAlarm_PncAlrmSta "Unverified opendbc signal";
 CM_ SG_ 992 BAlarm_BrglrHrnRlySta "Unverified opendbc signal";
 CM_ SG_ 992 BCM_KeyInSta "Unverified opendbc signal";
@@ -1901,7 +1915,7 @@ CM_ BO_ 1187 "Unverified: Imported from opendbc. Validation required.";
 CM_ SG_ 1187 Navi_ISLW_LinkClass "Unverified opendbc signal";
 CM_ SG_ 1187 Navi_ISLW_Frwinfo "Unverified opendbc signal";
 CM_ SG_ 1187 Navi_ISLW_SpdUnit "Unverified opendbc signal";
-CM_ SG_ 1187 Navi_ISLW_SpdLimit "Unverified opendbc signal";
+CM_ SG_ 1187 Navi_ISLW_SpdLimit "Checked on an EV6 against CAN logs: the map speed limit of the current road in km/h (50, 70, 30 over log_12, changing as the car turns onto another road), 0 when unknown. Sent while driving even without a route. Not checked against signs.";
 CM_ SG_ 1187 Navi_ISLW_CountryCode "Unverified opendbc signal";
 CM_ SG_ 1187 Navi_ISLW_MapSource "Unverified opendbc signal";
 CM_ SG_ 1187 Navi_ISLW_TollExist "Unverified opendbc signal";
@@ -2219,6 +2233,8 @@ VAL_ 929 Tire_Pressure_RL 255 "Not_Available";
 VAL_ 929 Tire_Pressure_RR 255 "Not_Available";
 VAL_ 764 Aux_Battery_Voltage 0 "Not_Available";
 VAL_ 1230 Media_Source 20 "Off" 222 "Android_Auto";
+VAL_ 418 Cruise_State 0 "Not_Engaged" 2 "Engaged";
+VAL_ 992 BAlarm_BglrAlrmSta 0 "Disarmed" 1 "Armed";
 VAL_ 56 Power_Mode 1 "Off" 4 "Ready";
 VAL_ 1256 Distance_Unit 0 "m" 1 "km" 2 "mi" 3 "ft" 4 "yd" 15 "Not_Available";
 VAL_ 1256 ETA_Hours 255 "Not_Available";
