@@ -101,6 +101,10 @@ message CommandResponse {
   // This field contains a human-readable error message when the command failed.
   string error_message = 3;
 
+  // Field number 4 was never used; it is reserved so it can't be reused with a
+  // different meaning.
+  reserved 4;
+
   // The response data of the command.
   oneof response_data {
     // Basic response data that can be sent on any communication protocol.

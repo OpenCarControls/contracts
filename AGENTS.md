@@ -5,8 +5,8 @@ This repository is the **Single Source of Truth** for all data structures bridgi
 
 ## 🏗️ Architecture: The Envelope Pattern
 We use an opaque payload architecture to keep the core firmware entirely agnostic to vehicle-specific features.
-*   **`proto/core.proto` (The Envelope):** Handles routing, message IDs, and timestamps. It contains a `car_id` (e.g., "hmg") so the receiver knows how to decode the otherwise opaque `bytes payload`.
-*   **`proto/cars/*.proto` (The Payload):** Vehicle-specific states and commands (e.g., `hmg.proto`, `tesla.proto`). These are compiled to bytes and stuffed into the core envelope's payload field.
+*   **`opencar/core/v1/` (The Envelope):** `core.proto` and `system.proto` handle routing, message IDs, and timestamps. The envelope contains a `platform_id` (CRC32 of the platform name, pre-computed in the platform's `meta.toml`) so the receiver knows how to decode the otherwise opaque payload bytes.
+*   **`opencar/cars/<platform>/v1/*.proto` (The Payload):** Vehicle-specific states and commands (e.g., `egmp.proto`, `virtual_car.proto`). These are compiled to bytes and stuffed into the core envelope's payload field.
 *   **`opencar/core/v1/transport.toml` (Transport Metadata):** Generic cross-platform transport bindings shared by firmware and the app, such as MQTT topic templates, BLE GATT service/characteristic UUIDs and the BLE message size limit. Treat these values as wire-level contract data just like the `.proto` schemas.
 *   **BLE message size:** BLE messages are fragmented into chunks (2-byte header and CRC, see `docs/ble-fragmentation.md`), so an encoded `AppToDevice`/`DeviceToApp` must fit in `ble.payload.max_message_bytes` once reassembled. Every field added to a vehicle's state grows its state update; the firmware's vehicle crates test the worst-case size, so a change that no longer fits fails there.
 
