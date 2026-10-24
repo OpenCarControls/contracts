@@ -22,6 +22,12 @@ direction = "device -> app"
 # How long (seconds) the device keeps its pairing window open after the
 # pairing button is pressed. The app wizard uses this as its bond timeout.
 pairing_window_seconds = 60
+# How long (seconds) a device without a pairing button keeps the window open
+# at boot while no phone is bonded (first setup), so the owner has time to
+# plug it in, open the app and finish the wizard. The device closes the window
+# as soon as the first phone bonds. Keep it bounded: an abandoned setup would
+# otherwise stay open to any phone in range.
+first_setup_pairing_window_seconds = 300
 # How long (seconds) the wizard scans for an advertising device before
 # declaring a timeout and asking the user to try again.
 scan_timeout_seconds = 30
