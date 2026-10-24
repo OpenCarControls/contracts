@@ -15,6 +15,33 @@ message SystemState {
 
   // The LTE signal strength in dBm.
   int32 lte_rssi = 4;
+
+  // The VIN the connected car reported, 17 characters. Unset until the
+  // firmware has read it; a VIN is only reported once it is well-formed, but
+  // it may belong to a car the firmware doesn't support (see car_identity).
+  optional string vin = 5;
+
+  // Whether the firmware has confirmed that the connected car is one its
+  // vehicle platform supports. The car's buses stay read-only until it is
+  // confirmed.
+  optional CarIdentity car_identity = 6;
+}
+
+// Whether the connected car's identity has been confirmed.
+enum CarIdentity {
+  // Not reported (older firmware).
+  CAR_IDENTITY_UNSPECIFIED = 0;
+
+  // Not checked yet, or the check didn't get an answer (car asleep, no
+  // reply). The buses stay read-only.
+  CAR_IDENTITY_UNCONFIRMED = 1;
+
+  // The car matches the vehicle platform the firmware was built for.
+  CAR_IDENTITY_CONFIRMED = 2;
+
+  // The car answered but doesn't match the vehicle platform (for example a
+  // VIN of another make). The buses stay read-only.
+  CAR_IDENTITY_MISMATCH = 3;
 }
 
 // This contains a single system command.
