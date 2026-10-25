@@ -145,11 +145,10 @@ message SystemEvent {}
 // on the car's CAN buses so it can send commands to the car.
 //
 // Read-write mode needs all of these, and the bus stays read-only while any is
-// missing:
-// - The vehicle has recognised its platform on the bus and identified the
-//   exact car (CanAccessState.car_identity_confirmed).
-// - The owner approved read-write mode for that car with this command.
-// - In development builds, the dev lock is unlocked (SetCanDevWriteUnlock).
+// missing. First, the vehicle has recognised its platform on the bus and
+// identified the exact car (CanAccessState.car_identity_confirmed). Second, the
+// owner approved read-write mode for that car with this command. Third, in
+// development builds, the dev lock is unlocked (SetCanDevWriteUnlock).
 //
 // An approval binds to the car identified when it is given, and is refused
 // while no car is identified. It survives reboots and pairing or removing
