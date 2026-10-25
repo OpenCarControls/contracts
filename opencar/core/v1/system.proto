@@ -15,6 +15,11 @@ message SystemState {
 
   // The LTE signal strength in dBm.
   int32 lte_rssi = 4;
+
+  // Whether the device may transmit on the car's CAN buses, and which of the
+  // conditions for it hold. BLE only. Sent in a state update of its own (with
+  // no vehicle_state) whenever it changes and when the app subscribes.
+  optional CanAccessState can_access = 5;
 }
 
 // This contains a single system command.
@@ -42,6 +47,15 @@ message SystemCommand {
 
     // Records a newly paired BLE phone in the bonded registry.
     UpsertPairedPhoneCommand upsert_paired_phone = 7;
+
+    // Approves (or revokes) CAN read-write mode for the car the device is
+    // plugged into. BLE only, from a bonded phone; never accepted over MQTT.
+    SetCanReadWriteApprovalCommand set_can_read_write_approval = 8;
+
+    // Locks or unlocks CAN read-write mode in development builds. BLE only,
+    // from a bonded phone; never accepted over MQTT. Rejected by release
+    // builds, which don't have the lock.
+    SetCanDevWriteUnlockCommand set_can_dev_write_unlock = 9;
   }
 }
 
@@ -126,3 +140,78 @@ message UpsertPairedPhoneCommand {
 // A firmware-initiated event pushed to the app with no associated inbound
 // command. Delivered over the DeviceToApp BLE characteristic.
 message SystemEvent {}
+
+// Approves or revokes CAN read-write mode: the device leaving read-only mode
+// on the car's CAN buses so it can send commands to the car.
+//
+// Read-write mode needs all of these, and the bus stays read-only while any is
+// missing:
+// - The vehicle has recognised its platform on the bus and identified the
+//   exact car (CanAccessState.car_identity_confirmed).
+// - The owner approved read-write mode for that car with this command.
+// - In development builds, the dev lock is unlocked (SetCanDevWriteUnlock).
+//
+// An approval binds to the car identified when it is given, and is refused
+// while no car is identified. It survives reboots and pairing or removing
+// phones. It no longer applies if the device is moved to another car (approve
+// again there, which replaces it), and it is cleared by revoking it or by
+// erasing the device's flash. The app must show the risk before sending
+// approved = true. BLE only, from a bonded phone; never accepted over MQTT.
+message SetCanReadWriteApprovalCommand {
+  // True approves read-write mode for the identified car; false revokes the
+  // approval, which makes the bus read-only again.
+  bool approved = 1;
+}
+
+// Locks or unlocks CAN read-write mode in development builds, on top of the
+// owner's approval. Locked at every boot and not stored. Release builds don't
+// have the lock and reject this command (CanAccessState.dev_lock_available is
+// false). BLE only, from a bonded phone; never accepted over MQTT.
+message SetCanDevWriteUnlockCommand {
+  // True unlocks read-write mode; false locks it again.
+  bool unlocked = 1;
+}
+
+// Whether the device may transmit on the car's CAN buses, and why not.
+message CanAccessState {
+  // The vehicle recognised its own platform on the bus (the firmware matches
+  // the car's platform).
+  optional bool platform_confirmed = 1;
+
+  // The vehicle identified the exact car it is plugged into. The approval is
+  // bound to it.
+  optional bool car_identity_confirmed = 2;
+
+  // The owner's approval of read-write mode, compared with the identified car.
+  optional CanReadWriteApproval approval = 3;
+
+  // True in development builds, which have the dev lock.
+  optional bool dev_lock_available = 4;
+
+  // The dev lock is unlocked. Always false in release builds.
+  optional bool dev_unlocked = 5;
+
+  // A CAN logging (SavvyCAN) session is active, which forces read-only mode.
+  optional bool logging = 6;
+
+  // The effective state: true while the device must not transmit on any bus.
+  // False only when every condition above allows read-write mode and the
+  // vehicle has unlocked the bus.
+  optional bool read_only = 7;
+}
+
+// The owner's approval of CAN read-write mode.
+enum CanReadWriteApproval {
+  // Unknown (an older firmware, or not reported).
+  CAN_READ_WRITE_APPROVAL_UNSPECIFIED = 0;
+  // Read-write mode was never approved, or the approval was revoked.
+  CAN_READ_WRITE_APPROVAL_NOT_APPROVED = 1;
+  // Approved for the car the device is plugged into.
+  CAN_READ_WRITE_APPROVAL_APPROVED = 2;
+  // Approved for another car than the one identified. The bus stays
+  // read-only until the owner approves this car, which replaces the approval.
+  CAN_READ_WRITE_APPROVAL_OTHER_CAR = 3;
+  // An approval is stored but no car is identified yet, so it can't be
+  // checked. The bus stays read-only.
+  CAN_READ_WRITE_APPROVAL_AWAITING_CAR = 4;
+}
