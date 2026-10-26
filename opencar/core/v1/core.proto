@@ -74,7 +74,8 @@ message DeviceToApp {
 // This holds the state update data of the device, containing both the system
 // state and the vehicle specific state.
 message StateUpdate {
-  // System state, only transmitted over BLE.
+  // System state, only transmitted over BLE, except the command availability,
+  // which MQTT clients get too (see SystemState.command_availability).
   SystemState system_state = 1;
 
   // Vehicle specific state.

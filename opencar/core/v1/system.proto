@@ -21,10 +21,11 @@ message SystemState {
   // no vehicle_state) whenever it changes and when the app subscribes.
   optional CanAccessState can_access = 5;
 
-  // Which of the vehicle's commands the device accepts right now. BLE only.
-  // Sent whenever it changes, repeated while unchanged, and when the app
-  // subscribes. The app must only trust one received on the current
-  // connection: never a cached or older one.
+  // Which of the vehicle's commands the device accepts right now. Sent over BLE
+  // and over MQTT (MQTT clients only get the basic commands). Sent whenever it
+  // changes, repeated while unchanged, and when the app subscribes. The app
+  // must only trust one received on the current connection: never a cached or
+  // older one.
   optional CommandAvailability command_availability = 6;
 }
 
@@ -236,7 +237,8 @@ message CommandAvailability {
   // Availability of the basic commands by field number.
   map<uint32, CommandAvailabilityState> basic = 1;
 
-  // Availability of the advanced commands by field number. BLE only.
+  // Availability of the advanced commands by field number. BLE only: never
+  // sent over MQTT.
   map<uint32, CommandAvailabilityState> advanced = 2;
 }
 
