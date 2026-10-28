@@ -74,7 +74,8 @@ message DeviceToApp {
 // This holds the state update data of the device, containing both the system
 // state and the vehicle specific state.
 message StateUpdate {
-  // System state, only transmitted over BLE.
+  // System state, only transmitted over BLE, except the command availability,
+  // which MQTT clients get too (see SystemState.command_availability).
   SystemState system_state = 1;
 
   // Vehicle specific state.
@@ -129,6 +130,12 @@ enum CommandStatusCode {
   COMMAND_STATUS_CODE_FAILED = 2;
   // REJECTED_NOT_CONTROLLER indicates the command was rejected because the sender is not the controller.
   COMMAND_STATUS_CODE_REJECTED_NOT_CONTROLLER = 3;
+  // REJECTED_UNAVAILABLE indicates the command was rejected because the device
+  // does not accept it right now (see CommandAvailability in SystemState): the
+  // device is read-only, the car state is out of date, or the car is not in a
+  // state the command needs. Nothing was sent to the car. error_message gives
+  // the reason.
+  COMMAND_STATUS_CODE_REJECTED_UNAVAILABLE = 4;
 }
 
 // Deprecated: the BLE CAN debug stream was removed from the firmware and this

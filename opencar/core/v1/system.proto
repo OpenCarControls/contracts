@@ -20,6 +20,13 @@ message SystemState {
   // conditions for it hold. BLE only. Sent in a state update of its own (with
   // no vehicle_state) whenever it changes and when the app subscribes.
   optional CanAccessState can_access = 5;
+
+  // Which of the vehicle's commands the device accepts right now. Sent over BLE
+  // and over MQTT (MQTT clients only get the basic commands). Sent whenever it
+  // changes, repeated while unchanged, and when the app subscribes. The app
+  // must only trust one received on the current connection: never a cached or
+  // older one.
+  optional CommandAvailability command_availability = 6;
 }
 
 // This contains a single system command.
@@ -213,4 +220,38 @@ enum CanReadWriteApproval {
   // An approval is stored but no car is identified yet, so it can't be
   // checked. The bus stays read-only.
   CAN_READ_WRITE_APPROVAL_AWAITING_CAR = 4;
+}
+
+// Which commands the device accepts right now, from the vehicle state. The
+// device rejects any other command with
+// COMMAND_STATUS_CODE_REJECTED_UNAVAILABLE, even if the app sends it anyway.
+// The app greys out unavailable commands and shows no reason.
+//
+// Commands are identified by their field number in the vehicle's command
+// oneof, so this stays vehicle-agnostic: the keys of `basic` are the field
+// numbers of the platform's BasicCommand.action, the keys of `advanced` those
+// of its AdvancedCommand.action. The maps merge per key, so an update may carry
+// only the commands that changed. A command that has no entry has not been
+// reported: treat it as unavailable.
+message CommandAvailability {
+  // Availability of the basic commands by field number.
+  map<uint32, CommandAvailabilityState> basic = 1;
+
+  // Availability of the advanced commands by field number. BLE only: never
+  // sent over MQTT.
+  map<uint32, CommandAvailabilityState> advanced = 2;
+}
+
+// Whether a command can be run right now.
+enum CommandAvailabilityState {
+  // Unknown (not reported yet, or an older firmware). Treat as unavailable.
+  COMMAND_AVAILABILITY_STATE_UNSPECIFIED = 0;
+  // The command is accepted now.
+  COMMAND_AVAILABILITY_STATE_AVAILABLE = 1;
+  // Not available right now, for example the device is read-only, the car
+  // state is out of date, or the car is driving. The app greys the button out.
+  COMMAND_AVAILABILITY_STATE_UNAVAILABLE = 2;
+  // Not available on this car, for example a trim without the feature. The
+  // app usually hides the button. Reserved: no firmware sends it yet.
+  COMMAND_AVAILABILITY_STATE_UNSUPPORTED = 3;
 }
