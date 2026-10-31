@@ -193,9 +193,10 @@ BO_ 504 CHARGING_TIME: 8 Vector__XXX
 BO_ 605 CANDIDATE_25D: 8 Vector__XXX
    SG_ Cand_Heater_Power_25D : 16|8@1+ (0.1,0) [0|25.5] "kW" Vector__XXX
 
-BO_ 412 CANDIDATE_19C: 8 Vector__XXX
-   SG_ Cand_19C_16 : 16|8@1+ (1,0) [0|255] "" Vector__XXX
-   SG_ Cand_AC_Current_19C : 32|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
+BO_ 412 CHARGER_LIMITS: 8 Vector__XXX
+   SG_ DC_Target_Voltage : 0|16@1+ (0.1,0) [0|6553.5] "V" Vector__XXX
+   SG_ DC_Current_Limit : 16|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
+   SG_ AC_Current_Limit : 32|8@1+ (0.1,0) [0|25.5] "A" Vector__XXX
 
 BO_ 100 AUTO_HOLD_STATUS: 8 Vector__XXX
    SG_ Auto_Hold : 24|8@1+ (1,0) [0|255] "" Vector__XXX
@@ -235,10 +236,13 @@ BO_ 739 I_PEDAL_STATUS: 8 Vector__XXX
    SG_ I_Pedal : 57|1@1+ (1,0) [0|1] "" Vector__XXX
 
 BO_ 929 TIRE_PRESSURES: 8 Vector__XXX
-   SG_ Tire_Pressure_FL : 32|8@1+ (1,0) [0|255] "psi" Vector__XXX
-   SG_ Tire_Pressure_FR : 40|8@1+ (1,0) [0|255] "psi" Vector__XXX
-   SG_ Tire_Pressure_RL : 48|8@1+ (1,0) [0|255] "psi" Vector__XXX
-   SG_ Tire_Pressure_RR : 56|8@1+ (1,0) [0|255] "psi" Vector__XXX
+   SG_ Tire_Pressure_FL : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Tire_Pressure_FR : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Tire_Pressure_RL : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+   SG_ Tire_Pressure_RR : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 930 TIRE_PRESSURE_UNIT: 8 Vector__XXX
+   SG_ Tire_Pressure_Unit : 8|8@1+ (1,0) [0|255] "" Vector__XXX
 
 BO_ 1264 LOCAL_TIME: 8 Vector__XXX
    SG_ Hours : 8|5@1+ (1,0) [0|23] "h" Vector__XXX
@@ -247,6 +251,7 @@ BO_ 1264 LOCAL_TIME: 8 Vector__XXX
    SG_ Month : 34|4@1+ (1,0) [1|12] "" Vector__XXX
    SG_ Year : 40|8@1+ (1,2000) [2000|2255] "" Vector__XXX
    SG_ Day : 48|5@1+ (1,0) [1|31] "" Vector__XXX
+   SG_ Clock_Format : 6|2@1+ (1,0) [0|3] "" Vector__XXX
 
 BO_ 1259 LOCAL_TIME2: 8 Vector__XXX
    SG_ Weekday : 0|7@1+ (1,0) [0|127] "" Vector__XXX
@@ -254,6 +259,9 @@ BO_ 1259 LOCAL_TIME2: 8 Vector__XXX
    SG_ Minutes : 16|6@1+ (1,0) [0|59] "min" Vector__XXX
    SG_ Seconds : 24|6@1+ (1,0) [0|59] "s" Vector__XXX
    SG_ NEW_SIGNAL_3 : 39|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1138 DISPLAY_SETTINGS_472: 8 Vector__XXX
+   SG_ Efficiency_Unit : 38|2@1+ (1,0) [0|3] "" Vector__XXX
 
 BO_ 56 POWER_MODE: 8 Vector__XXX
    SG_ Power_Mode : 0|4@1+ (1,0) [0|15] "" Vector__XXX
@@ -1225,9 +1233,10 @@ CM_ SG_ 843 Headlight_Switch "Wrong on an EV6: steps through every value once a 
 CM_ SG_ 550 Outdoor_Temperature "Verified on an EV6 against CAN logs: matches the dashboard outside temperature while the car displays Celsius; Not_Available (255) while it displays Fahrenheit, then ODOMETER Outdoor_Temperature_F has it.";
 CM_ SG_ 551 Odometer "Verified on an EV6 against CAN logs: matches the dashboard odometer. Stays in km when the car displays miles.";
 CM_ SG_ 764 State_Of_Charge "Verified on an EV6 against CAN logs and live: matches the dashboard SOC.";
-CM_ BO_ 412 "Candidate from EV6 CAN logs: only seen on one L2 charger.";
-CM_ SG_ 412 Cand_AC_Current_19C "Candidate: reads 11.9-12.0 A while charging on a 240 V 15 A circuit (2.6-2.7 kW) and 0 on DC or idle. Reads 12.3-12.4 A from plug-in until charging starts, so maybe the charger's advertised limit then. 0x30D byte 5 carries the same values.";
-CM_ SG_ 412 Cand_19C_16 "Candidate from EV6 CAN logs: ramps from 0 to 210 in steps of 20 per frame when L2 charging starts and holds 210 until it stops, on every L2 log (one charger). Maybe the AC voltage, but 210 V x 11.9 A = 2.5 kW, not the 2.7 kW the car shows; Car Scanner doesn't show the AC voltage to check it.";
+CM_ BO_ 412 "Verified on an EV6 against CAN logs and Car Scanner: the limits the car sets for the onboard charger (Car Scanner's ICCU VCMS Charge Mode values), not measurements. With the car idle (log_42) Car Scanner showed 825.6 V and two 0 A limits; on L2 (log_46) 825.6 V, 21 A DC and 11.9 A AC, as here. All zeros for the first frames after the car wakes up. The measured AC voltage and current (239.5 V, 11.31 A in log_46) are not on this bus.";
+CM_ SG_ 412 DC_Target_Voltage "Verified on an EV6 against CAN logs and Car Scanner: 825.6 V in every log, idle, driving and charging.";
+CM_ SG_ 412 DC_Current_Limit "Verified on an EV6 against CAN logs and Car Scanner: limit on the onboard charger's DC output, 21.0 A on L2 (log_46). Ramps up from 0 over about 2 s when L2 charging starts and drops to 0 when it stops; 0 on DC fast charging and idle (0.8 A in log_31 to log_34).";
+CM_ SG_ 412 AC_Current_Limit "Verified on an EV6 against CAN logs and Car Scanner: AC input current limit, 11.9 A on a 240 V 15 A circuit (Car Scanner 11.9 A, log_46), now and then 12.0 A; 12.3-12.4 A from plug-in until charging starts, 0 on DC fast charging and idle. 0x30D byte 5 carries the same values.";
 CM_ SG_ 413 Charger_Type "Verified on an EV6 against CAN logs: charger type. The car tries DC first, so it reads DC for the first seconds on an AC charger, then None, then AC about 7 s after plug-in.";
 CM_ SG_ 413 DC_Sequence_Stage "Verified on an EV6 against CAN logs: DC charging sequence. 1 plugged in, 2 and 3 talking to the charger, 4 ready, 5 starting, 6 charging, 8 to 11 ending. An AC charger goes from 1 straight to 9 to 11 while the car gives up on DC; stages 2 to 6 mean the charger really is DC.";
 CM_ SG_ 780 Proximity_Voltage "Verified on an EV6 against CAN logs: charge inlet proximity voltage. About 4.4 V unplugged, 1.5 V plugged in and latched, 2.7 V while the plug release button is pressed. AC and DC.";
@@ -1281,13 +1290,18 @@ CM_ BO_ 738 "Verified on an EV6 against CAN logs with a video of the cluster (lo
 CM_ SG_ 738 Regen_Auto "Verified on an EV6 against CAN logs with a video of the cluster: 1 while the paddles are in Auto regen (log_32 from 1:28 to 1:52), 0 for fixed levels and i-Pedal.";
 CM_ SG_ 738 Regen_Level "Verified on an EV6 against CAN logs with a video of the cluster: regen strength, 0 to 3 for the paddle levels and 4 for the maximum (i-Pedal, or the maximum without i-Pedal). In Auto it moves smoothly between them (0.1, 0.8, 1.9 seen) and the cluster numbers the steps one higher (Auto level 1 to 5). Not_Available with the car off and while smart cruise drives the car. Resets to 3 in Park and Reverse.";
 CM_ SG_ 739 I_Pedal "Verified on an EV6 against CAN logs with a video of the cluster: 1 in i-Pedal, 0 at fixed levels, in Auto and at the maximum level without i-Pedal (log_32 1:52 to 1:56). Keeps its last value with the car off.";
-CM_ BO_ 929 "Verified on an EV6 against CAN logs with the cluster's tire screen: tire pressures in whole psi, with the cluster set to psi; it can also show kPa, which was never captured and may change these bytes. Not_Available until the sensors report, a minute or two into a drive. Front left (log_33, deflated to 32 psi) and rear left (log_34, 36 psi) are confirmed; front right and rear right are assumed from the usual order, as neither was ever set apart. Bytes 0-1 hold a 14-bit CRC.";
+CM_ BO_ 929 "Verified on an EV6 against CAN logs with the cluster's tire screen: tire pressures in the unit chosen for the cluster, TIRE_PRESSURE_UNIT: whole psi (35/34), kPa / 5 (48/46 = 240/230 kPa) or bar x 10 (24/23 = 2.4/2.3 bar), switched through all three in log_40 at 0:32-0:53. Not_Available until the sensors report, a minute or two into a drive. Front left (log_33, deflated to 32 psi) and rear left (log_34, 36 psi) are confirmed; front right and rear right are assumed from the usual order, as neither was ever set apart. Bytes 0-1 hold a 14-bit CRC.";
 CM_ SG_ 929 Tire_Pressure_FL "Verified on an EV6 against CAN logs with the cluster's tire screen: front left (dropped from 35 to 32 psi when only that tire was deflated, log_33).";
 CM_ SG_ 929 Tire_Pressure_FR "Assumed front right from the usual wheel order; never set apart from the others.";
 CM_ SG_ 929 Tire_Pressure_RL "Verified on an EV6 against CAN logs with the cluster's tire screen: rear left (toggled 35/36 psi with the cluster's rear left, log_34).";
 CM_ SG_ 929 Tire_Pressure_RR "Assumed rear right from the usual wheel order; never set apart from the others.";
-CM_ BO_ 1264 "Verified on an EV6 against CAN logs: the head unit clock, local time with the date, sent every 250 ms and stepping once a second. Matches the date of all 53 captures (June to October) and the time each of log_01 to log_34 was saved (EDT). Reads all ones for the first frames after the car wakes up. Byte 0 (0x8A) and bit 38 (set) never changed; they may hold the 12/24 h or daylight saving settings, never changed in a capture.";
-CM_ SG_ 1264 Hours "Verified on an EV6 against CAN logs: 0-23 whatever the clock format shown (only 24 h was captured).";
+CM_ BO_ 930 "Verified on an EV6 against CAN logs: sent every 200 ms with TIRE_PRESSURES. Byte 0 is 0 or 1 depending on the log, meaning unknown.";
+CM_ SG_ 930 Tire_Pressure_Unit "Verified on an EV6 against CAN logs: the tire pressure unit set for the cluster, which TIRE_PRESSURES uses (log_40: psi, kPa, bar, then the same again at 0:32-0:53). Always psi in the other logs.";
+CM_ BO_ 1138 "Verified on an EV6 against CAN logs: sent every 200 ms. Bytes 0-1 change with the content, maybe a checksum.";
+CM_ SG_ 1138 Efficiency_Unit "Verified on an EV6 against CAN logs: the energy efficiency unit shown. km/kWh at 1:02-1:07 in log_40; mi/kWh whenever the distance unit is miles (log_30 at 6:51-7:10, where the cluster showed 3.2 mi/kWh, and log_32 until 3:27); kWh/100 km otherwise.";
+CM_ BO_ 1264 "Verified on an EV6 against CAN logs: the head unit clock, local time with the date, sent every 250 ms and stepping once a second. Matches the date of all 53 captures (June to October) and the time each of log_01 to log_34 was saved (EDT). Reads all ones for the first frames after the car wakes up. Switching daylight saving on and off in the head unit only moves the hour, with no flag (log_40 at 1:23-1:41). Bit 38 (set) never changed.";
+CM_ SG_ 1264 Hours "Verified on an EV6 against CAN logs: 0-23 whatever the clock format shown (also in 12 h, log_40 at 1:48-2:03).";
+CM_ SG_ 1264 Clock_Format "Verified on an EV6 against CAN logs: the head unit's clock format (log_40: 12 h at 1:48-1:54 and 1:59-2:03, 24 h otherwise). Bit 57 is set along with 12 h.";
 CM_ SG_ 1264 Year "Verified on an EV6 against CAN logs: 26 for 2026.";
 CM_ BO_ 1259 "Verified on an EV6 against CAN logs: the same local time as LOCAL_TIME with the day of the week instead of the date, sent every 200 ms and stepping once a second, at most a second off LOCAL_TIME.";
 CM_ SG_ 1259 Weekday "Verified on an EV6 against CAN logs: one bit per day, in the order of the departure-day bits of HU_EV_P_1263 (Sunday in bit 0 up to Monday in bit 6). Sunday, Saturday, Friday and Monday were captured; Tuesday to Thursday follow from that order.";
@@ -2241,3 +2255,6 @@ VAL_ 1256 ETA_Hours 255 "Not_Available";
 VAL_ 1256 Destination_Flag 0 "Destination" 1 "Waypoint_1" 2 "Waypoint_2" 3 "Waypoint_3" 4 "Waypoint_4" 15 "None";
 VAL_ 199 NAVI_precond_EVStationFlag 0 "Cancel" 1 "Destination" 2 "EV_Station" 7 "No_Request";
 VAL_ 1259 Weekday 64 "Monday" 32 "Tuesday" 16 "Wednesday" 8 "Thursday" 4 "Friday" 2 "Saturday" 1 "Sunday";
+VAL_ 930 Tire_Pressure_Unit 2 "Bar" 1 "Kpa" 0 "Psi";
+VAL_ 1264 Clock_Format 2 "Hours_24" 1 "Hours_12";
+VAL_ 1138 Efficiency_Unit 2 "Kwh_Per_100_Km" 1 "Km_Per_Kwh" 0 "Mi_Per_Kwh";
