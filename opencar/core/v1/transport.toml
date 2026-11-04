@@ -31,6 +31,14 @@ first_setup_pairing_window_seconds = 300
 # How long (seconds) the wizard scans for an advertising device before
 # declaring a timeout and asking the user to try again.
 scan_timeout_seconds = 30
+# Bond reset by power-cycling, for devices without a pairing button whose
+# owner's phone lost its bond: after this many power-ons in a row that each
+# lose power within power_cycle_reset_uptime_seconds of booting, the next
+# power-on clears every bond and opens the first-setup window. Only power-on
+# resets count (never watchdog, panic or brownout resets). The app uses both
+# values in its recovery instructions.
+power_cycle_reset_short_boots = 3
+power_cycle_reset_uptime_seconds = 10
 
 [ble.payload]
 # ATT MTU the app requests after connecting. The device supports it.
