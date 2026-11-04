@@ -40,6 +40,22 @@ scan_timeout_seconds = 30
 power_cycle_reset_short_boots = 3
 power_cycle_reset_uptime_seconds = 10
 
+[ble.phone_validation]
+# Validating a bonded phone in the car (StartPhoneValidationCommand in
+# system.proto). The device enforces these; the app uses them in its
+# instructions. The session messages also carry the time and attempts left.
+# How long (seconds) a validation session runs before it times out.
+session_seconds = 120
+# Digits in the code a code entry method shows (on the cluster, for example).
+code_length = 6
+# Wrong codes a code entry session accepts before it fails.
+max_code_attempts = 3
+# How long (seconds) no session can start after one used all its attempts.
+cooldown_seconds = 300
+# How long (seconds) an ended session is still reported to its phone
+# (PhoneAccessState.validation), so the app can show how it ended.
+result_keep_seconds = 60
+
 [ble.payload]
 # ATT MTU the app requests after connecting. The device supports it.
 att_mtu = 247

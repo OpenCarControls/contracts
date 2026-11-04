@@ -336,7 +336,8 @@ message ListPhoneValidationMethodsCommand {}
 // belongs to that car. Refused while another phone's session runs, and during
 // the cooldown after a code entry session used all its attempts. Starting
 // again from the same phone replaces its session (a code entry method then
-// shows a new code).
+// shows a new code). The session length, the code length, the attempts and
+// the cooldown are in transport.toml, [ble.phone_validation].
 message StartPhoneValidationCommand {
   // The method's identifier, from PhoneValidationMethod.method_id.
   string method_id = 1;
