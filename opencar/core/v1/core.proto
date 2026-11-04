@@ -113,6 +113,8 @@ message CommandResponse {
 
     // Advanced response data that can only be sent over BLE.
     bytes advanced_response_bytes = 6;
+    // The data a system command answers with. BLE only, like system commands.
+    SystemCommandResult system_result = 8;
   }
 
   // Structured command result code so apps can distinguish policy rejections
@@ -136,6 +138,11 @@ enum CommandStatusCode {
   // state the command needs. Nothing was sent to the car. error_message gives
   // the reason.
   COMMAND_STATUS_CODE_REJECTED_UNAVAILABLE = 4;
+  // REJECTED_NOT_VALIDATED indicates a vehicle command was rejected because
+  // the sending phone is not validated for this car (see PhoneTrustLevel), or
+  // a system command needed a validated phone. Nothing was sent to the car.
+  // The app offers to validate the phone. error_message gives the reason.
+  COMMAND_STATUS_CODE_REJECTED_NOT_VALIDATED = 5;
 }
 
 // Deprecated: the BLE CAN debug stream was removed from the firmware and this

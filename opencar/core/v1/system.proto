@@ -27,6 +27,12 @@ message SystemState {
   // must only trust one received on the current connection: never a cached or
   // older one.
   optional CommandAvailability command_availability = 6;
+
+  // How far the device trusts the connected phone, and its validation session.
+  // BLE only, about the phone it is sent to. Sent with can_access, in the same
+  // state update, whenever either changes, repeated while unchanged, and when
+  // the app subscribes.
+  optional PhoneAccessState phone_access = 7;
 }
 
 // This contains a single system command.
@@ -63,6 +69,22 @@ message SystemCommand {
     // from a bonded phone; never accepted over MQTT. Rejected by release
     // builds, which don't have the lock.
     SetCanDevWriteUnlockCommand set_can_dev_write_unlock = 9;
+
+    // Lists the ways this car offers to validate a phone. BLE only, from a
+    // bonded phone. Answered with SystemCommandResult.validation_methods.
+    ListPhoneValidationMethodsCommand list_phone_validation_methods = 10;
+
+    // Starts validating the sending phone with one of the car's methods. BLE
+    // only, from a bonded phone. Answered with
+    // SystemCommandResult.validation_session.
+    StartPhoneValidationCommand start_phone_validation = 11;
+
+    // Submits the code the car shows, for a code entry session started by the
+    // sending phone. Answered with SystemCommandResult.validation_session.
+    SubmitPhoneValidationCodeCommand submit_phone_validation_code = 12;
+
+    // Ends the validation session the sending phone started.
+    CancelPhoneValidationCommand cancel_phone_validation = 13;
   }
 }
 
@@ -126,16 +148,19 @@ message CanDebugFilter {
   uint32 mask = 3;
 }
 
-// Requests the list of currently bonded BLE phones.
+// Requests the list of currently bonded BLE phones. Answered with
+// SystemCommandResult.paired_phones.
 message ListPairedPhonesCommand {}
 
-// Requests removal of a single bonded BLE phone.
+// Requests removal of a single bonded BLE phone. Removing a phone validated
+// for the identified car needs a validated phone (see PhoneTrustLevel).
 message RemovePairedPhoneCommand {
   // Stable firmware-owned identifier for the bonded phone.
   bytes device_id = 1;
 }
 
-// Requests removal of all bonded BLE phones.
+// Requests removal of all bonded BLE phones. Needs a validated phone once a
+// phone is validated for the identified car.
 message ClearPairedPhonesCommand {}
 
 // Adds a bonded BLE phone if it is not already present.
@@ -163,6 +188,13 @@ message SystemEvent {}
 // again there, which replaces it), and it is cleared by revoking it or by
 // erasing the device's flash. The app must show the risk before sending
 // approved = true. BLE only, from a bonded phone; never accepted over MQTT.
+//
+// The approval only lets the device send the platform's own frames that don't
+// act on the car (the identity request, text on the cluster). Vehicle commands
+// also need a validated phone (see PhoneTrustLevel). Once a phone is validated
+// for the identified car, only a validated phone can change the approval.
+// Approving another car than the one the validations belong to erases every
+// validation: the phones stay bonded and validate again in that car.
 message SetCanReadWriteApprovalCommand {
   // True approves read-write mode for the identified car; false revokes the
   // approval, which makes the bus read-only again.
@@ -233,6 +265,9 @@ enum CanReadWriteApproval {
 // of its AdvancedCommand.action. The maps merge per key, so an update may carry
 // only the commands that changed. A command that has no entry has not been
 // reported: treat it as unavailable.
+//
+// Over BLE it is for the connected phone: every command is unavailable while
+// that phone is not validated (PhoneAccessState.trust).
 message CommandAvailability {
   // Availability of the basic commands by field number.
   map<uint32, CommandAvailabilityState> basic = 1;
@@ -254,4 +289,178 @@ enum CommandAvailabilityState {
   // Not available on this car, for example a trim without the feature. The
   // app usually hides the button. Reserved: no firmware sends it yet.
   COMMAND_AVAILABILITY_STATE_UNSUPPORTED = 3;
+}
+
+// How far the device trusts a phone. Vehicle commands (basic and advanced
+// commands, from any platform) need a validated phone, on top of the CAN
+// read-write approval and, in development builds, the dev lock.
+enum PhoneTrustLevel {
+  // Unknown (an older firmware, or not reported).
+  PHONE_TRUST_LEVEL_UNSPECIFIED = 0;
+  // Not bonded: it can only pair, while the pairing window is open.
+  PHONE_TRUST_LEVEL_NOT_BONDED = 1;
+  // Bonded during a pairing window. It can send system commands, but no
+  // vehicle command, and it can't change the approval or remove a validated
+  // phone once a phone is validated for this car.
+  PHONE_TRUST_LEVEL_BONDED = 2;
+  // Bonded and validated in the identified car, by an in-car action that
+  // proves it is the owner's (see StartPhoneValidationCommand). A validation
+  // belongs to one car: it doesn't apply while another car, or no car, is
+  // identified. It ends when the phone's bond is removed, when the bonds are
+  // reset, or when another car is approved.
+  PHONE_TRUST_LEVEL_VALIDATED = 3;
+}
+
+// What the device allows the connected phone.
+message PhoneAccessState {
+  // The connected phone's trust level, for the identified car.
+  optional PhoneTrustLevel trust = 1;
+
+  // A phone is validated for the identified car. Until then, a bonded phone
+  // can approve or revoke CAN read-write mode (first setup); after that, only
+  // a validated phone can.
+  optional bool car_has_validated_phone = 2;
+
+  // The connected phone's latest validation session, while it runs and for a
+  // while after it ends (its status then says how). Not set when the phone
+  // has no session.
+  optional PhoneValidationSession validation = 3;
+}
+
+// Lists the ways this car offers to validate a phone.
+message ListPhoneValidationMethodsCommand {}
+
+// Starts validating the sending phone. One session runs at a time, for one
+// phone, and ends when it succeeds, fails, is cancelled or times out. The
+// phone must be bonded and the exact car identified, since the validation
+// belongs to that car. Refused while another phone's session runs, and during
+// the cooldown after a code entry session used all its attempts. Starting
+// again from the same phone replaces its session (a code entry method then
+// shows a new code).
+message StartPhoneValidationCommand {
+  // The method's identifier, from PhoneValidationMethod.method_id.
+  string method_id = 1;
+}
+
+// Submits the code the car shows. A wrong code uses one attempt; the session
+// fails once all are used, and the cooldown starts.
+message SubmitPhoneValidationCodeCommand {
+  // The digits as entered, e.g. "042917".
+  string code = 1;
+}
+
+// Ends the sending phone's validation session.
+message CancelPhoneValidationCommand {}
+
+// How the owner validates a phone with a method.
+enum PhoneValidationMethodKind {
+  // Unknown (a newer firmware). The app shows the method's generic text.
+  PHONE_VALIDATION_METHOD_KIND_UNSPECIFIED = 0;
+  // The car shows a code (on the cluster, for example) and the owner types it
+  // in the app. The app shows a code input.
+  PHONE_VALIDATION_METHOD_KIND_CODE_ENTRY = 1;
+  // The owner does something in the car (switch it on and press a button,
+  // for example), which the device detects. The app shows instructions and
+  // waits for PhoneAccessState.validation to end.
+  PHONE_VALIDATION_METHOD_KIND_IN_CAR_ACTION = 2;
+}
+
+// One way of validating a phone in the car.
+message PhoneValidationMethod {
+  // Stable identifier, e.g. "egmp.cluster_code". The app maps it to
+  // localized text, with a generic text for the kind when it doesn't know it.
+  string method_id = 1;
+
+  // What the app shows for it.
+  PhoneValidationMethodKind kind = 2;
+
+  // The method sends frames to the car (a code shown on the cluster), so it
+  // only works while the device may send them: the car approved for CAN
+  // read-write mode and, in development builds, the dev lock unlocked.
+  bool needs_approval = 3;
+
+  // The method can be started now. False while it needs the approval and the
+  // device is read-only, or the car isn't identified.
+  bool available = 4;
+}
+
+// The car's validation methods, in the order the app offers them.
+message PhoneValidationMethods {
+  // The methods.
+  repeated PhoneValidationMethod methods = 1;
+}
+
+// How a validation session is going.
+enum PhoneValidationStatus {
+  // Unknown (an older firmware, or not reported).
+  PHONE_VALIDATION_STATUS_UNSPECIFIED = 0;
+  // Waiting for the code or the in-car action.
+  PHONE_VALIDATION_STATUS_IN_PROGRESS = 1;
+  // The phone is validated.
+  PHONE_VALIDATION_STATUS_SUCCEEDED = 2;
+  // Every attempt was used with a wrong code. The cooldown runs.
+  PHONE_VALIDATION_STATUS_FAILED = 3;
+  // The session ran out of time.
+  PHONE_VALIDATION_STATUS_TIMED_OUT = 4;
+  // The phone cancelled it, started another one, or the car changed.
+  PHONE_VALIDATION_STATUS_CANCELLED = 5;
+}
+
+// A validation session of one phone.
+message PhoneValidationSession {
+  // The method it uses.
+  string method_id = 1;
+
+  // The method's kind.
+  PhoneValidationMethodKind kind = 2;
+
+  // Where it stands.
+  PhoneValidationStatus status = 3;
+
+  // Code entry only: the number of digits of the code.
+  uint32 code_length = 4;
+
+  // Code entry only: the wrong codes still accepted before the session fails.
+  uint32 attempts_left = 5;
+
+  // Seconds until the session times out, while in progress.
+  uint32 expires_in_s = 6;
+
+  // Seconds until a new session can be started, after a failed one.
+  uint32 cooldown_s = 7;
+}
+
+// One bonded phone.
+message PairedPhone {
+  // Stable firmware-owned identifier, as in RemovePairedPhoneCommand.
+  bytes device_id = 1;
+
+  // Its trust level, for the identified car.
+  PhoneTrustLevel trust = 2;
+
+  // This is the phone that sent the command.
+  bool is_requester = 3;
+}
+
+// The bonded phones.
+message PairedPhones {
+  // The phones, in bonding order.
+  repeated PairedPhone phones = 1;
+}
+
+// The data a system command answers with.
+message SystemCommandResult {
+  // Which data, by the command it answers.
+  oneof result {
+    // For ListPairedPhonesCommand.
+    PairedPhones paired_phones = 1;
+
+    // For ListPhoneValidationMethodsCommand.
+    PhoneValidationMethods validation_methods = 2;
+
+    // For StartPhoneValidationCommand and SubmitPhoneValidationCodeCommand:
+    // the sending phone's session after the command. Also set when the command
+    // was refused because of the session (no attempts left, cooldown).
+    PhoneValidationSession validation_session = 3;
+  }
 }
