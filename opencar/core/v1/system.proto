@@ -381,7 +381,8 @@ message PhoneValidationMethod {
   bool needs_approval = 3;
 
   // The method can be started now. False while it needs the approval and the
-  // device is read-only, or the car isn't identified.
+  // device is read-only, the car isn't identified, or the car's current state
+  // doesn't allow it, which the vehicle decides.
   bool available = 4;
 }
 
