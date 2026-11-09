@@ -450,6 +450,39 @@ message PairedPhones {
   repeated PairedPhone phones = 1;
 }
 
+// Why the device refused a phone validation command.
+enum PhoneValidationRefusalReason {
+  // Unknown (a newer firmware). The app shows a generic failure.
+  PHONE_VALIDATION_REFUSAL_REASON_UNSPECIFIED = 0;
+  // This car has no such method.
+  PHONE_VALIDATION_REFUSAL_REASON_UNKNOWN_METHOD = 1;
+  // The method needs the CAN read-write approval and the device is read-only.
+  PHONE_VALIDATION_REFUSAL_REASON_NEEDS_APPROVAL = 2;
+  // The car's current state doesn't allow the method.
+  PHONE_VALIDATION_REFUSAL_REASON_METHOD_NOT_AVAILABLE_NOW = 3;
+  // The car isn't identified yet.
+  PHONE_VALIDATION_REFUSAL_REASON_CAR_NOT_IDENTIFIED = 4;
+  // Another phone has a session in progress.
+  PHONE_VALIDATION_REFUSAL_REASON_OTHER_PHONE_VALIDATING = 5;
+  // Too many wrong codes: no phone can start until the cooldown ends.
+  PHONE_VALIDATION_REFUSAL_REASON_COOLING_DOWN = 6;
+  // This phone has no session in progress.
+  PHONE_VALIDATION_REFUSAL_REASON_NO_SESSION = 7;
+  // This phone's session doesn't take a code.
+  PHONE_VALIDATION_REFUSAL_REASON_NOT_CODE_ENTRY = 8;
+  // The device can't generate a code.
+  PHONE_VALIDATION_REFUSAL_REASON_NO_RANDOM_SOURCE = 9;
+}
+
+// A refused phone validation command.
+message PhoneValidationRefusal {
+  // Why it was refused.
+  PhoneValidationRefusalReason reason = 1;
+
+  // COOLING_DOWN only: seconds until a new session can be started.
+  uint32 cooldown_s = 2;
+}
+
 // The data a system command answers with.
 message SystemCommandResult {
   // Which data, by the command it answers.
@@ -461,8 +494,12 @@ message SystemCommandResult {
     PhoneValidationMethods validation_methods = 2;
 
     // For StartPhoneValidationCommand and SubmitPhoneValidationCodeCommand:
-    // the sending phone's session after the command. Also set when the command
-    // was refused because of the session (no attempts left, cooldown).
+    // the sending phone's session after the command. Also set when a wrong
+    // code was refused, with the attempts left.
     PhoneValidationSession validation_session = 3;
+
+    // For any phone validation command refused for another reason than a
+    // wrong code.
+    PhoneValidationRefusal validation_refusal = 4;
   }
 }
