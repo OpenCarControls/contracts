@@ -33,6 +33,11 @@ message SystemState {
   // state update, whenever either changes, repeated while unchanged, and when
   // the app subscribes.
   optional PhoneAccessState phone_access = 7;
+
+  // The device's MQTT client ID: the {client_id} of the topic templates in
+  // transport.toml, so the topics this device's MQTT clients must use. BLE only.
+  // Sent with can_access. Unset when the device has no MQTT.
+  optional string mqtt_client_id = 8;
 }
 
 // This contains a single system command.

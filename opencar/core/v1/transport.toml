@@ -1,4 +1,6 @@
 [mqtt]
+# {client_id} is the device's MQTT client ID (SystemState.mqtt_client_id), also
+# in the topics an app uses: never the app's own client ID.
 command_topic_template = "opencar/{client_id}/cmd"
 data_topic_template = "opencar/{client_id}/data"
 
