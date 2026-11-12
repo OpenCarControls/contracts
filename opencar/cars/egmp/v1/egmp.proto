@@ -233,6 +233,11 @@ message AdvancedState {
   optional Gear gear = 6;
   // Current power state.
   optional PowerState power_state = 7;
+  // Whether this device's manual preconditioning is requested: from an accepted
+  // BatteryPreconditioningCommand that enables it until the session ends (turned off, the
+  // car stops it or leaves Ready, or it fails to start). While false, a preparing or heating
+  // preconditioning_state was started by the car itself, e.g. navigating to a DC charger.
+  optional bool is_manual_preconditioning_requested = 8;
 }
 
 // This contains a single basic command.
@@ -310,7 +315,8 @@ message AdvancedCommand {
   }
 }
 
-// Command to toggle the battery preconditioning.
+// Command to start or stop the device's manual battery preconditioning. It is refused
+// while the car preconditions on its own (see is_manual_preconditioning_requested).
 message BatteryPreconditioningCommand {
   // Indicate if battery preconditioning should be enabled or disabled.
   bool enable = 1;
