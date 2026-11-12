@@ -16,10 +16,10 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v7.0.1
 
       - name: Buf Check
-        uses: bufbuild/buf-action@v1.4.0
+        uses: bufbuild/buf-action@v1.7.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           push: false
