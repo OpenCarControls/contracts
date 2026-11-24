@@ -517,9 +517,9 @@ message SystemCommandResult {
   }
 }
 
-// The health of one CAN bus. The counters are totals since the device booted,
-// so an update lost on the way doesn't lose counts; they saturate instead of
-// wrapping.
+// The health of one CAN bus. The error counters are totals since the device
+// booted, so an update lost on the way doesn't lose counts; they saturate
+// instead of wrapping.
 message CanBusHealth {
   // The firmware's summary of the bus over its last report window (a few
   // seconds).
@@ -529,24 +529,19 @@ message CanBusHealth {
   // no error frames, no transmission). True while the device is read-only.
   optional bool listen_only = 2;
 
-  // Frames received.
-  optional uint32 frames_received = 3;
-
-  // Frames received that the vehicle's filters accepted.
-  optional uint32 frames_matched = 4;
+  // Frames received per second over the last report window, rounded down. A
+  // rate rather than a total: on a busy bus a total would saturate after a few
+  // weeks of the bus being awake.
+  optional uint32 frames_per_second = 3;
 
   // Receive errors (bit, stuff, form, CRC or acknowledge errors).
-  optional uint32 rx_errors = 5;
+  optional uint32 rx_errors = 4;
 
   // Times the receive queue overflowed and frames were dropped.
-  optional uint32 overruns = 6;
+  optional uint32 overruns = 5;
 
   // Times the controller went bus-off and was restarted.
-  optional uint32 bus_offs = 7;
-
-  // Frames received per second over the last report window, rounded down. Unlike
-  // the totals, it doesn't grow with time, so it reads at a glance.
-  optional uint32 frames_per_second = 8;
+  optional uint32 bus_offs = 6;
 }
 
 // The firmware's summary of a CAN bus over its last report window.
