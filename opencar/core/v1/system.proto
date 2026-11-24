@@ -543,6 +543,10 @@ message CanBusHealth {
 
   // Times the controller went bus-off and was restarted.
   optional uint32 bus_offs = 7;
+
+  // Frames received per second over the last report window, rounded down. Unlike
+  // the totals, it doesn't grow with time, so it reads at a glance.
+  optional uint32 frames_per_second = 8;
 }
 
 // The firmware's summary of a CAN bus over its last report window.
