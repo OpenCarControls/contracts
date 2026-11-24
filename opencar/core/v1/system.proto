@@ -38,6 +38,14 @@ message SystemState {
   // transport.toml, so the topics this device's MQTT clients must use. BLE only.
   // Sent with can_access. Unset when the device has no MQTT.
   optional string mqtt_client_id = 8;
+
+  // The health of each CAN bus the device listens on, by bus id (the 0-based
+  // index of the bus in the device's hardware config). BLE only. Sent in a
+  // state update of its own (with no vehicle_state) whenever a bus's status
+  // changes, every few seconds while frames arrive, and when the app
+  // subscribes. Each update carries every bus the device reports on; a bus
+  // whose driver doesn't report its health is absent.
+  map<uint32, CanBusHealth> can_bus_health = 9;
 }
 
 // This contains a single system command.
@@ -507,4 +515,49 @@ message SystemCommandResult {
     // wrong code.
     PhoneValidationRefusal validation_refusal = 4;
   }
+}
+
+// The health of one CAN bus. The counters are totals since the device booted,
+// so an update lost on the way doesn't lose counts; they saturate instead of
+// wrapping.
+message CanBusHealth {
+  // The firmware's summary of the bus over its last report window (a few
+  // seconds).
+  optional CanBusStatus status = 1;
+
+  // The controller is in listen-only mode: it never drives the bus (no ACKs,
+  // no error frames, no transmission). True while the device is read-only.
+  optional bool listen_only = 2;
+
+  // Frames received.
+  optional uint32 frames_received = 3;
+
+  // Frames received that the vehicle's filters accepted.
+  optional uint32 frames_matched = 4;
+
+  // Receive errors (bit, stuff, form, CRC or acknowledge errors).
+  optional uint32 rx_errors = 5;
+
+  // Times the receive queue overflowed and frames were dropped.
+  optional uint32 overruns = 6;
+
+  // Times the controller went bus-off and was restarted.
+  optional uint32 bus_offs = 7;
+}
+
+// The firmware's summary of a CAN bus over its last report window.
+enum CanBusStatus {
+  // Unknown (not reported yet, or an older firmware).
+  CAN_BUS_STATUS_UNSPECIFIED = 0;
+  // Frames arrive with no errors.
+  CAN_BUS_STATUS_OK = 1;
+  // No frames and no errors: the car is asleep, or the bus isn't connected.
+  CAN_BUS_STATUS_SILENT = 2;
+  // Frames arrive, but with receive errors or overruns.
+  CAN_BUS_STATUS_DEGRADED = 3;
+  // Receive errors and no frames: usually a wrong bitrate, a CAN FD bus or a
+  // wiring fault.
+  CAN_BUS_STATUS_NO_VALID_FRAMES = 4;
+  // The controller went bus-off and is being restarted.
+  CAN_BUS_STATUS_BUS_OFF = 5;
 }
